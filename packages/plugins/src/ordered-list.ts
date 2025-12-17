@@ -1,5 +1,5 @@
 import { Plugin } from '@likha/core';
-import { wrapInList, liftListItem } from 'prosemirror-schema-list';
+import { wrapInList, liftListItem, splitListItem } from 'prosemirror-schema-list';
 
 /**
  * Ordered list plugin
@@ -66,6 +66,18 @@ export class OrderedListPlugin extends Plugin {
 
   keymap() {
     return {
+      'Enter': (editor: any) => {
+        const { state, dispatch } = editor.view;
+        const itemType = state.schema.nodes.list_item;
+        if (!itemType) return false;
+        return splitListItem(itemType)(state, dispatch);
+      },
+      'Mod-]': (editor: any) => {
+        const { state, dispatch } = editor.view;
+        const itemType = state.schema.nodes.list_item;
+        if (!itemType) return false;
+        return liftListItem(itemType)(state, dispatch);
+      },
       'Ctrl-Shift-9': (editor: any) => this.commands().toggleOrderedList(editor),
     };
   }

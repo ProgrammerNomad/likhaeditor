@@ -23,6 +23,23 @@ export const likhaSchema: Schema = new Schema({
         return ['p', style ? { style } : {}, 0];
       }
     })
+    .update('blockquote', {
+      attrs: { textAlign: { default: 'left' } },
+      content: 'block+',
+      group: 'block',
+      defining: true,
+      parseDOM: [{
+        tag: 'blockquote',
+        getAttrs: (dom: any) => ({
+          textAlign: dom.style.textAlign || 'left'
+        })
+      }],
+      toDOM: (node) => {
+        const align = node.attrs.textAlign;
+        const style = align && align !== 'left' ? `text-align: ${align}` : '';
+        return ['blockquote', style ? { style } : {}, 0];
+      }
+    })
     .update('heading', {
       attrs: { 
         level: { default: 1 },
