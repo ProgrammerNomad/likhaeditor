@@ -14,21 +14,20 @@ export class TextAlignmentPlugin extends Plugin {
         const { state, dispatch } = editor.view;
         const { from, to } = state.selection;
 
+        if (!dispatch) return false;
+
         const tr = state.tr;
         
         state.doc.nodesBetween(from, to, (node: any, pos: number) => {
-          if (node.isBlock && node.type.name !== 'doc') {
+          if (node.isBlock && node.type.name !== 'doc' && node.type.name !== 'list_item') {
+            // Preserve all existing attributes and only update textAlign
             const attrs = { ...node.attrs, textAlign: alignment };
-            tr.setNodeMarkup(pos, null, attrs);
+            tr.setNodeMarkup(pos, undefined, attrs);
           }
         });
 
-        if (dispatch) {
-          dispatch(tr);
-          return true;
-        }
-
-        return false;
+        dispatch(tr);
+        return true;
       },
 
       setAlignLeft: (editor: any): boolean => {
@@ -66,67 +65,63 @@ export class TextAlignmentPlugin extends Plugin {
     return [
       keymap({
         'Mod-Shift-l': (state, dispatch) => {
+          if (!dispatch) return false;
           const tr = state.tr;
           const { from, to } = state.selection;
           
           state.doc.nodesBetween(from, to, (node: any, pos: number) => {
-            if (node.isBlock && node.type.name !== 'doc') {
+            if (node.isBlock && node.type.name !== 'doc' && node.type.name !== 'list_item') {
               const attrs = { ...node.attrs, textAlign: 'left' };
-              tr.setNodeMarkup(pos, null, attrs);
+              tr.setNodeMarkup(pos, undefined, attrs);
             }
           });
 
-          if (dispatch) {
-            dispatch(tr);
-          }
+          dispatch(tr);
           return true;
         },
         'Mod-Shift-e': (state, dispatch) => {
+          if (!dispatch) return false;
           const tr = state.tr;
           const { from, to } = state.selection;
           
           state.doc.nodesBetween(from, to, (node: any, pos: number) => {
-            if (node.isBlock && node.type.name !== 'doc') {
+            if (node.isBlock && node.type.name !== 'doc' && node.type.name !== 'list_item') {
               const attrs = { ...node.attrs, textAlign: 'center' };
-              tr.setNodeMarkup(pos, null, attrs);
+              tr.setNodeMarkup(pos, undefined, attrs);
             }
           });
 
-          if (dispatch) {
-            dispatch(tr);
-          }
+          dispatch(tr);
           return true;
         },
         'Mod-Shift-r': (state, dispatch) => {
+          if (!dispatch) return false;
           const tr = state.tr;
           const { from, to } = state.selection;
           
           state.doc.nodesBetween(from, to, (node: any, pos: number) => {
-            if (node.isBlock && node.type.name !== 'doc') {
+            if (node.isBlock && node.type.name !== 'doc' && node.type.name !== 'list_item') {
               const attrs = { ...node.attrs, textAlign: 'right' };
-              tr.setNodeMarkup(pos, null, attrs);
+              tr.setNodeMarkup(pos, undefined, attrs);
             }
           });
 
-          if (dispatch) {
-            dispatch(tr);
-          }
+          dispatch(tr);
           return true;
         },
         'Mod-Shift-j': (state, dispatch) => {
+          if (!dispatch) return false;
           const tr = state.tr;
           const { from, to } = state.selection;
           
           state.doc.nodesBetween(from, to, (node: any, pos: number) => {
-            if (node.isBlock && node.type.name !== 'doc') {
+            if (node.isBlock && node.type.name !== 'doc' && node.type.name !== 'list_item') {
               const attrs = { ...node.attrs, textAlign: 'justify' };
-              tr.setNodeMarkup(pos, null, attrs);
+              tr.setNodeMarkup(pos, undefined, attrs);
             }
           });
 
-          if (dispatch) {
-            dispatch(tr);
-          }
+          dispatch(tr);
           return true;
         }
       })
