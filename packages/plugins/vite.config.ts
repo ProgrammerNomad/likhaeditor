@@ -10,7 +10,7 @@ export default defineConfig({
       fileName: (format) => `index.${format === 'es' ? 'js' : 'cjs'}`,
     },
     rollupOptions: {
-      external: ['@likha/core', 'prosemirror-keymap'],
+      external: ['@likha/core', 'prosemirror-keymap', 'prosemirror-inputrules'],
     },
     sourcemap: true,
     minify: 'terser',

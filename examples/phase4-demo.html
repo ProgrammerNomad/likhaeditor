@@ -135,6 +135,25 @@
       font-size: 0.875em;
     }
 
+    .ProseMirror pre {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+      margin-bottom: 1rem;
+      font-family: 'Courier New', Consolas, Monaco, monospace;
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+
+    .ProseMirror pre code {
+      background: transparent;
+      padding: 0;
+      color: inherit;
+      font-size: inherit;
+    }
+
     .ProseMirror strong {
       font-weight: 600;
     }
@@ -345,7 +364,10 @@
       BulletListPlugin,
       OrderedListPlugin,
       BlockquotePlugin,
-      HorizontalRulePlugin
+      HorizontalRulePlugin,
+      LinkPlugin,
+      CodeBlockPlugin,
+      TextAlignmentPlugin
     } from '@likha/plugins';
     import { Toolbar, Button, Dropdown, injectTheme } from '@likha/ui';
 
@@ -383,7 +405,9 @@
         new OrderedListPlugin(),
         new BlockquotePlugin(),
         new HorizontalRulePlugin(),
-        new LinkPlugin()
+        new LinkPlugin(),
+        new CodeBlockPlugin(),
+        new TextAlignmentPlugin()
       ]
     });
 

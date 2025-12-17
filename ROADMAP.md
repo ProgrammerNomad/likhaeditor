@@ -135,17 +135,17 @@ This document outlines the complete development plan for Likha, divided into man
 #### High Priority Plugins (Week 12-13)
 - [x] Heading plugin (H1-H6 with Ctrl+Alt+1-6) ✅
 - [x] Bold/Italic/Code marks (core functionality) ✅
-- [ ] Link plugin with URL input
+- [x] Link plugin with URL input ✅
 - [x] Bullet list plugin (Ctrl+Shift+8) ✅
 - [x] Ordered list plugin (Ctrl+Shift+9) ✅
 - [x] Blockquote plugin (Ctrl+Shift+B) ✅
 - [x] Horizontal rule plugin (Mod+_) ✅
 
 #### Medium Priority Plugins (Week 14-15)
+- [x] Code block plugin with language support ✅
+- [x] Text alignment plugin ✅
 - [ ] Table plugin (create, resize, merge)
 - [ ] Image plugin (insert, resize, align)
-- [ ] Code block plugin with syntax highlighting
-- [ ] Text alignment plugin
 - [ ] Text color plugin
 - [ ] Highlight plugin
 

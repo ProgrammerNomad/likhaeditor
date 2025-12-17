@@ -6,3 +6,5 @@ export { OrderedListPlugin } from './ordered-list';
 export { BlockquotePlugin } from './blockquote';
 export { HorizontalRulePlugin } from './horizontal-rule';
 export { LinkPlugin } from './link';
+export { CodeBlockPlugin } from './code-block';
+export { TextAlignmentPlugin } from './text-alignment';

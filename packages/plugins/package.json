@@ -34,6 +34,7 @@
   "dependencies": {
     "@likha/core": "workspace:*",
     "prosemirror-commands": "^1.5.2",
+    "prosemirror-inputrules": "^1.5.1",
     "prosemirror-keymap": "^1.2.2",
     "prosemirror-model": "^1.19.4",
     "prosemirror-schema-list": "^1.5.1"

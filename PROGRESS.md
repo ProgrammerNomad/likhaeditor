@@ -1,137 +1,136 @@
-# Likha Editor - Development Progress
+﻿# Likha Editor - Progress Update
 
-## Current Status
+## Current Status (Phase 4 - 73% Complete)
 
-We have successfully completed **Phase 3: UI Components** and are progressing through **Phase 4: Official Plugins**. Five essential content plugins (Heading, BulletList, OrderedList, Blockquote, HorizontalRule) have been implemented with comprehensive test coverage.
+### Latest Completions ✅
+1. **TextAlignmentPlugin** - Text alignment (left, center, right, justify)
+   - `setTextAlign(alignment)` - Set alignment (left/center/right/justify)
+   - `setAlignLeft()`, `setAlignCenter()`, `setAlignRight()`, `setAlignJustify()` - Convenience methods
+   - `getTextAlign()` - Get current alignment
+   - `isAlignActive(alignment)` - Check if alignment is active
+   - Keyboard shortcuts: Mod-Shift-l/e/r/j
+   - 27 comprehensive tests covering all alignments and edge cases
+   - Works with paragraphs and headings
+   - Preserves inline formatting
 
-## Completed Phases
+2. **CodeBlockPlugin** - Code blocks with language support
+   - `setCodeBlock(language?)` - Convert to code block with optional language
+   - `toggleCodeBlock(language?)` - Toggle code block on/off
+   - `isCodeBlockActive()` - Check if code block is active
+   - `getCodeBlockLanguage()` - Get language from active code block
+   - Keyboard shortcuts: Mod-Alt-c, Shift-Ctrl-\
+   - 27 comprehensive tests
+   
+3. **LinkPlugin** - Hyperlink functionality
+   - `setLink(href)` - Add link
+   - `removeLink()` - Remove link
+   - `toggleLink(href?)` - Toggle link
+   - `isLinkActive()` - Check if link is active
+   - `getLinkHref()` - Get href from active link
+   - Keyboard shortcut: Mod-k
+   - 22 comprehensive tests
 
-### ✅ Phase 0: Project Foundation (Week 1)
-- ✅ pnpm workspace configuration
-- ✅ TypeScript strict mode setup
-- ✅ Vite build configuration for all packages
-- ✅ Vitest testing infrastructure
-- ✅ Package structure created (@likha/core, @likha/ui, @likha/plugins, etc.)
+2. **Core Type System Updates**
+   - Changed CommandFunction return type from \oolean\ to \ny\ for flexibility
+   - Allows commands to return any type (boolean, string, null, etc.)
+   - Maintains type safety with TypeScript strict mode
 
-### ✅ Phase 1: Core Editor Engine (Week 2-3)
-- ✅ **Editor class** with ProseMirror integration
-- ✅ **Schema definition** (now extended with headings and lists)
-- ✅ **State management** via EditorState
-- ✅ **Content methods** (setContent, getContent, getHTML, getText)
-- ✅ **Basic formatting** (bold, italic via toggleMark)
-- ✅ **History support** (undo/redo via prosemirror-history)
-- ✅ **Event system** (onChange, onFocus, onBlur)
-- ✅ **5 core tests** passing
+3. **Schema Extensions**
+   - Added link mark to likhaSchema with href and title attributes
+   - Proper parseDOM and toDOM handlers for HTML serialization
+   - Supports both absolute and relative URLs
 
-### ✅ Phase 2: Plugin System Architecture (Week 4-5)
-- ✅ **Base Plugin class** with lifecycle hooks (init, destroy)
-- ✅ **Command registration** system (executeCommand)
-- ✅ **Plugin manager** integration in Editor
-- ✅ **PlaceholderPlugin** - Shows placeholder text when editor is empty
-- ✅ **CharacterCountPlugin** - Live character count with target element binding
-- ✅ **10 plugin tests** passing
+### Test Coverage 📊
+- **Total Tests:** 188 passing
+  - Core: 5 tests
+  - Plugins: 153 tests
+  - UI: 30 tests
+- **Plugin Test Breakdown:**
+  - TextAlignmentPlugin: 27 tests
+  - CodeBlockPlugin: 27 tests
+  - LinkPlugin: 22 tests
+  - HeadingPlugin: 21 tests
+  - BlockquotePlugin: 13 tests
+  - OrderedListPlugin: 12 tests
+  - BulletListPlugin: 11 tests
+  - HorizontalRulePlugin: 10 tests
+  - CharacterCountPlugin: 6 tests
+  - PlaceholderPlugin: 4 tests
 
-### ✅ Phase 3: UI Components (Week 6-8)
-- ✅ **Toolbar component** - Sticky/non-sticky positioning, group management
-- ✅ **Button component** - Active states, icons, click handlers
-- ✅ **Dropdown component** - Item selection, custom styling
-- ✅ **Theme system** - CSS-in-JS with injectTheme()
-- ✅ **Enhanced demo** (ui-demo.html) showcasing all UI components
-- ✅ **30 UI component tests** passing
+### Bundle Sizes 📦
+- **@likha/core:** 8.99 KB (2.51 KB gzipped)
+- **@likha/plugins:** 104.32 KB (21.96 KB gzipped)
+- **@likha/ui:** 11.95 KB (2.96 KB gzipped)
+- **Total:** 125.26 KB uncompressed
 
-### ✅ Phase 4: Official Plugins (In Progress)
+### Completed Plugins (9/14 Priority Plugins) ✅
+1. HeadingPlugin - H1-H6 with Ctrl+Alt+1-6
+2. BulletListPlugin - Ctrl+Shift+8
+3. OrderedListPlugin - Ctrl+Shift+9
+4. BlockquotePlugin - Ctrl+Shift+B, Ctrl+>
+5. HorizontalRulePlugin - Mod+_
+6. LinkPlugin - Mod-k 
+7. CodeBlockPlugin - Mod-Alt-c, Shift-Ctrl-\
+8. **TextAlignmentPlugin** - Mod-Shift-l/e/r/j (NEW ✨)
+9. Core marks - Bold, Italic, Code (Ctrl+B, Ctrl+I, Ctrl+`)
 
-**Week 9-12: High-Priority Plugins**
-- ✅ **HeadingPlugin** - Keyboard shortcuts (Ctrl+Alt+1-6), toggleHeading, setHeading commands
-- ✅ **BulletListPlugin** - Ctrl+Shift+8 shortcut, toggleBulletList command  
-- ✅ **OrderedListPlugin** - Ctrl+Shift+9 shortcut, toggleOrderedList command
-- ✅ **Extended Schema** - Added heading (H1-H6) and list nodes using prosemirror-schema-list
-- ✅ **Phase 4 Demo** - Enhanced demo with heading dropdown and list buttons
+### Keyboard Shortcuts Summary ⌨️
+- **Bold:** Ctrl+B
+- **Italic:** Ctrl+I
+- **Code:** Ctrl+`
+- **Link:** Mod-k (Ctrl/Cmd+K)
+- **Code Block:** Mod-Alt-c or Shift-Ctrl-\
+- **Align Left:** Mod-Shift-l
+- **Align Center:** Mod-Shift-e
+- **Align Right:** Mod-Shift-r
+- **Align Justify:** Mod-Shift-j
+- **Headings:** Ctrl+Alt+1 through Ctrl+Alt+6
+- **Bullet List:** Ctrl+Shift+8
+- **Ordered List:** Ctrl+Shift+9
+- **Blockquote:** Ctrl+> or Ctrl+Shift+B
+- **Horizontal Rule:** Mod+_ (Ctrl/Cmd+Shift+-)
+- **Undo:** Ctrl+Z
+- **Redo:** Ctrl+Y / Ctrl+Shift+Z
+### Key Technical Achievements 🔧
+- Extended likhaSchema with textAlign attribute on paragraph and heading nodes
+- Text alignment stored as node attributes (left/center/right/justify)
+- parseDOM reads textAlign from style.textAlign attribute
+- toDOM omits style when alignment is 'left' (default)
+- Code blocks preserve whitespace with language support
+- Link mark with href/title attributes
+- All 188 tests passing with TypeScript strict mode
+- Zero build errors
 
-**Pending Plugins:**
-- BlockquotePlugin
-- HorizontalRulePlugin  
-- LinkPlugin (medium priority but high value)
-- ImagePlugin
-- CodeBlockPlugin
-- TablePlugin
-- And more...
+### Next Steps (Phase 4 Continuation) 🚀
+1. **Table Plugin** - Create, resize, merge cells
+2. **Image Plugin** - Insert, resize, align images  
+3. **Text color/highlight plugins**
+4. Update demo with alignment UI controls
+5. Add syntax highlighting library integration (Prism.js/highlight.js)
 
-## Test Summary
+### Phase Completion Status 📈
+- **Phase 0:** Foundation ✅ 100%
+- **Phase 1:** Core Editor ✅ 100%
+- **Phase 2:** Plugin System ✅ 100%
+- **Phase 3:** UI Components ✅ 100%
+- **Phase 4:** Official Plugins 🔄 73% (9/12 high+medium priority plugins)
 
-- **@likha/core**: 5/5 tests passing
-- **@likha/plugins**: 10/10 tests passing (existing CharacterCount, Placeholder)
-- **@likha/ui**: 30/30 tests passing
-- **Total**: 45/45 tests passing ✅
+### Issues Resolved 
+1. TypeScript errors with getLinkHref return type  Updated CommandFunction signature
+2. Missing prosemirror-keymap dependency  Installed via pnpm
+3. Vite build failures  Added prosemirror-keymap to externals
+4. File corruption during creation  Used PowerShell Out-File with UTF-8 encoding
+5. Duplicate class declarations  Recreated file cleanly
 
-**Note**: New heading and list plugins need tests added (target: 20+ new tests)
-
-## Package Sizes
-
-### Current Build (Phase 4 - 5 Plugins)
-- **@likha/core**: 6.46 KB (2.04 KB gzipped)
-- **@likha/plugins**: 95.19 KB (20.98 KB gzipped)
-- **@likha/ui**: 11.95 KB (2.96 KB gzipped)
-- **Total**: 113.60 KB (25.98 KB gzipped)
-
-**Status**: Excellent - Well under 100 KB gzipped target ✅
-
-## Technology Stack
-
-- **Build Tool**: Vite 5.4.21
-- **Package Manager**: pnpm 8.15.1
-- **Testing**: Vitest with happy-dom
-- **TypeScript**: Strict mode enabled
-- **Editor Foundation**: ProseMirror (MIT-licensed)
-- **Dependencies**: 
-  - prosemirror-state@1.4.3
-  - prosemirror-view@1.35.2
-  - prosemirror-model@1.25.4
-  - prosemirror-schema-basic@1.2.3
-  - prosemirror-schema-list@1.5.1
-  - prosemirror-commands@1.7.1
-  - prosemirror-history@1.4.1
-  - prosemirror-keymap@1.2.2
-
-## Next Steps
-
-1. **Test New Plugins** - Write comprehensive tests for HeadingPlugin, BulletListPlugin, OrderedListPlugin
-   - Test all heading levels (1-6)
-   - Test list nesting and lifting
-   - Test keyboard shortcuts
-   - Test active state detection
-
-2. **Continue Phase 4** - Build remaining high-priority plugins:
-   - BlockquotePlugin
-   - HorizontalRulePlugin
-   - LinkPlugin with URL input
-   - TextAlignmentPlugin
-
-3. **Documentation** - Update README with new plugin examples and keyboard shortcuts
-
-4. **Performance** - Monitor bundle sizes (currently well under 100KB target)
-
-## Development Commands
-
-```bash
-pnpm install              # Install all dependencies
-pnpm build                # Build all packages
-pnpm dev                  # Watch mode for development
-pnpm test                 # Run all tests
-pnpm --filter @likha/core build   # Build specific package
-```
-
-## Key Achievements
-
-- 🎯 **112 tests passing** with 0 failures (up from 92)
-- 📦 **25.98 KB gzipped** total bundle size (target: <100KB)
-- 🧩 **7 official plugins** created (2 utility + 5 content)
-- 🎨 **3 UI components** with comprehensive styling
-- ⌨️ **10+ keyboard shortcuts** implemented
-- 🏗️ **Monorepo structure** with 6 packages
-- 📝 **Extended schema** supporting headings, lists, blockquote, HR
-- ✨ **Public Editor API** with getText(), executeCommand(...args)
+### Logo Integration 
+- Logo moved from root to \examples/assets/logo.svg\
+- Integrated into phase4-demo.html header
+- SVG viewBox: 0 0 25.3652 12.3281
+- Displayed at 60px height with proper spacing
 
 ---
 
-*Last updated: Phase 4 in progress - 5 content plugins complete with 77 tests*
+**Last Updated:** December 17, 2025  
+**Build Status:** ✅ All packages building successfully  
+**Test Status:** ✅ 188/188 tests passing  
+**Bundle Target:** Well under 100 KB gzipped goal (currently 27.43 KB total)
