@@ -39,6 +39,21 @@ Track progress for the Likha editor development.
 - ⏸️ Add changesets for versioning (deferred)
 - ✅ Create development scripts
 
+### Documentation
+- ✅ Create basic markdown docs (docs/)
+- ✅ Write CHANGELOG.md
+- ⏳ **Set up VitePress for documentation site** ⚠️ HIGH PRIORITY
+  - Install: `pnpm add -D vitepress`
+  - Init: `pnpm vitepress init`
+  - Configure: docs/.vitepress/config.ts
+  - Theme: Default VitePress theme with customization
+  - Search: Built-in search with @algolia/client-search
+  - Deploy: GitHub Pages or Netlify
+  - URL: https://vitepress.dev/guide/getting-started
+- ⏳ Add interactive examples in docs
+- ⏳ Create plugin development guide
+- ⏳ Write contribution guidelines
+
 ---
 
 ## Phase 1: Core Editor Engine ✅ COMPLETE

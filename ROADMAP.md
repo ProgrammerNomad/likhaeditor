@@ -189,15 +189,23 @@ This document outlines the complete development plan for Likha, divided into man
 ### Plain HTML Adapter (Week 17) ✅
 - [x] Create @likha/html package
 - [x] Build vanilla JS wrapper (createEditor helper)
-- [x] Add CDN build configuration (UMD 81.6 KB gzipped)
+- [x] Add CDN build configuration (UMD 85 KB gzipped)
 - [x] Create initialization helpers (plugin loading, toolbar)
 - [x] Write usage examples (cdn-demo.html)
-- [x] Add comprehensive default toolbar (18 controls: heading, bold, italic, underline, link, lists, blockquote, alignment, image, table, HR, code, colors)
-- [ ] Add Undo/Redo toolbar buttons (functionality exists, needs UI)
-- [ ] Add Clear Formatting toolbar button
-- [ ] Add HTML Source View toggle button (plugin exists, needs toolbar integration)
-- [ ] Test in different browsers
-- [ ] Documentation (VitePress in /docs)
+- [x] Add comprehensive default toolbar (27+ controls)
+- [x] Add Undo/Redo toolbar buttons
+- [x] Add Clear Formatting toolbar button
+- [x] Add HTML Source View toggle button
+- [x] Add color picker for text color and highlight
+- [ ] Test in different browsers (Chrome tested)
+- [ ] **Documentation with VitePress** ⚠️ IMPORTANT
+  - [ ] Install VitePress: `pnpm add -D vitepress`
+  - [ ] Initialize VitePress: `pnpm vitepress init`
+  - [ ] Configure docs/.vitepress/config.ts
+  - [ ] Create documentation site with existing markdown files
+  - [ ] Add search functionality
+  - [ ] Deploy to GitHub Pages or Netlify
+  - See: https://vitepress.dev/guide/getting-started
 
 ### React Adapter (Week 18)
 - [ ] Create @likha/react package
