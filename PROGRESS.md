@@ -1,9 +1,36 @@
 ﻿# Likha Editor - Progress Update
 
-## Current Status (Phase 4 - 100% COMPLETE! 🎉)
+## Current Status: Phase 5 - 25% COMPLETE
+
+**Active Phase:** Phase 5 - Framework Adapters  
+**Overall Progress:** 4.25/8 phases complete (53%)
+
+**Bundle Sizes:**
+- Core: 13.86 KB (4.79 KB gzipped)
+- Plugins: 114.07 KB (23.73 KB gzipped)
+- HTML/CDN: 279 KB UMD (81.6 KB gzipped)
+- Total: ~407 KB uncompressed
+
+**Test Coverage:** 274/275 tests passing (99.6%)
+
+---
 
 ### Latest Completions ✅
-1. **HighlightPlugin** - Text highlighting/background color ✨ NEW
+
+**Phase 5 - Framework Adapters:**
+1. **@likha/html Package** - Vanilla JS/CDN wrapper ✨ NEW
+   - `createEditor(options)` - Main initialization API
+   - UMD build: 279 KB (81.6 KB gzipped) for CDN usage
+   - ES/CJS builds for bundlers (580 KB ES, 279 KB CJS)
+   - Plugin loading system with 14 default plugins
+   - Default toolbar creation with all formatting options
+   - `window.LikhaEditor` global for script tag usage
+   - onChange callback with 300ms debounce
+   - CDN demo example (cdn-demo.html)
+   - No build tools required - works directly in browsers
+
+**Phase 4 - Plugins:**
+1. **HighlightPlugin** - Text highlighting/background color
    - `setHighlight(color?)` - Set background color (default: yellow)
    - `removeHighlight()` - Remove highlight from selection
    - `getHighlight()` - Get current highlight color at cursor

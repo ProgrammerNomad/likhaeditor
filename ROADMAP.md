@@ -184,17 +184,18 @@ This document outlines the complete development plan for Likha, divided into man
 
 ---
 
-## Phase 5: Framework Adapters (Week 17-20)
+## Phase 5: Framework Adapters (Week 17-20) - 25% COMPLETE
 
 **Goal:** Create integrations for popular frameworks
 
-### Plain HTML Adapter (Week 17)
-- [ ] Create @likha/html package
-- [ ] Build vanilla JS wrapper
-- [ ] Add CDN build configuration
-- [ ] Create initialization helpers
-- [ ] Write usage examples
+### Plain HTML Adapter (Week 17) ✅
+- [x] Create @likha/html package
+- [x] Build vanilla JS wrapper (createEditor helper)
+- [x] Add CDN build configuration (UMD 81.6 KB gzipped)
+- [x] Create initialization helpers (plugin loading, toolbar)
+- [x] Write usage examples (cdn-demo.html)
 - [ ] Test in different browsers
+- [ ] Documentation (VitePress in /docs)
 
 ### React Adapter (Week 18)
 - [ ] Create @likha/react package
