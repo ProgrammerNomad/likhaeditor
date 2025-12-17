@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { Editor } from '../../../core/src/editor';
+import { Editor } from '@likha/core';
 import { HighlightPlugin } from '../highlight';
 
 describe('HighlightPlugin', () => {

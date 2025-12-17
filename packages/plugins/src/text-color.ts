@@ -1,8 +1,12 @@
-import type { Editor } from '../../core/src/editor';
-import { Plugin } from '../../core/src/plugin';
+import { Plugin, type PluginConfig } from '@likha/core';
+import type { Editor } from '@likha/core';
 
 export class TextColorPlugin extends Plugin {
   name = 'text-color';
+
+  constructor(config: PluginConfig = {}) {
+    super(config);
+  }
 
   init(editor: Editor): void {
     this.editor = editor;

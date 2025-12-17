@@ -85,6 +85,25 @@ importers:
         specifier: ^1.0.0
         version: 1.6.1(@types/node@20.19.27)(happy-dom@20.0.11)(jsdom@27.3.0)(terser@5.44.1)
 
+  packages/html:
+    dependencies:
+      '@likha/core':
+        specifier: workspace:*
+        version: link:../core
+      '@likha/plugins':
+        specifier: workspace:*
+        version: link:../plugins
+      '@likha/ui':
+        specifier: workspace:*
+        version: link:../ui
+    devDependencies:
+      typescript:
+        specifier: ^5.3.3
+        version: 5.9.3
+      vite:
+        specifier: ^5.4.0
+        version: 5.4.21(@types/node@20.19.27)(terser@5.44.1)
+
   packages/plugins:
     dependencies:
       '@likha/core':
