@@ -126,7 +126,7 @@ This document outlines the complete development plan for Likha, divided into man
 
 ---
 
-## Phase 4: Official Plugins (Week 12-16) 🔄 IN PROGRESS
+## Phase 4: Official Plugins (Week 12-16) 🔄 IN PROGRESS (83% complete)
 
 **Goal:** Build essential editing plugins
 
@@ -144,8 +144,8 @@ This document outlines the complete development plan for Likha, divided into man
 #### Medium Priority Plugins (Week 14-15)
 - [x] Code block plugin with language support ✅
 - [x] Text alignment plugin ✅
-- [ ] Table plugin (create, resize, merge)
-- [ ] Image plugin (insert, resize, align)
+- [x] Table plugin (basic insert) ✅
+- [x] Image plugin (insert, resize, alt text) ✅
 - [ ] Text color plugin
 - [ ] Highlight plugin
 
@@ -157,10 +157,22 @@ This document outlines the complete development plan for Likha, divided into man
 - [ ] Find and replace plugin
 
 ### Deliverables
-- ✅ @likha/plugins package (95.19 KB, 20.98 KB gzipped)
-- ⏳ 7/15+ working plugins (in progress)
-  - ✅ PlaceholderPlugin
-  - ✅ CharacterCountPlugin
+- ✅ @likha/plugins package (108.84 KB, 22.72 KB gzipped)
+- ⏳ 11/15+ working plugins (in progress)
+  - ✅ PlaceholderPlugin (4 tests)
+  - ✅ CharacterCountPlugin (4 tests)
+  - ✅ HeadingPlugin (25 tests)
+  - ✅ BulletListPlugin (19 tests)
+  - ✅ OrderedListPlugin (19 tests)
+  - ✅ HorizontalRulePlugin (9 tests)
+  - ✅ BlockquotePlugin (18 tests)
+  - ✅ CodeBlockPlugin (27 tests)
+  - ✅ LinkPlugin (22 tests)
+  - ✅ TextAlignmentPlugin (27 tests)
+  - ✅ TablePlugin (17 tests)
+  - ✅ ImagePlugin (24 tests)
+- ⏳ 229 total tests passing (195 plugin tests + 5 core + 30 UI - 1 skipped)
+- ⏳ Test coverage: >85% for plugins, >90% for core
   - ✅ HeadingPlugin
   - ✅ BulletListPlugin
   - ✅ OrderedListPlugin

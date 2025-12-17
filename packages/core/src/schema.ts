@@ -110,6 +110,86 @@ export const likhaSchema: Schema = new Schema({
           : '';
         return ['pre', ['code', { class: className }, 0]];
       }
+    })
+    .addToEnd('table', {
+      content: 'table_row+',
+      tableRole: 'table',
+      isolating: true,
+      group: 'block',
+      parseDOM: [{ tag: 'table' }],
+      toDOM: () => ['table', ['tbody', 0]]
+    })
+    .addToEnd('table_row', {
+      content: 'table_cell+',
+      tableRole: 'row',
+      parseDOM: [{ tag: 'tr' }],
+      toDOM: () => ['tr', 0]
+    })
+    .addToEnd('table_cell', {
+      content: 'paragraph+',
+      tableRole: 'cell',
+      isolating: true,
+      attrs: {
+        colspan: { default: 1 },
+        rowspan: { default: 1 },
+        colwidth: { default: null }
+      },
+      parseDOM: [{
+        tag: 'td',
+        getAttrs: (dom: any) => ({
+          colspan: parseInt(dom.getAttribute('colspan') || '1', 10),
+          rowspan: parseInt(dom.getAttribute('rowspan') || '1', 10),
+          colwidth: dom.getAttribute('data-colwidth') ? 
+            dom.getAttribute('data-colwidth').split(',').map((s: string) => parseInt(s, 10)) : 
+            null
+        })
+      }, {
+        tag: 'th',
+        getAttrs: (dom: any) => ({
+          colspan: parseInt(dom.getAttribute('colspan') || '1', 10),
+          rowspan: parseInt(dom.getAttribute('rowspan') || '1', 10),
+          colwidth: dom.getAttribute('data-colwidth') ? 
+            dom.getAttribute('data-colwidth').split(',').map((s: string) => parseInt(s, 10)) : 
+            null
+        })
+      }],
+      toDOM: (node) => {
+        const attrs: any = {};
+        if (node.attrs.colspan !== 1) attrs.colspan = node.attrs.colspan;
+        if (node.attrs.rowspan !== 1) attrs.rowspan = node.attrs.rowspan;
+        if (node.attrs.colwidth) attrs['data-colwidth'] = node.attrs.colwidth.join(',');
+        return ['td', attrs, 0];
+      }
+    })
+    .addToEnd('image', {
+      inline: true,
+      attrs: {
+        src: { default: null },
+        alt: { default: null },
+        title: { default: null },
+        width: { default: null },
+        height: { default: null }
+      },
+      group: 'inline',
+      draggable: true,
+      parseDOM: [{
+        tag: 'img[src]',
+        getAttrs: (dom: any) => ({
+          src: dom.getAttribute('src'),
+          alt: dom.getAttribute('alt'),
+          title: dom.getAttribute('title'),
+          width: dom.getAttribute('width') ? parseInt(dom.getAttribute('width'), 10) : null,
+          height: dom.getAttribute('height') ? parseInt(dom.getAttribute('height'), 10) : null
+        })
+      }],
+      toDOM: (node) => {
+        const attrs: any = { src: node.attrs.src };
+        if (node.attrs.alt) attrs.alt = node.attrs.alt;
+        if (node.attrs.title) attrs.title = node.attrs.title;
+        if (node.attrs.width) attrs.width = node.attrs.width;
+        if (node.attrs.height) attrs.height = node.attrs.height;
+        return ['img', attrs];
+      }
     }),
   marks: basicSchema.spec.marks.update('link', {
     attrs: {

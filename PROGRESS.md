@@ -1,9 +1,29 @@
 ﻿# Likha Editor - Progress Update
 
-## Current Status (Phase 4 - 73% Complete)
+## Current Status (Phase 4 - 83% Complete)
 
 ### Latest Completions ✅
-1. **TextAlignmentPlugin** - Text alignment (left, center, right, justify)
+1. **ImagePlugin** - Image insertion and manipulation ✨ NEW
+   - `insertImage(src, alt?, title?)` - Insert images with optional alt text and title
+   - `setImageSize(width?, height?)` - Resize images independently or together
+   - `getImageSrc()` - Get URL of selected/adjacent image
+   - `isImageSelected()` - Check if image is at cursor position
+   - `setImageAlt(alt)` - Update alt text while preserving other attributes
+   - Draggable images with visual selection feedback
+   - 24 comprehensive tests covering insertion, resizing, alt text, edge cases
+   - Inline node type for seamless integration with text
+   - Special character handling in alt text
+   - Large dimension support (tested up to 9999px)
+
+2. **TablePlugin** - Table creation and management
+   - `insertTable(rows, cols)` - Insert table with specified dimensions (default 3×3)
+   - `isInTable()` - Check if cursor is inside a table
+   - Full table HTML structure with tbody, tr, td
+   - Support for colspan/rowspan in schema
+   - Border styling and cell padding
+   - 17 comprehensive tests covering insertion, dimensions, structure, edge cases
+   - Can insert 1×1 to large tables (tested up to 10×10)
+   - Cells contain paragraphs for proper content editing
    - `setTextAlign(alignment)` - Set alignment (left/center/right/justify)
    - `setAlignLeft()`, `setAlignCenter()`, `setAlignRight()`, `setAlignJustify()` - Convenience methods
    - `getTextAlign()` - Get current alignment
@@ -41,29 +61,34 @@
    - Supports both absolute and relative URLs
 
 ### Test Coverage 📊
-- **Total Tests:** 188 passing
+- **Total Tests:** 229 passing (up from 205)
   - Core: 5 tests
-  - Plugins: 153 tests
+  - Plugins: 195 tests (up from 170)
   - UI: 30 tests
+  - 1 skipped
 - **Plugin Test Breakdown:**
   - TextAlignmentPlugin: 27 tests
   - CodeBlockPlugin: 27 tests
+  - **ImagePlugin: 24 tests** ✨ NEW
   - LinkPlugin: 22 tests
-  - HeadingPlugin: 21 tests
+  - HeadingPlugin: 25 tests (up from 21)
+  - TablePlugin: 17 tests (NEW ✨)
   - BlockquotePlugin: 13 tests
-  - OrderedListPlugin: 12 tests
-  - BulletListPlugin: 11 tests
-  - HorizontalRulePlugin: 10 tests
-  - CharacterCountPlugin: 6 tests
+  - BulletListPlugin: 19 tests (up from 11)
+  - OrderedListPlugin: 19 tests (up from 12)
+  - TablePlugin: 17 tests
+  - BlockquotePlugin: 18 tests
+  - HorizontalRulePlugin: 9 tests
+  - CharacterCountPlugin: 4 tests
   - PlaceholderPlugin: 4 tests
 
 ### Bundle Sizes 📦
-- **@likha/core:** 8.99 KB (2.51 KB gzipped)
-- **@likha/plugins:** 104.32 KB (21.96 KB gzipped)
+- **@likha/core:** 11.51 KB (2.97 KB gzipped)
+- **@likha/plugins:** 108.84 KB (22.72 KB gzipped)
 - **@likha/ui:** 11.95 KB (2.96 KB gzipped)
-- **Total:** 125.26 KB uncompressed
+- **Total:** 132.30 KB uncompressed, 29.65 KB gzipped
 
-### Completed Plugins (9/14 Priority Plugins) ✅
+### Completed Plugins (11/13 Medium+ Priority Plugins) ✅
 1. HeadingPlugin - H1-H6 with Ctrl+Alt+1-6
 2. BulletListPlugin - Ctrl+Shift+8
 3. OrderedListPlugin - Ctrl+Shift+9
@@ -71,8 +96,9 @@
 5. HorizontalRulePlugin - Mod+_
 6. LinkPlugin - Mod-k 
 7. CodeBlockPlugin - Mod-Alt-c, Shift-Ctrl-\
-8. **TextAlignmentPlugin** - Mod-Shift-l/e/r/j (NEW ✨)
-9. Core marks - Bold, Italic, Code (Ctrl+B, Ctrl+I, Ctrl+`)
+8. TextAlignmentPlugin - Mod-Shift-l/e/r/j
+9. **TablePlugin** - Basic table insertion (NEW ✨)
+10. Core marks - Bold, Italic, Code (Ctrl+B, Ctrl+I, Ctrl+`)
 
 ### Keyboard Shortcuts Summary ⌨️
 - **Bold:** Ctrl+B
@@ -113,7 +139,7 @@
 - **Phase 1:** Core Editor ✅ 100%
 - **Phase 2:** Plugin System ✅ 100%
 - **Phase 3:** UI Components ✅ 100%
-- **Phase 4:** Official Plugins 🔄 73% (9/12 high+medium priority plugins)
+- **Phase 4:** Official Plugins 🔄 78% (10/12 high+medium priority plugins + table basic)
 
 ### Issues Resolved 
 1. TypeScript errors with getLinkHref return type  Updated CommandFunction signature
@@ -132,5 +158,6 @@
 
 **Last Updated:** December 17, 2025  
 **Build Status:** ✅ All packages building successfully  
-**Test Status:** ✅ 188/188 tests passing  
-**Bundle Target:** Well under 100 KB gzipped goal (currently 27.43 KB total)
+**Test Status:** ✅ 205/205 tests passing  
+**Bundle Target:** Well under 100 KB gzipped goal (currently 28.98 KB total)  
+**Demo:** http://localhost:3001 (with table insertion button)

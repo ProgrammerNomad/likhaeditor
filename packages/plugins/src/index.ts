@@ -8,3 +8,5 @@ export { HorizontalRulePlugin } from './horizontal-rule';
 export { LinkPlugin } from './link';
 export { CodeBlockPlugin } from './code-block';
 export { TextAlignmentPlugin } from './text-alignment';
+export { TablePlugin } from './table';
+export { ImagePlugin } from './image';
