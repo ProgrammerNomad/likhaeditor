@@ -6,7 +6,7 @@ export interface PluginConfig {
 }
 
 export interface CommandFunction {
-  (editor: Editor): boolean;
+  (editor: Editor, ...args: any[]): any;
 }
 
 export interface Commands {

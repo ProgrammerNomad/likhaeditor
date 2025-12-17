@@ -1,7 +1,7 @@
-import { EditorState, Plugin as ProseMirrorPlugin } from 'prosemirror-state';
+import { EditorState, Plugin as ProseMirrorPlugin, TextSelection } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { Schema, DOMParser, DOMSerializer } from 'prosemirror-model';
-import { schema } from 'prosemirror-schema-basic';
+import { likhaSchema } from './schema';
 import { keymap } from 'prosemirror-keymap';
 import { history, undo, redo } from 'prosemirror-history';
 import { baseKeymap, toggleMark } from 'prosemirror-commands';
@@ -15,7 +15,7 @@ export interface EditorOptions {
 }
 
 export class Editor {
-  private view: EditorView;
+  public view: EditorView;
   private element: HTMLElement;
   private plugins: PluginRegistry = {};
   private customCommands: Commands = {};
@@ -23,7 +23,7 @@ export class Editor {
   constructor(options: EditorOptions) {
     this.element = options.element;
     
-    const editorSchema = options.schema || schema;
+    const editorSchema = options.schema || likhaSchema;
     
     // Register plugins first
     if (options.plugins) {
@@ -83,13 +83,13 @@ export class Editor {
     return this.plugins[name];
   }
 
-  public executeCommand(name: string): boolean {
+  public executeCommand(name: string, ...args: any[]): any {
     const command = this.customCommands[name];
     if (!command) {
       console.warn(`Command "${name}" not found`);
       return false;
     }
-    return command(this);
+    return command(this, ...args);
   }
 
   private parseContent(content: string, schema: Schema) {
@@ -107,6 +107,10 @@ export class Editor {
     return div.innerHTML;
   }
 
+  public getText(): string {
+    return this.view.state.doc.textContent;
+  }
+
   public setContent(content: string): void {
     const doc = this.parseContent(content, this.view.state.schema);
     const state = EditorState.create({
@@ -114,6 +118,11 @@ export class Editor {
       plugins: this.view.state.plugins,
     });
     this.view.updateState(state);
+    // Set selection to start of document
+    const tr = this.view.state.tr.setSelection(
+      TextSelection.atStart(this.view.state.doc)
+    );
+    this.view.dispatch(tr);
   }
 
   public focus(): void {

@@ -1,6 +1,5 @@
 import { Plugin } from '@likha/core';
 import { wrapInList, liftListItem } from 'prosemirror-schema-list';
-import { NodeType } from 'prosemirror-model';
 
 /**
  * Bullet list plugin

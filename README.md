@@ -1,3 +1,5 @@
+<img src="./assets/logo.svg" alt="लिखा Logo" width="100">
+
 # Likha Editor
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)

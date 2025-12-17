@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Likha Editor - Phase 4 Demo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #f9fafb;
+      padding: 2rem;
+      color: #111827;
+    }
+
+    .container {
+      max-width: 56rem;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header p {
+      color: #6b7280;
+      font-size: 1.125rem;
+    }
+
+    .editor-container {
+      background: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+    }
+
+    .editor-wrapper {
+      border-top: 1px solid #e5e7eb;
+    }
+
+    #editor {
+      min-height: 400px;
+      padding: 1.5rem;
+      outline: none;
+    }
+
+    .ProseMirror {
+      outline: none;
+      line-height: 1.6;
+    }
+
+    .ProseMirror p {
+      margin-bottom: 1rem;
+    }
+
+    .ProseMirror p:last-child {
+      margin-bottom: 0;
+    }
+
+    .ProseMirror h1,
+    .ProseMirror h2,
+    .ProseMirror h3,
+    .ProseMirror h4,
+    .ProseMirror h5,
+    .ProseMirror h6 {
+      font-weight: 600;
+      margin-bottom: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .ProseMirror h1:first-child,
+    .ProseMirror h2:first-child,
+    .ProseMirror h3:first-child {
+      margin-top: 0;
+    }
+
+    .ProseMirror h1 { font-size: 2rem; }
+    .ProseMirror h2 { font-size: 1.5rem; }
+    .ProseMirror h3 { font-size: 1.25rem; }
+    .ProseMirror h4 { font-size: 1.125rem; }
+    .ProseMirror h5 { font-size: 1rem; }
+    .ProseMirror h6 { font-size: 0.875rem; font-weight: 700; }
+
+    .ProseMirror blockquote {
+      border-left: 4px solid #3b82f6;
+      padding-left: 1rem;
+      margin-left: 0;
+      margin-right: 0;
+      margin-bottom: 1rem;
+      color: #6b7280;
+      font-style: italic;
+    }
+
+    .ProseMirror hr {
+      border: none;
+      border-top: 2px solid #e5e7eb;
+      margin: 2rem 0;
+    }
+
+    .ProseMirror ul,
+    .ProseMirror ol {
+      padding-left: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .ProseMirror li {
+      margin-bottom: 0.5rem;
+    }
+
+    .ProseMirror li p {
+      margin-bottom: 0.25rem;
+    }
+
+    .ProseMirror code {
+      background: #f3f4f6;
+      padding: 0.125rem 0.375rem;
+      border-radius: 0.25rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.875em;
+    }
+
+    .ProseMirror strong {
+      font-weight: 600;
+    }
+
+    .ProseMirror em {
+      font-style: italic;
+    }
+
+    .stats-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      background: #f9fafb;
+      border-top: 1px solid #e5e7eb;
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+
+    .stats-left {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .stat {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .stat-value {
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .badge {
+      background: #dcfce7;
+      color: #166534;
+      padding: 0.25rem 0.625rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .shortcuts {
+      margin-top: 2rem;
+      background: white;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .shortcuts h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #111827;
+    }
+
+    .shortcuts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .shortcut-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem;
+      background: #f9fafb;
+      border-radius: 0.375rem;
+    }
+
+    .shortcut-name {
+      color: #374151;
+      font-size: 0.875rem;
+    }
+
+    .shortcut-keys {
+      display: flex;
+      gap: 0.25rem;
+    }
+
+    .key {
+      background: white;
+      border: 1px solid #d1d5db;
+      border-radius: 0.25rem;
+      padding: 0.125rem 0.375rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="assets/logo.svg" alt="Likha Logo" style="height: 60px; margin-bottom: 1rem;">
+      <h1>Likha Editor</h1>
+      <p>Phase 4: Headings and Lists</p>
+    </div>
+
+    <div class="editor-container">
+      <div id="toolbar-container"></div>
+      
+      <div class="editor-wrapper">
+        <div id="editor"></div>
+      </div>
+
+      <div class="stats-bar">
+        <div class="stats-left">
+          <div class="stat">
+            <span>Characters:</span>
+            <span class="stat-value" id="char-count">0</span>
+          </div>
+          <div class="stat">
+            <span>Words:</span>
+            <span class="stat-value" id="word-count">0</span>
+          </div>
+        </div>
+        <div class="badge">Phase 4: Official Plugins</div>
+      </div>
+    </div>
+
+    <div class="shortcuts">
+      <h3>Keyboard Shortcuts</h3>
+      <div class="shortcuts-grid">
+        <div class="shortcut-item">
+          <span class="shortcut-name">Bold</span>
+          <div class="shortcut-keys">
+            <span class="key">Ctrl</span>
+            <span class="key">B</span>
+          </div>
+        </div>
+        <div class="shortcut-item">
+          <span class="shortcut-name">Italic</span>
+          <div class="shortcut-keys">
+            <span class="key">Ctrl</span>
+            <span class="key">I</span>
+          </div>
+        </div>
+        <div class="shortcut-item">
+          <span class="shortcut-name">Heading 1</span>
+          <div class="shortcut-keys">
+            <span class="key">Ctrl</span>
+            <span class="key">Alt</span>
+            <span class="key">1</span>
+          </div>
+        </div>
+        <div class="shortcut-item">
+          <span class="shortcut-name">Heading 2</span>
+          <div class="shortcut-keys">
+            <span class="key">Ctrl</span>
+            <span class="key">Alt</span>
+            <span class="key">2</span>
+          </div>
+        </div>
+        <div class="shortcut-item">
+          <span class="shortcut-name">Heading 3</span>
+          <div class="shortcut-keys">
+            <span class="key">Ctrl</span>
+            <span class="key">Alt</span>
+            <span class="key">3</span>
+          </div>
+        </div>
+        <div class="shortcut-item">
+          <span class="shortcut-name">Bullet List</span>
+          <div class="shortcut-keys">
+            <span class="key">Ctrl</span>
+            <span class="key">Shift</span>
+            <span class="key">8</span>
+          </div>
+        </div>
+        <div class="shortcut-item">
+          <span class="shortcut-name">Numbered List</span>
+          <div class="shortcut-keys">
+            <span class="key">Ctrl</span>
+            <span class="key">Shift</span>
+            <span class="key">9</span>
+          </div>
+        </div>
+        <div class="shortcut-item">
+          <span class="shortcut-name">Blockquote</span>
+          <div class="shortcut-keys">
+            <span class="key">Ctrl</span>
+            <span class="key">Shift</span>
+            <span class="key">B</span>
+          </div>
+        </div>
+        <div class="shortcut-item">
+          <span class="shortcut-name">Undo</span>
+          <div class="shortcut-keys">
+            <span class="key">Ctrl</span>
+            <span class="key">Z</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { Editor } from '@likha/core';
+    import { 
+      PlaceholderPlugin, 
+      CharacterCountPlugin,
+      HeadingPlugin,
+      BulletListPlugin,
+      OrderedListPlugin,
+      BlockquotePlugin,
+      HorizontalRulePlugin
+    } from '@likha/plugins';
+    import { Toolbar, Button, Dropdown, injectTheme } from '@likha/ui';
+
+    // Inject theme styles
+    injectTheme();
+
+    // Initialize editor with plugins
+    const editor = new Editor({
+      element: document.getElementById('editor'),
+      content: `
+        <h1>Welcome to Likha Editor</h1>
+        <p>Phase 4 introduces <strong>headings</strong> and <strong>lists</strong>! Try out these new features:</p>
+        <h2>Headings</h2>
+        <p>Use the dropdown menu or keyboard shortcuts to create headings (H1-H6).</p>
+        <h3>Lists</h3>
+        <p>Create organized content with bullet or numbered lists:</p>
+        <ul>
+          <li>Bullet list item 1</li>
+          <li>Bullet list item 2</li>
+          <li>Bullet list item 3</li>
+        </ul>
+        <p>Or use numbered lists:</p>
+        <ol>
+          <li>First item</li>
+          <li>Second item</li>
+          <li>Third item</li>
+        </ol>
+        <p>Press <strong>Ctrl+Shift+8</strong> for bullet lists or <strong>Ctrl+Shift+9</strong> for numbered lists!</p>
+      `,
+      plugins: [
+        new PlaceholderPlugin({ text: 'Start writing something amazing...' }),
+        new CharacterCountPlugin({ target: '#char-count' }),
+        new HeadingPlugin(),
+        new BulletListPlugin(),
+        new OrderedListPlugin(),
+        new BlockquotePlugin(),
+        new HorizontalRulePlugin(),
+        new LinkPlugin()
+      ]
+    });
+
+    // Icons
+    const boldIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path></svg>';
+    const italicIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="4" x2="10" y2="4"></line><line x1="14" y1="20" x2="5" y2="20"></line><line x1="15" y1="4" x2="9" y2="20"></line></svg>';
+    const quoteIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path></svg>';
+    const hrIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line></svg>';
+    const listIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>';
+    const numberedIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="10" y1="6" x2="21" y2="6"></line><line x1="10" y1="12" x2="21" y2="12"></line><line x1="10" y1="18" x2="21" y2="18"></line><path d="M4 6h1v4"></path><path d="M4 10h2"></path><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"></path></svg>';
+    const undoIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v6h6"></path><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"></path></svg>';
+    const redoIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 7v6h-6"></path><path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3l3 2.7"></path></svg>';
+
+    // Create toolbar
+    const toolbar = new Toolbar({
+      container: '#toolbar-container',
+      sticky: false
+    });
+
+    // Heading dropdown
+    const headingDropdown = new Dropdown({
+      placeholder: 'Paragraph',
+      items: [
+        { value: 'p', label: 'Paragraph' },
+        { value: 'h1', label: 'Heading 1' },
+        { value: 'h2', label: 'Heading 2' },
+        { value: 'h3', label: 'Heading 3' },
+        { value: 'h4', label: 'Heading 4' },
+        { value: 'h5', label: 'Heading 5' },
+        { value: 'h6', label: 'Heading 6' }
+      ],
+      onSelect: (value) => {
+        if (value === 'p') {
+          editor.executeCommand('setParagraph');
+        } else {
+          const level = parseInt(value.substring(1));
+          editor.executeCommand('toggleHeading', level);
+        }
+        editor.view.focus();
+      }
+    });
+
+    toolbar.addButton(headingDropdown.getElement());
+    toolbar.addSeparator();
+
+    // Format buttons
+    const boldBtn = new Button({
+      icon: boldIcon,
+      title: 'Bold (Ctrl+B)',
+      onClick: () => editor.bold(),
+      isActive: () => editor.isActive('bold')
+    });
+
+    const italicBtn = new Button({
+      icon: italicIcon,
+      title: 'Italic (Ctrl+I)',
+      onClick: () => editor.italic(),
+      isActive: () => editor.isActive('italic')
+    });
+
+    toolbar.addGroup([boldBtn.getElement(), italicBtn.getElement()]);
+    toolbar.addSeparator();
+
+    // List buttons
+    const bulletListBtn = new Button({
+      icon: listIcon,
+      title: 'Bullet List (Ctrl+Shift+8)',
+      onClick: () => editor.executeCommand('toggleBulletList'),
+      isActive: () => editor.executeCommand('isBulletListActive') || false
+    });
+
+    const orderedListBtn = new Button({
+      icon: numberedIcon,
+      title: 'Numbered List (Ctrl+Shift+9)',
+      onClick: () => editor.executeCommand('toggleOrderedList'),
+      isActive: () => editor.executeCommand('isOrderedListActive') || false
+    });
+
+
+    // Blockquote and HR buttons
+    const blockquoteBtn = new Button({
+      icon: quoteIcon,
+      title: 'Blockquote (Ctrl+Shift+B)',
+      onClick: () => editor.executeCommand('toggleBlockquote'),
+      isActive: () => editor.executeCommand('isBlockquoteActive') || false
+    });
+
+    const hrBtn = new Button({
+      icon: hrIcon,
+      title: 'Insert Horizontal Rule',
+      onClick: () => editor.executeCommand('insertHorizontalRule')
+    });
+
+    toolbar.addGroup([blockquoteBtn.getElement(), hrBtn.getElement()]);
+    toolbar.addSeparator();
+    toolbar.addGroup([bulletListBtn.getElement(), orderedListBtn.getElement()]);
+    toolbar.addSeparator();
+
+    // History buttons
+    const undoBtn = new Button({
+      icon: undoIcon,
+      title: 'Undo (Ctrl+Z)',
+      onClick: () => editor.undo()
+    });
+
+    const redoBtn = new Button({
+      icon: redoIcon,
+      title: 'Redo (Ctrl+Y)',
+      onClick: () => editor.redo()
+    });
+
+    toolbar.addGroup([undoBtn.getElement(), redoBtn.getElement()]);
+
+    // Update word count
+    function updateWordCount() {
+      const text = editor.getHTML().replace(/<[^>]*>/g, '');
+      const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+      document.getElementById('word-count').textContent = words;
+    }
+
+    setInterval(updateWordCount, 500);
+    updateWordCount();
+
+    // Make editor available globally
+    window.likhaEditor = editor;
+    window.likhaToolbar = toolbar;
+  </script>
+</body>
+</html>

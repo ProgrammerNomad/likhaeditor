@@ -1,6 +1,5 @@
 import { Plugin } from '@likha/core';
 import { setBlockType } from 'prosemirror-commands';
-import { Node as ProseMirrorNode } from 'prosemirror-model';
 
 /**
  * Heading plugin

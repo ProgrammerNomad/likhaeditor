@@ -56,6 +56,9 @@ importers:
       prosemirror-schema-basic:
         specifier: ^1.2.2
         version: 1.2.4
+      prosemirror-schema-list:
+        specifier: ^1.5.1
+        version: 1.5.1
       prosemirror-state:
         specifier: ^1.4.3
         version: 1.4.4
@@ -87,6 +90,18 @@ importers:
       '@likha/core':
         specifier: workspace:*
         version: link:../core
+      prosemirror-commands:
+        specifier: ^1.5.2
+        version: 1.7.1
+      prosemirror-keymap:
+        specifier: ^1.2.2
+        version: 1.2.3
+      prosemirror-model:
+        specifier: ^1.19.4
+        version: 1.25.4
+      prosemirror-schema-list:
+        specifier: ^1.5.1
+        version: 1.5.1
     devDependencies:
       '@types/node':
         specifier: ^20.10.0
@@ -1910,6 +1925,14 @@ packages:
     resolution: {integrity: sha512-ELxP4TlX3yr2v5rM7Sb70SqStq5NvI15c0j9j/gjsrO5vaw+fnnpovCLEGIcpeGfifkuqJwl4fon6b+KdrODYQ==}
     dependencies:
       prosemirror-model: 1.25.4
+    dev: false
+
+  /prosemirror-schema-list@1.5.1:
+    resolution: {integrity: sha512-927lFx/uwyQaGwJxLWCZRkjXG0p48KpMj6ueoYiu4JX05GGuGcgzAy62dfiV8eFZftgyBUvLx76RsMe20fJl+Q==}
+    dependencies:
+      prosemirror-model: 1.25.4
+      prosemirror-state: 1.4.4
+      prosemirror-transform: 1.10.5
     dev: false
 
   /prosemirror-state@1.4.4:
