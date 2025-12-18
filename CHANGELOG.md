@@ -5,6 +5,54 @@ All notable changes to Likha Editor will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.1] - 2025-12-18
+
+### 🎉 First Public Release
+
+**NPM Packages Published**
+- `@nomadprogrammer/likha-core` v0.0.1
+- `@nomadprogrammer/likha-ui` v0.0.1
+- `@nomadprogrammer/likha-plugins` v0.0.1
+- `@nomadprogrammer/likha` v0.0.1
+
+### Added
+
+**Core Features**
+- Framework-agnostic editor engine
+- Complete toolbar and UI component system
+- 15 official plugins
+- Vanilla JavaScript wrapper for zero-build usage
+- CDN support via jsDelivr and unpkg
+
+**Plugins**
+- Text formatting: Bold, Italic, Underline, Strikethrough
+- Advanced: Subscript, Superscript, Text Color, Highlight
+- Headings: H1-H6 support
+- Lists: Bullet lists and ordered lists
+- Blocks: Blockquote, Code block, Horizontal rule
+- Rich content: Links, Images, Tables
+- Text alignment: Left, Center, Right, Justify
+- Utilities: Clear formatting, Placeholder, Character count
+
+**Developer Experience**
+- TypeScript support with full type definitions
+- Customizable toolbar with 24 built-in buttons
+- Plugin-based architecture
+- Tree-shakable ES modules
+- Documentation site: https://likha-doc.netlify.app/
+
+**Bundle Sizes**
+- Core: 14.18 KB (3.44 KB gzipped)
+- UI: 11.95 KB (2.96 KB gzipped)
+- Plugins: 124.54 KB (25.24 KB gzipped)
+- HTML wrapper: 259.69 KB UMD (75.51 KB gzipped)
+
+### Known Issues
+- List Enter key behavior needs improvement
+- Nested list handling has edge cases (99.6% test coverage)
+
+---
+
 ## [Unreleased]
 
 ### Added

@@ -2,6 +2,8 @@
 
 # Likha Editor
 
+[![npm version](https://img.shields.io/npm/v/@nomadprogrammer/likha.svg)](https://www.npmjs.com/package/@nomadprogrammer/likha)
+[![npm downloads](https://img.shields.io/npm/dm/@nomadprogrammer/likha.svg)](https://www.npmjs.com/package/@nomadprogrammer/likha)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![GitHub Stars](https://img.shields.io/github/stars/ProgrammerNomad/likha)](https://github.com/ProgrammerNomad/likha/stargazers)
@@ -9,7 +11,7 @@
 
 Likha is a completely free, open-source, self-hosted, framework-agnostic rich text editor built for developers who demand flexibility without vendor lock-in. Run it anywhere: static HTML, Laravel, Livewire, React, Next.js, and more. Likha comes from the Hindi word "लिखा", meaning "written".
 
-[Documentation](https://likha-doc.netlify.app/) | [Examples](https://likha-doc.netlify.app/examples/) | [API Reference](https://likha-doc.netlify.app/api/core) | [Plugins](https://likha-doc.netlify.app/api/plugins)
+[Documentation](https://likha-doc.netlify.app/) | [Examples](https://likha-doc.netlify.app/examples/) | [API Reference](https://likha-doc.netlify.app/api/core) | [npm Package](https://www.npmjs.com/package/@nomadprogrammer/likha)
 
 ## Why Likha
 
@@ -251,6 +253,21 @@ editor.use(TrackChangesPlugin);
 - First-class support for community plugins
 
 ## Architecture Overview
+
+### NPM Packages
+
+All packages are published under the `@nomadprogrammer` scope on npm:
+
+| Package | Version | Description |
+|---------|---------|-------------|
+| [@nomadprogrammer/likha-core](https://www.npmjs.com/package/@nomadprogrammer/likha-core) | ![npm](https://img.shields.io/npm/v/@nomadprogrammer/likha-core) | Framework-agnostic editor engine |
+| [@nomadprogrammer/likha-ui](https://www.npmjs.com/package/@nomadprogrammer/likha-ui) | ![npm](https://img.shields.io/npm/v/@nomadprogrammer/likha-ui) | Toolbar and UI components |
+| [@nomadprogrammer/likha-plugins](https://www.npmjs.com/package/@nomadprogrammer/likha-plugins) | ![npm](https://img.shields.io/npm/v/@nomadprogrammer/likha-plugins) | Official plugin collection |
+| [@nomadprogrammer/likha](https://www.npmjs.com/package/@nomadprogrammer/likha) | ![npm](https://img.shields.io/npm/v/@nomadprogrammer/likha) | Vanilla JS wrapper (recommended) |
+
+**Coming soon:** `@nomadprogrammer/likha-react`, `@nomadprogrammer/likha-laravel`, `@nomadprogrammer/likha-livewire`
+
+### Project Structure
 
 ```
 likha/

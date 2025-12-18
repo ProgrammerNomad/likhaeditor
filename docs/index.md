@@ -78,20 +78,26 @@ Likha is a **modern, framework-agnostic rich text editor** built on ProseMirror.
 
 ## Current Status
 
-**Version:** 0.1.0-alpha  
-**Phase:** 4 - Plugin Development (14/14 plugins complete)
+**Version:** 0.0.1  
+**Released:** December 18, 2025
 
-### Available Packages
+### NPM Packages
 
-| Package | Description | Status |
-|---------|-------------|--------|
-| `@nomadprogrammer/likha-core` | Framework-agnostic editor engine | ✅ Stable |
-| `@nomadprogrammer/likha-ui` | Toolbar and UI components | ✅ Stable |
-| `@nomadprogrammer/likha-plugins` | Official plugin collection | ✅ Alpha |
-| `@nomadprogrammer/likha` | Vanilla JS wrapper | ✅ Alpha |
-| `@nomadprogrammer/likha-react` | React components | 🚧 Planned |
-| `@nomadprogrammer/likha-laravel` | Laravel Blade components | 🚧 Planned |
-| `@nomadprogrammer/likha-livewire` | Livewire integration | 🚧 Planned |
+All packages are available on npm under the `@nomadprogrammer` scope:
+
+| Package | npm | Description | Status |
+|---------|-----|-------------|--------|
+| [@nomadprogrammer/likha-core](https://www.npmjs.com/package/@nomadprogrammer/likha-core) | ![npm](https://img.shields.io/npm/v/@nomadprogrammer/likha-core) | Framework-agnostic editor engine | ✅ Stable |
+| [@nomadprogrammer/likha-ui](https://www.npmjs.com/package/@nomadprogrammer/likha-ui) | ![npm](https://img.shields.io/npm/v/@nomadprogrammer/likha-ui) | Toolbar and UI components | ✅ Stable |
+| [@nomadprogrammer/likha-plugins](https://www.npmjs.com/package/@nomadprogrammer/likha-plugins) | ![npm](https://img.shields.io/npm/v/@nomadprogrammer/likha-plugins) | Official plugin collection | ✅ Alpha |
+| [@nomadprogrammer/likha](https://www.npmjs.com/package/@nomadprogrammer/likha) | ![npm](https://img.shields.io/npm/v/@nomadprogrammer/likha) | Vanilla JS wrapper | ✅ Alpha |
+| `@nomadprogrammer/likha-react` | - | React components | 🚧 Planned |
+| `@nomadprogrammer/likha-laravel` | - | Laravel Blade components | 🚧 Planned |
+| `@nomadprogrammer/likha-livewire` | - | Livewire integration | 🚧 Planned |
+
+**Installation:**
+```bash
+npm install @nomadprogrammer/likha
 
 ## Browser Support
 
@@ -101,9 +107,11 @@ Likha is a **modern, framework-agnostic rich text editor** built on ProseMirror.
 
 ## Community
 
+- **NPM:** [View all packages](https://www.npmjs.com/search?q=%40nomadprogrammer%2Flikha)
 - **Issues:** [GitHub Issues](https://github.com/ProgrammerNomad/likha/issues)
 - **Discussions:** [GitHub Discussions](https://github.com/ProgrammerNomad/likha/discussions)
-- **License:** [MIT](../LICENSE)
+- **Changelog:** [CHANGELOG.md](https://github.com/ProgrammerNomad/likha/blob/main/CHANGELOG.md)
+- **License:** [MIT](https://github.com/ProgrammerNomad/likha/blob/main/LICENSE)
 
 ## Credits
 
