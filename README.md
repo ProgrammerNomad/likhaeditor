@@ -1,6 +1,6 @@
 <img src="./assets/logo.svg" alt="लिखा Logo" width="100">
 
-# Likha Editor
+# LikhaEditor
 
 [![npm version](https://img.shields.io/npm/v/@likhaeditor/likhaeditor.svg)](https://www.npmjs.com/package/@likhaeditor/likhaeditor)
 [![npm downloads](https://img.shields.io/npm/dm/@likhaeditor/likhaeditor.svg)](https://www.npmjs.com/package/@likhaeditor/likhaeditor)
@@ -9,11 +9,11 @@
 [![GitHub Stars](https://img.shields.io/github/stars/ProgrammerNomad/likha)](https://github.com/ProgrammerNomad/likhaeditor/stargazers)
 [![GitHub Issues](https://img.shields.io/github/issues/ProgrammerNomad/likha)](https://github.com/ProgrammerNomad/likhaeditor/issues)
 
-Likha is a completely free, open-source, self-hosted, framework-agnostic rich text editor built for developers who demand flexibility without vendor lock-in. Run it anywhere: static HTML, Laravel, Livewire, React, Next.js, and more. Likha comes from the Hindi word "लिखा", meaning "written".
+LikhaEditor is a completely free, open-source, self-hosted, framework-agnostic rich text editor built for developers who demand flexibility without vendor lock-in. Run it anywhere: static HTML, Laravel, Livewire, React, Next.js, and more. The name "Likha" comes from the Hindi word "लिखा", meaning "written".
 
 [Documentation](https://likhaeditor.netlify.app/) | [Examples](https://likhaeditor.netlify.app/examples/) | [API Reference](https://likhaeditor.netlify.app/api/core) | [npm Package](https://www.npmjs.com/package/@likhaeditor/likhaeditor)
 
-## Why Likha
+## Why LikhaEditor
 
 - Free forever under the MIT license
 - No mandatory cloud services or accounts
@@ -36,7 +36,7 @@ Likha is a completely free, open-source, self-hosted, framework-agnostic rich te
   
   <script src="https://cdn.jsdelivr.net/npm/@likhaeditor/likhaeditor/dist/likha-editor.umd.js"></script>
   <script>
-    const editor = Likha.createEditor({
+    const editor = LikhaEditor.createEditor({
       element: document.getElementById("editor"),
       content: "<p>Start writing...</p>"
     });
@@ -81,9 +81,9 @@ composer require nomadprogrammer/likha-laravel
 - No gated or paywalled functionality
 - Developer-first ergonomics and documentation
 
-## What Likha Is (and Is Not)
+## What LikhaEditor Is (and Is Not)
 
-### Likha is
+### LikhaEditor is
 
 - A modern rich text editor platform
 - Fully extensible through plugins
@@ -91,7 +91,7 @@ composer require nomadprogrammer/likha-laravel
 - Welcoming to Laravel and Livewire workflows
 - Safe for commercial projects
 
-### Likha is not
+### LikhaEditor is not
 
 - A hosted cloud service
 - A SaaS subscription offering
@@ -100,7 +100,7 @@ composer require nomadprogrammer/likha-laravel
 
 ## Comparison with Other Editors
 
-| Feature | Likha | TipTap | Quill | CKEditor | Slate |
+| Feature | LikhaEditor | TipTap | Quill | CKEditor | Slate |
 |---------|-------|--------|-------|----------|-------|
 | License | MIT (Free) | MIT (Free) | BSD | GPL/Commercial | MIT (Free) |
 | Self-Hosted | Yes | Yes | Yes | Yes | Yes |
@@ -212,7 +212,7 @@ composer require nomadprogrammer/likha-laravel
 
 	const editor = new Editor({
 		element: document.getElementById("editor"),
-		content: "<p>Hello from Likha</p>"
+		content: "<p>Hello from LikhaEditor</p>"
 	});
 
 	console.log(editor.getHTML());
@@ -239,7 +239,7 @@ composer require nomadprogrammer/likha-laravel
 
 ## Plugin-Based Architecture
 
-Everything in Likha is delivered as a plugin, so you only ship what you enable.
+Everything in LikhaEditor is delivered as a plugin, so you only ship what you enable.
 
 ```ts
 editor.use(TablePlugin);
@@ -306,7 +306,7 @@ All official packages are published under the `@nomadprogrammer` scope on npm:
 
 ## License
 
-Likha is distributed under the MIT License.
+LikhaEditor is distributed under the MIT License.
 
 - Free for personal and commercial use
 - Redistribution allowed without attribution
@@ -336,29 +336,29 @@ Please review CONTRIBUTING.md before submitting a pull request.
 
 ## Vision
 
-Likha aims to become the default open-source editor for developers seeking freedom, control, and simplicity without licenses, clouds, or lock-in. The goal is a modular platform that grows with your product and embraces the ecosystems you already trust.
+LikhaEditor aims to become the default open-source editor for developers seeking freedom, control, and simplicity without licenses, clouds, or lock-in. The goal is a modular platform that grows with your product and embraces the ecosystems you already trust.
 
 ## Frequently Asked Questions
 
-### Is Likha really free?
+### Is LikhaEditor really free?
 
 Yes, completely free. MIT licensed with no hidden costs, premium tiers, or feature gating. Use it in commercial projects without attribution requirements.
 
-### Does Likha require a backend server?
+### Does LikhaEditor require a backend server?
 
-No mandatory backend. Likha runs entirely in the browser. You only need a server if you want features like image uploads, which you control and implement yourself.
+No mandatory backend. LikhaEditor runs entirely in the browser. You only need a server if you want features like image uploads, which you control and implement yourself.
 
-### Can I use Likha offline?
+### Can I use LikhaEditor offline?
 
-Yes, Likha works completely offline once loaded. No internet connection required for editing.
+Yes, LikhaEditor works completely offline once loaded. No internet connection required for editing.
 
 ### How does Likha compare to TipTap?
 
-Both are excellent. Likha focuses on framework-agnostic design with first-class Laravel/Livewire support and works in plain HTML without build tools. TipTap is React/Vue focused and requires a build step.
+Both are excellent. LikhaEditor focuses on framework-agnostic design with first-class Laravel/Livewire support and works in plain HTML without build tools. TipTap is React/Vue focused and requires a build step.
 
 ### Will there be a paid version?
 
-No. Likha will remain 100 percent free and open source forever. No premium plans, no enterprise editions, no feature paywalls.
+No. LikhaEditor will remain 100 percent free and open source forever. No premium plans, no enterprise editions, no feature paywalls.
 
 ### How is collaborative editing implemented?
 
@@ -370,7 +370,7 @@ Yes, migration guides and content conversion tools are planned to help you switc
 
 ### What is the browser support?
 
-Likha targets modern evergreen browsers (Chrome, Firefox, Safari, Edge). IE11 is not supported.
+LikhaEditor targets modern evergreen browsers (Chrome, Firefox, Safari, Edge). IE11 is not supported.
 
 ### How can I get help?
 
@@ -379,16 +379,14 @@ Check the [documentation](https://likhaeditor.netlify.app/), browse [examples](h
 ## Community and Support
 
 - [GitHub Discussions](https://github.com/ProgrammerNomad/likhaeditor/discussions) - Ask questions and share ideas
-- [Issue Tracker](https://github.com/ProgrammerNomad/likhaeditor/issues) - Report bugs and request features  
-- [Discord Server](https://discord.gg/likha) - Join the community (Coming soon)
-- [Twitter](https://twitter.com/likhaeditor) - Follow for updates (Coming soon)
+- [Issue Tracker](https://github.com/ProgrammerNomad/likhaeditor/issues) - Report bugs and request features
 
 ## Support the Project
 
-Likha is and always will be free. You can support its development by:
+LikhaEditor is and always will be free. You can support its development by:
 
 - Star the repository on [GitHub](https://github.com/ProgrammerNomad/likhaeditor)
-- Share Likha with your network and colleagues
+- Share LikhaEditor with your network and colleagues
 - Report bugs with detailed reproduction steps
 - Suggest features and integrations
 - Contribute code, documentation, or plugins
@@ -398,7 +396,7 @@ Likha is and always will be free. You can support its development by:
 
 ## Acknowledgments
 
-Likha is built on the shoulders of giants:
+LikhaEditor is built on the shoulders of giants:
 
 - [ProseMirror](https://prosemirror.net/) - The powerful editing framework
 - All our [contributors](https://github.com/ProgrammerNomad/likhaeditor/graphs/contributors)
