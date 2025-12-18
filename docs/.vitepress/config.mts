@@ -38,7 +38,8 @@ export default defineConfig({
           items: [
             { text: 'React', link: '/guide/react' },
             { text: 'Laravel', link: '/guide/laravel' },
-            { text: 'Livewire', link: '/guide/livewire' }
+            { text: 'Livewire', link: '/guide/livewire' },
+            { text: 'Filament', link: '/guide/filament' }
           ]
         }
       ],
