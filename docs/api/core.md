@@ -1,6 +1,6 @@
 # Core API
 
-The `@likha/core` package provides the fundamental editor functionality.
+The `@nomadprogrammer/likha-core` package provides the fundamental editor functionality.
 
 ## Editor Class
 
@@ -9,7 +9,7 @@ The main editor class that manages the ProseMirror instance.
 ### Constructor
 
 ```typescript
-import { Editor } from '@likha/core';
+import { Editor } from '@nomadprogrammer/likha-core';
 
 const editor = new Editor({
   element: HTMLElement,
@@ -109,7 +109,7 @@ Base class for creating custom plugins.
 ### Example
 
 ```typescript
-import { Plugin } from '@likha/core';
+import { Plugin } from '@nomadprogrammer/likha-core';
 
 export class MyPlugin extends Plugin {
   name = 'myPlugin';
@@ -177,5 +177,5 @@ import type {
   Commands,
   KeyboardShortcuts,
   PluginRegistry
-} from '@likha/core';
+} from '@nomadprogrammer/likha-core';
 ```

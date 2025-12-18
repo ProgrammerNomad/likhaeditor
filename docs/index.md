@@ -85,13 +85,13 @@ Likha is a **modern, framework-agnostic rich text editor** built on ProseMirror.
 
 | Package | Description | Status |
 |---------|-------------|--------|
-| `@likha/core` | Framework-agnostic editor engine | ✅ Stable |
-| `@likha/ui` | Toolbar and UI components | ✅ Stable |
-| `@likha/plugins` | Official plugin collection | ✅ Alpha |
-| `@likha/html` | Vanilla JS wrapper | ✅ Alpha |
-| `@likha/react` | React components | 🚧 Planned |
-| `@likha/laravel` | Laravel Blade components | 🚧 Planned |
-| `@likha/livewire` | Livewire integration | 🚧 Planned |
+| `@nomadprogrammer/likha-core` | Framework-agnostic editor engine | ✅ Stable |
+| `@nomadprogrammer/likha-ui` | Toolbar and UI components | ✅ Stable |
+| `@nomadprogrammer/likha-plugins` | Official plugin collection | ✅ Alpha |
+| `@nomadprogrammer/likha` | Vanilla JS wrapper | ✅ Alpha |
+| `@nomadprogrammer/likha-react` | React components | 🚧 Planned |
+| `@nomadprogrammer/likha-laravel` | Laravel Blade components | 🚧 Planned |
+| `@nomadprogrammer/likha-livewire` | Livewire integration | 🚧 Planned |
 
 ## Browser Support
 

@@ -14,7 +14,7 @@
   <div id="toolbar"></div>
   <div id="editor"></div>
 
-  <script src="https://unpkg.com/@likha/html@latest/dist/likha-editor.umd.js"></script>
+  <script src="https://unpkg.com/@nomadprogrammer/likha@latest/dist/likha-editor.umd.js"></script>
   <script>
     const { createEditor } = LikhaEditor;
     
@@ -31,13 +31,13 @@
 ### Using npm/pnpm
 
 ```bash
-pnpm add @likha/html
+pnpm add @nomadprogrammer/likha
 # or
-npm install @likha/html
+npm install @nomadprogrammer/likha
 ```
 
 ```javascript
-import { createEditor } from '@likha/html';
+import { createEditor } from '@nomadprogrammer/likha';
 
 const editor = createEditor({
   element: document.getElementById('editor'),

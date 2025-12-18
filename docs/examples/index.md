@@ -10,12 +10,12 @@ The simplest possible setup.
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@likha/html/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@nomadprogrammer/likha/dist/likha-editor.css">
 </head>
 <body>
   <div id="editor"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@likha/html/dist/likha-editor.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@nomadprogrammer/likha/dist/likha-editor.umd.js"></script>
   <script>
     const { createEditor } = LikhaEditor;
     
@@ -37,7 +37,7 @@ The simplest possible setup.
 Choose which buttons appear in the toolbar.
 
 ```javascript
-import { createEditor } from '@likha/html';
+import { createEditor } from '@nomadprogrammer/likha';
 
 createEditor({
   element: '#editor',

@@ -1,6 +1,6 @@
 # API Reference
 
-## @likha/html
+## @nomadprogrammer/likha
 
 ### `createEditor(options)`
 
@@ -57,7 +57,7 @@ interface EditorInstance {
 #### Example
 
 ```javascript
-import { createEditor } from '@likha/html';
+import { createEditor } from '@nomadprogrammer/likha';
 
 const instance = createEditor({
   element: document.getElementById('editor'),
@@ -79,7 +79,7 @@ instance.setContent('<h1>New content</h1>');
 instance.destroy();
 ```
 
-## @likha/core
+## @nomadprogrammer/likha-core
 
 ### `Editor`
 
@@ -128,8 +128,8 @@ interface EditorOptions {
 #### Example
 
 ```javascript
-import { Editor } from '@likha/core';
-import { BoldPlugin, ItalicPlugin } from '@likha/plugins';
+import { Editor } from '@nomadprogrammer/likha-core';
+import { BoldPlugin, ItalicPlugin } from '@nomadprogrammer/likha-plugins';
 
 const editor = new Editor({
   element: document.getElementById('editor'),
@@ -148,7 +148,7 @@ editor.toggleHeading(2);
 editor.executeCommand('toggleBulletList');
 ```
 
-## @likha/ui
+## @nomadprogrammer/likha-ui
 
 ### `Toolbar`
 
@@ -196,7 +196,7 @@ interface ButtonOptions {
 - `getElement(): HTMLElement` - Get button DOM element
 - `setActive(active: boolean): void` - Set active state
 
-## @likha/plugins
+## @nomadprogrammer/likha-plugins
 
 All plugins extend the base `Plugin` class:
 

@@ -23,26 +23,26 @@ Choose your preferred method:
 ### NPM (Recommended)
 
 ```bash
-npm install @likha/html
+npm install @nomadprogrammer/likha
 ```
 
 ### pnpm
 
 ```bash
-pnpm add @likha/html
+pnpm add @nomadprogrammer/likha
 ```
 
 ### Yarn
 
 ```bash
-yarn add @likha/html
+yarn add @nomadprogrammer/likha
 ```
 
 ### CDN
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@likha/html/style.css">
-<script src="https://cdn.jsdelivr.net/npm/@likha/html/dist/likha-editor.umd.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@nomadprogrammer/likha/dist/likha-editor.css">
+<script src="https://cdn.jsdelivr.net/npm/@nomadprogrammer/likha/dist/likha-editor.umd.js"></script>
 ```
 
 ## Basic Usage
@@ -53,12 +53,12 @@ yarn add @likha/html
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@likha/html/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@nomadprogrammer/likha/dist/likha-editor.css">
 </head>
 <body>
   <div id="editor"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@likha/html/dist/likha-editor.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@nomadprogrammer/likha/dist/likha-editor.umd.js"></script>
   <script>
     const { createEditor } = LikhaEditor;
     
@@ -74,8 +74,8 @@ yarn add @likha/html
 ### ES Module
 
 ```javascript
-import '@likha/html/style.css';
-import { createEditor } from '@likha/html';
+import '@nomadprogrammer/likha/dist/likha-editor.css';
+import { createEditor } from '@nomadprogrammer/likha';
 
 createEditor({
   element: document.getElementById('editor'),

@@ -1,13 +1,13 @@
 # HTML Package API
 
-The `@likha/html` package provides a simple wrapper for using Likha in vanilla HTML/JavaScript projects.
+The `@nomadprogrammer/likha` package provides a simple wrapper for using Likha in vanilla HTML/JavaScript projects.
 
 ## createEditor()
 
 Creates and initializes a Likha editor instance.
 
 ```typescript
-import { createEditor } from '@likha/html';
+import { createEditor } from '@nomadprogrammer/likha';
 
 const instance = createEditor(options);
 ```
@@ -91,7 +91,7 @@ interface EditorInstance {
 ### Basic Usage
 
 ```javascript
-import { createEditor } from '@likha/html';
+import { createEditor } from '@nomadprogrammer/likha';
 
 createEditor({
   element: '#editor',
@@ -153,11 +153,11 @@ instance.destroy();
 Don't forget to include the CSS:
 
 ```javascript
-import '@likha/html/style.css';
+import '@nomadprogrammer/likha/style.css';
 ```
 
 Or via HTML:
 
 ```html
-<link rel="stylesheet" href="@likha/html/style.css">
+<link rel="stylesheet" href="@nomadprogrammer/likha/style.css">
 ```
