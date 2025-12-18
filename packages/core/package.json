@@ -1,5 +1,5 @@
 {
-  "name": "@nomadprogrammer/likha-core",
+  "name": "@likhaeditor/core",
   "version": "0.0.1",
   "description": "Core editor engine for Likha - framework-agnostic",
   "type": "module",
@@ -34,10 +34,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ProgrammerNomad/likha.git",
+    "url": "https://github.com/ProgrammerNomad/likhaeditor.git",
     "directory": "packages/core"
   },
-  "homepage": "https://github.com/ProgrammerNomad/likha#readme",
+  "homepage": "https://github.com/ProgrammerNomad/likhaeditor#readme",
   "publishConfig": {
     "access": "public"
   },

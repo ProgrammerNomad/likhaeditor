@@ -57,7 +57,7 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/ProgrammerNomad/likha' }
+      { icon: 'github', link: 'https://github.com/ProgrammerNomad/likhaeditor' }
     ],
 
     footer: {

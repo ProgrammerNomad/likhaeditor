@@ -173,8 +173,8 @@ const toolbar = new Toolbar({ /* ... */ });
 ## Need Help?
 
 - 📖 **Documentation:** See main [README.md](../README.md)
-- 🐛 **Issues:** [GitHub Issues](https://github.com/ProgrammerNomad/likha/issues)
-- 💬 **Discussions:** [GitHub Discussions](https://github.com/ProgrammerNomad/likha/discussions)
+- 🐛 **Issues:** [GitHub Issues](https://github.com/ProgrammerNomad/likhaeditor/issues)
+- 💬 **Discussions:** [GitHub Discussions](https://github.com/ProgrammerNomad/likhaeditor/discussions)
 
 ## Key Concepts
 
@@ -259,9 +259,9 @@ const editor = new Editor({
 
 After trying the demos:
 
-1. **Install via NPM**: `npm install @nomadprogrammer/likha`
-2. **Use in React**: Check out `@nomadprogrammer/likha-react` package (coming soon)
-3. **Use in Laravel**: Check out `@nomadprogrammer/likha-laravel` package (coming soon)
+1. **Install via NPM**: `npm install @likhaeditor/likhaeditor`
+2. **Use in React**: Check out `@likhaeditor/likhaeditor-react` package (coming soon)
+3. **Use in Laravel**: Check out `@likhaeditor/likhaeditor-laravel` package (coming soon)
 4. **Build from source**: See [CONTRIBUTING.md](../CONTRIBUTING.md)
 
 ---

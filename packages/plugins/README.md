@@ -1,18 +1,18 @@
-# @nomadprogrammer/likha-plugins
+# @likhaeditor/plugins
 
 Official plugins for Likha editor.
 
 ## Installation
 
 ```bash
-npm install @nomadprogrammer/likha-plugins @nomadprogrammer/likha-core
+npm install @likhaeditor/plugins @likhaeditor/core
 ```
 
 ## Usage
 
 ```typescript
-import { Editor } from '@nomadprogrammer/likha-core';
-import { BulletListPlugin, OrderedListPlugin } from '@nomadprogrammer/likha-plugins';
+import { Editor } from '@likhaeditor/core';
+import { BulletListPlugin, OrderedListPlugin } from '@likhaeditor/plugins';
 
 const editor = new Editor({
   element: document.getElementById('editor'),
@@ -36,9 +36,9 @@ const editor = new Editor({
 
 ## Documentation
 
-Full documentation: https://likha-doc.netlify.app/
+Full documentation: https://likhaeditor.netlify.app/
 
-API Reference: https://likha-doc.netlify.app/api/plugins
+API Reference: https://likhaeditor.netlify.app/api/plugins
 
 ## License
 

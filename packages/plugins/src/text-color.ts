@@ -1,5 +1,5 @@
-import { Plugin, type PluginConfig } from '@likha/core';
-import type { Editor } from '@likha/core';
+import { Plugin, type PluginConfig } from '@likhaeditor/core';
+import type { Editor } from '@likhaeditor/core';
 
 export class TextColorPlugin extends Plugin {
   name = 'text-color';

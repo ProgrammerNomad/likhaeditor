@@ -1,5 +1,5 @@
-import { Plugin } from '@likha/core';
-import type { Editor } from '@likha/core';
+import { Plugin } from '@likhaeditor/core';
+import type { Editor } from '@likhaeditor/core';
 import type { Node as ProseMirrorNode } from 'prosemirror-model';
 
 export class ImagePlugin extends Plugin {

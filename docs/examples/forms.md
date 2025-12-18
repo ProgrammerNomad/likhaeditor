@@ -27,7 +27,7 @@ Copy the code below and save as an HTML file to see a working demo.
 ### JavaScript
 
 ```javascript
-import { createEditor } from '@nomadprogrammer/likha';
+import { createEditor } from '@likhaeditor/likhaeditor';
 
 const instance = createEditor({
   element: document.getElementById('editor'),
@@ -145,7 +145,7 @@ createEditor({
 </form>
 
 <script type="module">
-  import { createEditor } from '@nomadprogrammer/likha';
+  import { createEditor } from '@likhaeditor/likhaeditor';
   
   createEditor({
     element: '#editor',
@@ -164,7 +164,7 @@ See [Laravel Guide](/guide/laravel) for more Laravel-specific examples.
 
 ```jsx
 import { useRef, useEffect } from 'react';
-import { createEditor } from '@nomadprogrammer/likha';
+import { createEditor } from '@likhaeditor/likhaeditor';
 
 function BlogForm() {
   const editorRef = useRef(null);

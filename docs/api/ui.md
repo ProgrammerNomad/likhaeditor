@@ -1,13 +1,13 @@
 # UI Components
 
-The `@nomadprogrammer/likha-ui` package provides reusable UI components for building editor toolbars and menus.
+The `@likhaeditor/ui` package provides reusable UI components for building editor toolbars and menus.
 
 ## Toolbar
 
 Create customizable toolbars with buttons, dropdowns, and separators.
 
 ```typescript
-import { Toolbar } from '@nomadprogrammer/likha-ui';
+import { Toolbar } from '@likhaeditor/ui';
 
 const toolbar = new Toolbar({
   container: HTMLElement,
@@ -52,8 +52,8 @@ interface ButtonConfig {
 ### Example
 
 ```typescript
-import { Toolbar } from '@nomadprogrammer/likha-ui';
-import { Editor } from '@nomadprogrammer/likha-core';
+import { Toolbar } from '@likhaeditor/ui';
+import { Editor } from '@likhaeditor/core';
 
 const editor = new Editor({ element: document.getElementById('editor') });
 
@@ -93,7 +93,7 @@ const toolbar = new Toolbar({
 Create menu bars with dropdown menus.
 
 ```typescript
-import { MenuBar } from '@nomadprogrammer/likha-ui';
+import { MenuBar } from '@likhaeditor/ui';
 
 const menuBar = new MenuBar({
   container: HTMLElement,
@@ -166,7 +166,7 @@ const menuBar = new MenuBar({
 Pick colors for text and highlights.
 
 ```typescript
-import { ColorPicker } from '@nomadprogrammer/likha-ui';
+import { ColorPicker } from '@likhaeditor/ui';
 
 const picker = new ColorPicker({
   container: HTMLElement,
@@ -197,7 +197,7 @@ const colorPicker = new ColorPicker({
 Individual button component.
 
 ```typescript
-import { Button } from '@nomadprogrammer/likha-ui';
+import { Button } from '@likhaeditor/ui';
 
 const button = new Button({
   label: string,
@@ -229,7 +229,7 @@ document.getElementById('toolbar').appendChild(boldButton.element);
 Dropdown select component.
 
 ```typescript
-import { Dropdown } from '@nomadprogrammer/likha-ui';
+import { Dropdown } from '@likhaeditor/ui';
 
 const dropdown = new Dropdown({
   options: DropdownOption[],
@@ -266,7 +266,7 @@ const headingDropdown = new Dropdown({
 All UI components support theming:
 
 ```typescript
-import { setTheme } from '@nomadprogrammer/likha-ui';
+import { setTheme } from '@likhaeditor/ui';
 
 // Set global theme
 setTheme('dark');
@@ -282,7 +282,7 @@ const toolbar = new Toolbar({
 ### Custom Themes
 
 ```typescript
-import { registerTheme } from '@nomadprogrammer/likha-ui';
+import { registerTheme } from '@likhaeditor/ui';
 
 registerTheme('custom', {
   background: '#1e1e1e',

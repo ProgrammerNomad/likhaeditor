@@ -1,4 +1,4 @@
-# @nomadprogrammer/likha
+# @likhaeditor/likhaeditor
 
 Vanilla JavaScript wrapper for Likha editor - works without build tools.
 
@@ -7,14 +7,14 @@ Vanilla JavaScript wrapper for Likha editor - works without build tools.
 ### npm
 
 ```bash
-npm install @nomadprogrammer/likha
+npm install @likhaeditor/likhaeditor
 ```
 
 ### CDN
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@nomadprogrammer/likha/dist/likha-editor.css">
-<script src="https://cdn.jsdelivr.net/npm/@nomadprogrammer/likha/dist/likha-editor.umd.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@likhaeditor/likhaeditor/dist/likha-editor.css">
+<script src="https://cdn.jsdelivr.net/npm/@likhaeditor/likhaeditor/dist/likha-editor.umd.js"></script>
 ```
 
 ## Usage
@@ -22,8 +22,8 @@ npm install @nomadprogrammer/likha
 ### ES Module
 
 ```javascript
-import { createEditor } from '@nomadprogrammer/likha';
-import '@nomadprogrammer/likha/dist/likha-editor.css';
+import { createEditor } from '@likhaeditor/likhaeditor';
+import '@likhaeditor/likhaeditor/dist/likha-editor.css';
 
 createEditor({
   element: '#editor',
@@ -37,12 +37,12 @@ createEditor({
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@nomadprogrammer/likha/dist/likha-editor.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@likhaeditor/likhaeditor/dist/likha-editor.css">
 </head>
 <body>
   <div id="editor"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@nomadprogrammer/likha/dist/likha-editor.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@likhaeditor/likhaeditor/dist/likha-editor.umd.js"></script>
   <script>
     const { createEditor } = LikhaEditor;
     
@@ -81,11 +81,11 @@ createEditor({
 
 ## Documentation
 
-Full documentation: https://likha-doc.netlify.app/
+Full documentation: https://likhaeditor.netlify.app/
 
-Getting Started: https://likha-doc.netlify.app/guide/getting-started
+Getting Started: https://likhaeditor.netlify.app/guide/getting-started
 
-API Reference: https://likha-doc.netlify.app/api/html
+API Reference: https://likhaeditor.netlify.app/api/html
 
 ## License
 

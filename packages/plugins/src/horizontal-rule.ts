@@ -1,4 +1,4 @@
-import { Plugin } from '@likha/core';
+import { Plugin } from '@likhaeditor/core';
 
 /**
  * Horizontal rule plugin

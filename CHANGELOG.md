@@ -10,10 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### 🎉 First Public Release
 
 **NPM Packages Published**
-- `@nomadprogrammer/likha-core` v0.0.1
-- `@nomadprogrammer/likha-ui` v0.0.1
-- `@nomadprogrammer/likha-plugins` v0.0.1
-- `@nomadprogrammer/likha` v0.0.1
+- `@likhaeditor/core` v0.0.1
+- `@likhaeditor/ui` v0.0.1
+- `@likhaeditor/plugins` v0.0.1
+- `@likhaeditor/likhaeditor` v0.0.1
 
 ### Added
 
@@ -39,7 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Customizable toolbar with 24 built-in buttons
 - Plugin-based architecture
 - Tree-shakable ES modules
-- Documentation site: https://likha-doc.netlify.app/
+- Documentation site: https://likhaeditor.netlify.app/
 
 **Bundle Sizes**
 - Core: 14.18 KB (3.44 KB gzipped)
@@ -59,7 +59,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial alpha release
 - Core editor engine with ProseMirror foundation
 - 14 official plugins
-- Vanilla JS wrapper (@nomadprogrammer/likha)
+- Vanilla JS wrapper (@likhaeditor/likhaeditor)
 - Default toolbar with 27+ controls
 - Color picker for text color and highlight
 - Keyboard shortcuts for common operations
@@ -67,14 +67,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0-alpha] - 2025-12-17
 
 ### Added
-- **Core Package** (@nomadprogrammer/likha-core)
+- **Core Package** (@likhaeditor/core)
   - Framework-agnostic editor engine
   - Custom ProseMirror schema with text alignment support
   - Basic editing commands (bold, italic, underline, etc.)
   - Plugin architecture
   - Undo/redo functionality
 
-- **Plugins Package** (@nomadprogrammer/likha-plugins) - 14 plugins
+- **Plugins Package** (@likhaeditor/plugins) - 14 plugins
   - PlaceholderPlugin - Show placeholder text
   - CharacterCountPlugin - Track character/word count
   - HeadingPlugin - H1-H6 heading support
@@ -95,13 +95,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - ClearFormattingPlugin - Remove all formatting
   - HTMLSourceViewPlugin - Toggle HTML source view
 
-- **UI Package** (@nomadprogrammer/likha-ui)
+- **UI Package** (@likhaeditor/ui)
   - Toolbar component
   - Button component
   - Dropdown component
   - Color picker with 80-color palette
 
-- **HTML Package** (@nomadprogrammer/likha)
+- **HTML Package** (@likhaeditor/likhaeditor)
   - `createEditor()` function for vanilla JS usage
   - Auto-generated toolbar with all features
   - UMD build for CDN usage
@@ -150,9 +150,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive test coverage (Vitest)
 
 ### Bundle Sizes
-- @nomadprogrammer/likha-core: 3.3 KB gzipped
-- @nomadprogrammer/likha-plugins: 25 KB gzipped
-- @nomadprogrammer/likha: 85 KB gzipped (UMD)
+- @likhaeditor/core: 3.3 KB gzipped
+- @likhaeditor/plugins: 25 KB gzipped
+- @likhaeditor/likhaeditor: 85 KB gzipped (UMD)
 
 ## Known Issues
 

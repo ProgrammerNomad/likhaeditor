@@ -1,6 +1,6 @@
 # Plugins API
 
-All available plugins in the `@nomadprogrammer/likha-plugins` package.
+All available plugins in the `@likhaeditor/plugins` package.
 
 ## Built-in Plugins
 
@@ -9,7 +9,7 @@ All available plugins in the `@nomadprogrammer/likha-plugins` package.
 Adds support for headings (H1-H6).
 
 ```typescript
-import { HeadingPlugin } from '@nomadprogrammer/likha-plugins';
+import { HeadingPlugin } from '@likhaeditor/plugins';
 ```
 
 **Commands:**
@@ -26,7 +26,7 @@ import { HeadingPlugin } from '@nomadprogrammer/likha-plugins';
 Adds unordered (bullet) list support.
 
 ```typescript
-import { BulletListPlugin } from '@nomadprogrammer/likha-plugins';
+import { BulletListPlugin } from '@likhaeditor/plugins';
 ```
 
 **Commands:**
@@ -43,7 +43,7 @@ import { BulletListPlugin } from '@nomadprogrammer/likha-plugins';
 Adds ordered (numbered) list support.
 
 ```typescript
-import { OrderedListPlugin } from '@nomadprogrammer/likha-plugins';
+import { OrderedListPlugin } from '@likhaeditor/plugins';
 ```
 
 **Commands:**
@@ -60,7 +60,7 @@ import { OrderedListPlugin } from '@nomadprogrammer/likha-plugins';
 Adds blockquote support.
 
 ```typescript
-import { BlockquotePlugin } from '@nomadprogrammer/likha-plugins';
+import { BlockquotePlugin } from '@likhaeditor/plugins';
 ```
 
 **Commands:**
@@ -76,7 +76,7 @@ import { BlockquotePlugin } from '@nomadprogrammer/likha-plugins';
 Adds hyperlink support.
 
 ```typescript
-import { LinkPlugin } from '@nomadprogrammer/likha-plugins';
+import { LinkPlugin } from '@likhaeditor/plugins';
 ```
 
 **Commands:**
@@ -93,7 +93,7 @@ import { LinkPlugin } from '@nomadprogrammer/likha-plugins';
 Adds text color support with 80-color palette.
 
 ```typescript
-import { TextColorPlugin } from '@nomadprogrammer/likha-plugins';
+import { TextColorPlugin } from '@likhaeditor/plugins';
 ```
 
 **Commands:**
@@ -107,7 +107,7 @@ import { TextColorPlugin } from '@nomadprogrammer/likha-plugins';
 Adds background highlight color with 80-color palette.
 
 ```typescript
-import { HighlightPlugin } from '@nomadprogrammer/likha-plugins';
+import { HighlightPlugin } from '@likhaeditor/plugins';
 ```
 
 **Commands:**
@@ -121,7 +121,7 @@ import { HighlightPlugin } from '@nomadprogrammer/likha-plugins';
 Adds text alignment (left, center, right, justify).
 
 ```typescript
-import { TextAlignmentPlugin } from '@nomadprogrammer/likha-plugins';
+import { TextAlignmentPlugin } from '@likhaeditor/plugins';
 ```
 
 **Commands:**
@@ -140,7 +140,7 @@ import { TextAlignmentPlugin } from '@nomadprogrammer/likha-plugins';
 Adds table support.
 
 ```typescript
-import { TablePlugin } from '@nomadprogrammer/likha-plugins';
+import { TablePlugin } from '@likhaeditor/plugins';
 ```
 
 **Commands:**
@@ -160,7 +160,7 @@ import { TablePlugin } from '@nomadprogrammer/likha-plugins';
 Adds image support.
 
 ```typescript
-import { ImagePlugin } from '@nomadprogrammer/likha-plugins';
+import { ImagePlugin } from '@likhaeditor/plugins';
 ```
 
 **Commands:**
@@ -174,7 +174,7 @@ import { ImagePlugin } from '@nomadprogrammer/likha-plugins';
 Adds code block support.
 
 ```typescript
-import { CodeBlockPlugin } from '@nomadprogrammer/likha-plugins';
+import { CodeBlockPlugin } from '@likhaeditor/plugins';
 ```
 
 **Commands:**
@@ -190,7 +190,7 @@ import { CodeBlockPlugin } from '@nomadprogrammer/likha-plugins';
 Adds strikethrough formatting.
 
 ```typescript
-import { StrikethroughPlugin } from '@nomadprogrammer/likha-plugins';
+import { StrikethroughPlugin } from '@likhaeditor/plugins';
 ```
 
 **Commands:**
@@ -203,7 +203,7 @@ import { StrikethroughPlugin } from '@nomadprogrammer/likha-plugins';
 Adds subscript formatting.
 
 ```typescript
-import { SubscriptPlugin } from '@nomadprogrammer/likha-plugins';
+import { SubscriptPlugin } from '@likhaeditor/plugins';
 ```
 
 **Commands:**
@@ -216,7 +216,7 @@ import { SubscriptPlugin } from '@nomadprogrammer/likha-plugins';
 Adds superscript formatting.
 
 ```typescript
-import { SuperscriptPlugin } from '@nomadprogrammer/likha-plugins';
+import { SuperscriptPlugin } from '@likhaeditor/plugins';
 ```
 
 **Commands:**
@@ -229,7 +229,7 @@ import { SuperscriptPlugin } from '@nomadprogrammer/likha-plugins';
 Removes all formatting from selection.
 
 ```typescript
-import { ClearFormattingPlugin } from '@nomadprogrammer/likha-plugins';
+import { ClearFormattingPlugin } from '@likhaeditor/plugins';
 ```
 
 **Commands:**
@@ -242,7 +242,7 @@ import { ClearFormattingPlugin } from '@nomadprogrammer/likha-plugins';
 Adds placeholder text when editor is empty.
 
 ```typescript
-import { PlaceholderPlugin } from '@nomadprogrammer/likha-plugins';
+import { PlaceholderPlugin } from '@likhaeditor/plugins';
 ```
 
 **Options:**
@@ -259,7 +259,7 @@ new PlaceholderPlugin({
 Tracks character and word count.
 
 ```typescript
-import { CharacterCountPlugin } from '@nomadprogrammer/likha-plugins';
+import { CharacterCountPlugin } from '@likhaeditor/plugins';
 ```
 
 **Commands:**
@@ -271,7 +271,7 @@ import { CharacterCountPlugin } from '@nomadprogrammer/likha-plugins';
 ## Creating Custom Plugins
 
 ```typescript
-import { Plugin } from '@nomadprogrammer/likha-core';
+import { Plugin } from '@likhaeditor/core';
 
 export class MyCustomPlugin extends Plugin {
   name = 'myCustom';

@@ -1,5 +1,5 @@
-﻿import { Plugin } from '@likha/core';
-import type { Editor } from '@likha/core';
+import { Plugin } from '@likhaeditor/core';
+import type { Editor } from '@likhaeditor/core';
 
 export class TablePlugin extends Plugin {
   name = 'table';

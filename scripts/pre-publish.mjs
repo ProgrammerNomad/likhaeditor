@@ -121,8 +121,8 @@ if (hasErrors) {
   console.log('✅ Pre-publish validation PASSED');
   console.log('\nReady to publish! Run:');
   console.log('  npm login');
-  console.log('  pnpm --filter @nomadprogrammer/likha-core publish --access public');
-  console.log('  pnpm --filter @nomadprogrammer/likha-ui publish --access public');
-  console.log('  pnpm --filter @nomadprogrammer/likha-plugins publish --access public');
-  console.log('  pnpm --filter @nomadprogrammer/likha publish --access public');
+  console.log('  pnpm --filter @likhaeditor/likha-core publish --access public');
+  console.log('  pnpm --filter @likhaeditor/likha-ui publish --access public');
+  console.log('  pnpm --filter @likhaeditor/likha-plugins publish --access public');
+  console.log('  pnpm --filter @likhaeditor/likha publish --access public');
 }

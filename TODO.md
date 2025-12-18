@@ -300,7 +300,7 @@ Track progress for the Likha editor development.
 
 ## Phase 5: Framework Adapters
 
-### Plain HTML (@nomadprogrammer/likha)
+### Plain HTML (@likhaeditor/likhaeditor)
 - ⏳ Create package structure
 - ⏳ Build vanilla JS wrapper
 - ⏳ Add UMD build
@@ -309,7 +309,7 @@ Track progress for the Likha editor development.
 - ⏳ Write usage examples
 - ⏳ Test in Chrome, Firefox, Safari, Edge
 
-### React Adapter (@nomadprogrammer/likha-react)
+### React Adapter (@likhaeditor/likhaeditor-react)
 - ⏳ Create package structure
 - ⏳ Build Editor component
 - ⏳ Create useEditor hook
@@ -320,7 +320,7 @@ Track progress for the Likha editor development.
 - ⏳ Test with React 18+
 - ⏳ Test with Next.js 14+
 
-### Laravel Package (@nomadprogrammer/likha-laravel)
+### Laravel Package (@likhaeditor/likhaeditor-laravel)
 - ⏳ Create package structure
 - ⏳ Build service provider
 - ⏳ Create Blade component
@@ -332,7 +332,7 @@ Track progress for the Likha editor development.
 - ⏳ Create Laravel example project
 - ⏳ Test with Laravel 10+
 
-### Livewire Integration (@nomadprogrammer/likha-livewire)
+### Livewire Integration (@likhaeditor/likhaeditor-livewire)
 - ⏳ Create package structure
 - ⏳ Build Livewire component
 - ⏳ Implement wire:model support
@@ -459,7 +459,7 @@ Track progress for the Likha editor development.
 ### v1.0 Launch
 - ⏳ Final testing
 - ⏳ Fix critical bugs
-- ⏳ Publish to npm (@nomadprogrammer/likha-*)
+- ⏳ Publish to npm (@likhaeditor/likhaeditor-*)
 - ⏳ Deploy documentation site
 - ⏳ Announce on Twitter
 - ⏳ Post on Reddit (r/webdev, r/laravel, r/reactjs)

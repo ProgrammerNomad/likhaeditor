@@ -67,7 +67,7 @@ We welcome code contributions for:
 
 ```bash
 # Clone the repository
-git clone https://github.com/ProgrammerNomad/likha.git
+git clone https://github.com/ProgrammerNomad/likhaeditor.git
 cd likha
 
 # Install dependencies
@@ -163,7 +163,7 @@ Branch naming conventions:
 pnpm test
 
 # Run specific package tests
-pnpm --filter @nomadprogrammer/likha-core test
+pnpm --filter @likhaeditor/core test
 
 # Run linting
 pnpm lint
@@ -388,7 +388,7 @@ How has this been tested?
 ### Creating a New Plugin
 
 ```typescript
-import { Plugin } from '@nomadprogrammer/likha-core';
+import { Plugin } from '@likhaeditor/core';
 
 export class MyPlugin extends Plugin {
   name = 'my-plugin';
@@ -441,9 +441,9 @@ describe('MyPlugin', () => {
 
 ## Getting Help
 
-- Check [documentation](https://likha-doc.netlify.app/)
-- Search [existing issues](https://github.com/ProgrammerNomad/likha/issues)
-- Ask in [GitHub Discussions](https://github.com/ProgrammerNomad/likha/discussions)
+- Check [documentation](https://likhaeditor.netlify.app/)
+- Search [existing issues](https://github.com/ProgrammerNomad/likhaeditor/issues)
+- Ask in [GitHub Discussions](https://github.com/ProgrammerNomad/likhaeditor/discussions)
 - Reach out to maintainers
 
 ## Recognition

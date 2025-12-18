@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ProgrammerNomad/likha.git"
+    "url": "https://github.com/ProgrammerNomad/likhaeditor.git"
   },
   "scripts": {
     "build": "pnpm --filter \"./packages/**\" build",
@@ -22,7 +22,7 @@
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
     "pre-publish": "node scripts/pre-publish.mjs",
-    "publish:all": "pnpm pre-publish && pnpm --filter @nomadprogrammer/likha-core publish --access public && pnpm --filter @nomadprogrammer/likha-ui publish --access public && pnpm --filter @nomadprogrammer/likha-plugins publish --access public && pnpm --filter @nomadprogrammer/likha publish --access public"
+    "publish:all": "pnpm pre-publish && pnpm --filter @likhaeditor/core publish --access public && pnpm --filter @likhaeditor/ui publish --access public && pnpm --filter @likhaeditor/plugins publish --access public && pnpm --filter @likhaeditor/likhaeditor publish --access public"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",

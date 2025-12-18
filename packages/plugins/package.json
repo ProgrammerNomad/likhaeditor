@@ -1,5 +1,5 @@
 {
-  "name": "@nomadprogrammer/likha-plugins",
+  "name": "@likhaeditor/plugins",
   "version": "0.0.1",
   "description": "Official plugins for Likha editor",
   "type": "module",
@@ -33,15 +33,15 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ProgrammerNomad/likha.git",
+    "url": "https://github.com/ProgrammerNomad/likhaeditor.git",
     "directory": "packages/plugins"
   },
-  "homepage": "https://github.com/ProgrammerNomad/likha#readme",
+  "homepage": "https://github.com/ProgrammerNomad/likhaeditor#readme",
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "@nomadprogrammer/likha-core": "^0.0.1",
+    "@likhaeditor/core": "^0.0.1",
     "prosemirror-commands": "^1.5.2",
     "prosemirror-inputrules": "^1.5.1",
     "prosemirror-keymap": "^1.2.2",

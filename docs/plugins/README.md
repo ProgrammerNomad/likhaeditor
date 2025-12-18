@@ -12,12 +12,12 @@ Each plugin can provide:
 
 ## Using Plugins
 
-### With @nomadprogrammer/likha
+### With @likhaeditor/likhaeditor
 
 All plugins are loaded by default:
 
 ```javascript
-import { createEditor } from '@nomadprogrammer/likha';
+import { createEditor } from '@likhaeditor/likhaeditor';
 
 // All 19 plugins automatically loaded
 const editor = createEditor({
@@ -25,17 +25,17 @@ const editor = createEditor({
 });
 ```
 
-### With @nomadprogrammer/likha-core
+### With @likhaeditor/core
 
 Load only what you need:
 
 ```javascript
-import { Editor } from '@nomadprogrammer/likha-core';
+import { Editor } from '@likhaeditor/core';
 import { 
   BoldPlugin, 
   ItalicPlugin, 
   HeadingPlugin 
-} from '@nomadprogrammer/likha-plugins';
+} from '@likhaeditor/plugins';
 
 const editor = new Editor({
   element: document.getElementById('editor'),
@@ -146,13 +146,13 @@ const editor = new Editor({
 - **Commands:**
   - `setTextColor(color: string)`
   - `removeTextColor()`
-- Color picker UI provided in @nomadprogrammer/likha
+- Color picker UI provided in @likhaeditor/likhaeditor
 
 #### HighlightPlugin
 - **Commands:**
   - `setHighlight(color: string)`
   - `removeHighlight()`
-- Color picker UI provided in @nomadprogrammer/likha
+- Color picker UI provided in @likhaeditor/likhaeditor
 
 ### Utility
 
@@ -179,7 +179,7 @@ const count = plugin.getCount(editor);
 ## Creating Custom Plugins
 
 ```javascript
-import { Plugin } from '@nomadprogrammer/likha-core';
+import { Plugin } from '@likhaeditor/core';
 
 class MyPlugin extends Plugin {
   name = 'myPlugin';

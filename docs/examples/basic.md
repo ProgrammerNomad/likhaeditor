@@ -16,12 +16,12 @@ Copy the code below and open it in your browser to see a working demo.
 <head>
   <meta charset="UTF-8">
   <title>Likha Editor - Basic Example</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@nomadprogrammer/likha/dist/likha-editor.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@likhaeditor/likhaeditor/dist/likha-editor.css">
 </head>
 <body>
   <div id="editor"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@nomadprogrammer/likha/dist/likha-editor.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@likhaeditor/likhaeditor/dist/likha-editor.umd.js"></script>
   <script>
     const { createEditor } = LikhaEditor;
     
@@ -37,8 +37,8 @@ Copy the code below and open it in your browser to see a working demo.
 ### JavaScript (ES Module)
 
 ```javascript
-import { createEditor } from '@nomadprogrammer/likha';
-import '@nomadprogrammer/likha/dist/likha-editor.css';
+import { createEditor } from '@likhaeditor/likhaeditor';
+import '@likhaeditor/likhaeditor/dist/likha-editor.css';
 
 createEditor({
   element: '#editor',

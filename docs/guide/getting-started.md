@@ -23,26 +23,26 @@ Choose your preferred method:
 ### NPM (Recommended)
 
 ```bash
-npm install @nomadprogrammer/likha
+npm install @likhaeditor/likhaeditor
 ```
 
 ### pnpm
 
 ```bash
-pnpm add @nomadprogrammer/likha
+pnpm add @likhaeditor/likhaeditor
 ```
 
 ### Yarn
 
 ```bash
-yarn add @nomadprogrammer/likha
+yarn add @likhaeditor/likhaeditor
 ```
 
 ### CDN
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@nomadprogrammer/likha/dist/likha-editor.css">
-<script src="https://cdn.jsdelivr.net/npm/@nomadprogrammer/likha/dist/likha-editor.umd.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@likhaeditor/likhaeditor/dist/likha-editor.css">
+<script src="https://cdn.jsdelivr.net/npm/@likhaeditor/likhaeditor/dist/likha-editor.umd.js"></script>
 ```
 
 ## Basic Usage
@@ -53,12 +53,12 @@ yarn add @nomadprogrammer/likha
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@nomadprogrammer/likha/dist/likha-editor.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@likhaeditor/likhaeditor/dist/likha-editor.css">
 </head>
 <body>
   <div id="editor"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@nomadprogrammer/likha/dist/likha-editor.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@likhaeditor/likhaeditor/dist/likha-editor.umd.js"></script>
   <script>
     const { createEditor } = LikhaEditor;
     
@@ -74,8 +74,8 @@ yarn add @nomadprogrammer/likha
 ### ES Module
 
 ```javascript
-import '@nomadprogrammer/likha/dist/likha-editor.css';
-import { createEditor } from '@nomadprogrammer/likha';
+import '@likhaeditor/likhaeditor/dist/likha-editor.css';
+import { createEditor } from '@likhaeditor/likhaeditor';
 
 createEditor({
   element: document.getElementById('editor'),
@@ -92,5 +92,5 @@ createEditor({
 
 ## Need Help?
 
-- [GitHub Issues](https://github.com/ProgrammerNomad/likha/issues) - Report bugs or request features
-- [Discussions](https://github.com/ProgrammerNomad/likha/discussions) - Ask questions
+- [GitHub Issues](https://github.com/ProgrammerNomad/likhaeditor/issues) - Report bugs or request features
+- [Discussions](https://github.com/ProgrammerNomad/likhaeditor/discussions) - Ask questions

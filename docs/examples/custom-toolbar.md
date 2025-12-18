@@ -9,7 +9,7 @@ Copy the code below and open it in your browser to see a working demo.
 ## Code
 
 ```javascript
-import { createEditor } from '@nomadprogrammer/likha';
+import { createEditor } from '@likhaeditor/likhaeditor';
 
 createEditor({
   element: '#editor',

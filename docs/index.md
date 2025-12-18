@@ -14,7 +14,7 @@ hero:
       link: /guide/getting-started
     - theme: alt
       text: View on GitHub
-      link: https://github.com/ProgrammerNomad/likha
+      link: https://github.com/ProgrammerNomad/likhaeditor
 
 features:
   - icon:
@@ -74,7 +74,7 @@ Likha is a **modern, framework-agnostic rich text editor** built on ProseMirror.
 - [Installation](./installation.md)
 - [API Reference](./api/README.md)
 - [Plugins](./plugins/README.md)
-- [GitHub Repository](https://github.com/ProgrammerNomad/likha)
+- [GitHub Repository](https://github.com/ProgrammerNomad/likhaeditor)
 
 ## Current Status
 
@@ -87,17 +87,17 @@ All packages are available on npm under the `@nomadprogrammer` scope:
 
 | Package | npm | Description | Status |
 |---------|-----|-------------|--------|
-| [@nomadprogrammer/likha-core](https://www.npmjs.com/package/@nomadprogrammer/likha-core) | ![npm](https://img.shields.io/npm/v/@nomadprogrammer/likha-core) | Framework-agnostic editor engine | ✅ Stable |
-| [@nomadprogrammer/likha-ui](https://www.npmjs.com/package/@nomadprogrammer/likha-ui) | ![npm](https://img.shields.io/npm/v/@nomadprogrammer/likha-ui) | Toolbar and UI components | ✅ Stable |
-| [@nomadprogrammer/likha-plugins](https://www.npmjs.com/package/@nomadprogrammer/likha-plugins) | ![npm](https://img.shields.io/npm/v/@nomadprogrammer/likha-plugins) | Official plugin collection | ✅ Alpha |
-| [@nomadprogrammer/likha](https://www.npmjs.com/package/@nomadprogrammer/likha) | ![npm](https://img.shields.io/npm/v/@nomadprogrammer/likha) | Vanilla JS wrapper | ✅ Alpha |
-| `@nomadprogrammer/likha-react` | - | React components | 🚧 Planned |
-| `@nomadprogrammer/likha-laravel` | - | Laravel Blade components | 🚧 Planned |
-| `@nomadprogrammer/likha-livewire` | - | Livewire integration | 🚧 Planned |
+| [@likhaeditor/core](https://www.npmjs.com/package/@likhaeditor/core) | ![npm](https://img.shields.io/npm/v/@likhaeditor/core) | Framework-agnostic editor engine | ✅ Stable |
+| [@likhaeditor/ui](https://www.npmjs.com/package/@likhaeditor/ui) | ![npm](https://img.shields.io/npm/v/@likhaeditor/ui) | Toolbar and UI components | ✅ Stable |
+| [@likhaeditor/plugins](https://www.npmjs.com/package/@likhaeditor/plugins) | ![npm](https://img.shields.io/npm/v/@likhaeditor/plugins) | Official plugin collection | ✅ Alpha |
+| [@likhaeditor/likhaeditor](https://www.npmjs.com/package/@likhaeditor/likhaeditor) | ![npm](https://img.shields.io/npm/v/@likhaeditor/likhaeditor) | Vanilla JS wrapper | ✅ Alpha |
+| `@likhaeditor/likhaeditor-react` | - | React components | 🚧 Planned |
+| `@likhaeditor/likhaeditor-laravel` | - | Laravel Blade components | 🚧 Planned |
+| `@likhaeditor/likhaeditor-livewire` | - | Livewire integration | 🚧 Planned |
 
 **Installation:**
 ```bash
-npm install @nomadprogrammer/likha
+npm install @likhaeditor/likhaeditor
 
 ## Browser Support
 
@@ -107,11 +107,11 @@ npm install @nomadprogrammer/likha
 
 ## Community
 
-- **NPM:** [View all packages](https://www.npmjs.com/search?q=%40nomadprogrammer%2Flikha)
-- **Issues:** [GitHub Issues](https://github.com/ProgrammerNomad/likha/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/ProgrammerNomad/likha/discussions)
-- **Changelog:** [CHANGELOG.md](https://github.com/ProgrammerNomad/likha/blob/main/CHANGELOG.md)
-- **License:** [MIT](https://github.com/ProgrammerNomad/likha/blob/main/LICENSE)
+- **NPM:** [View all packages](https://www.npmjs.com/search?q=%40likhaeditor)
+- **Issues:** [GitHub Issues](https://github.com/ProgrammerNomad/likhaeditor/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/ProgrammerNomad/likhaeditor/discussions)
+- **Changelog:** [CHANGELOG.md](https://github.com/ProgrammerNomad/likhaeditor/blob/main/CHANGELOG.md)
+- **License:** [MIT](https://github.com/ProgrammerNomad/likhaeditor/blob/main/LICENSE)
 
 ## Credits
 

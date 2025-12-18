@@ -18,7 +18,7 @@ npm install -g pnpm
 ### Via CDN (Recommended for Prototyping)
 
 ```html
-<script src="https://unpkg.com/@nomadprogrammer/likha@latest/dist/likha-editor.umd.js"></script>
+<script src="https://unpkg.com/@likhaeditor/likhaeditor@latest/dist/likha-editor.umd.js"></script>
 <script>
   const { createEditor } = LikhaEditor;
   // Use createEditor...
@@ -28,21 +28,21 @@ npm install -g pnpm
 ### Via npm/pnpm
 
 ```bash
-pnpm add @nomadprogrammer/likha
+pnpm add @likhaeditor/likhaeditor
 ```
 
 ```javascript
-import { createEditor } from '@nomadprogrammer/likha';
+import { createEditor } from '@likhaeditor/likhaeditor';
 ```
 
 ## React (Coming Soon)
 
 ```bash
-pnpm add @nomadprogrammer/likha-react
+pnpm add @likhaeditor/likhaeditor-react
 ```
 
 ```jsx
-import { LikhaEditor } from '@nomadprogrammer/likha-react';
+import { LikhaEditor } from '@likhaeditor/likhaeditor-react';
 
 function MyComponent() {
   const [content, setContent] = useState('<p>Hello</p>');
@@ -116,7 +116,7 @@ Clone and build from source:
 
 ```bash
 # Clone repository
-git clone https://github.com/ProgrammerNomad/likha.git
+git clone https://github.com/ProgrammerNomad/likhaeditor.git
 cd likha
 
 # Install dependencies
@@ -133,9 +133,9 @@ pnpm dev
 
 | Package | Size (gzipped) |
 |---------|----------------|
-| @nomadprogrammer/likha-core | ~3.3 KB |
-| @nomadprogrammer/likha-plugins | ~25 KB |
-| @nomadprogrammer/likha (UMD) | ~85 KB |
+| @likhaeditor/core | ~3.3 KB |
+| @likhaeditor/plugins | ~25 KB |
+| @likhaeditor/likhaeditor (UMD) | ~85 KB |
 
 ## Browser Compatibility
 

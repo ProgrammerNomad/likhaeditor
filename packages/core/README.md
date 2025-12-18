@@ -1,21 +1,21 @@
-# @nomadprogrammer/likha-core
+# @likhaeditor/core
 
 Core editor engine for Likha - framework-agnostic rich text editor built on ProseMirror.
 
 ## Installation
 
 ```bash
-npm install @nomadprogrammer/likha-core
+npm install @likhaeditor/core
 # or
-pnpm add @nomadprogrammer/likha-core
+pnpm add @likhaeditor/core
 # or
-yarn add @nomadprogrammer/likha-core
+yarn add @likhaeditor/core
 ```
 
 ## Usage
 
 ```typescript
-import { Editor } from '@nomadprogrammer/likha-core';
+import { Editor } from '@likhaeditor/core';
 
 const editor = new Editor({
   element: document.getElementById('editor'),
@@ -33,9 +33,9 @@ const editor = new Editor({
 
 ## Documentation
 
-Full documentation: https://likha-doc.netlify.app/
+Full documentation: https://likhaeditor.netlify.app/
 
-API Reference: https://likha-doc.netlify.app/api/core
+API Reference: https://likhaeditor.netlify.app/api/core
 
 ## License
 

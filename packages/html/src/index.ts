@@ -1,5 +1,5 @@
-import { Editor } from '@likha/core';
-import type { Plugin } from '@likha/core';
+import { Editor } from '@likhaeditor/core';
+import type { Plugin } from '@likhaeditor/core';
 import {
   PlaceholderPlugin,
   CharacterCountPlugin,
@@ -20,8 +20,8 @@ import {
   SubscriptPlugin,
   SuperscriptPlugin,
   ClearFormattingPlugin
-} from '@likha/plugins';
-import { Toolbar, Button, Dropdown, injectTheme } from '@likha/ui';
+} from '@likhaeditor/plugins';
+import { Toolbar, Button, Dropdown, injectTheme } from '@likhaeditor/ui';
 
 /**
  * Inject essential editor styles

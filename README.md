@@ -2,16 +2,16 @@
 
 # Likha Editor
 
-[![npm version](https://img.shields.io/npm/v/@nomadprogrammer/likha.svg)](https://www.npmjs.com/package/@nomadprogrammer/likha)
-[![npm downloads](https://img.shields.io/npm/dm/@nomadprogrammer/likha.svg)](https://www.npmjs.com/package/@nomadprogrammer/likha)
+[![npm version](https://img.shields.io/npm/v/@likhaeditor/likhaeditor.svg)](https://www.npmjs.com/package/@likhaeditor/likhaeditor)
+[![npm downloads](https://img.shields.io/npm/dm/@likhaeditor/likhaeditor.svg)](https://www.npmjs.com/package/@likhaeditor/likhaeditor)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
-[![GitHub Stars](https://img.shields.io/github/stars/ProgrammerNomad/likha)](https://github.com/ProgrammerNomad/likha/stargazers)
-[![GitHub Issues](https://img.shields.io/github/issues/ProgrammerNomad/likha)](https://github.com/ProgrammerNomad/likha/issues)
+[![GitHub Stars](https://img.shields.io/github/stars/ProgrammerNomad/likha)](https://github.com/ProgrammerNomad/likhaeditor/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/ProgrammerNomad/likha)](https://github.com/ProgrammerNomad/likhaeditor/issues)
 
 Likha is a completely free, open-source, self-hosted, framework-agnostic rich text editor built for developers who demand flexibility without vendor lock-in. Run it anywhere: static HTML, Laravel, Livewire, React, Next.js, and more. Likha comes from the Hindi word "लिखा", meaning "written".
 
-[Documentation](https://likha-doc.netlify.app/) | [Examples](https://likha-doc.netlify.app/examples/) | [API Reference](https://likha-doc.netlify.app/api/core) | [npm Package](https://www.npmjs.com/package/@nomadprogrammer/likha)
+[Documentation](https://likhaeditor.netlify.app/) | [Examples](https://likhaeditor.netlify.app/examples/) | [API Reference](https://likhaeditor.netlify.app/api/core) | [npm Package](https://www.npmjs.com/package/@likhaeditor/likhaeditor)
 
 ## Why Likha
 
@@ -29,12 +29,12 @@ Likha is a completely free, open-source, self-hosted, framework-agnostic rich te
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@nomadprogrammer/likha/dist/likha-editor.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@likhaeditor/likhaeditor/dist/likha-editor.css">
 </head>
 <body>
   <div id="editor"></div>
   
-  <script src="https://cdn.jsdelivr.net/npm/@nomadprogrammer/likha/dist/likha-editor.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@likhaeditor/likhaeditor/dist/likha-editor.umd.js"></script>
   <script>
     const editor = Likha.createEditor({
       element: document.getElementById("editor"),
@@ -48,12 +48,12 @@ Likha is a completely free, open-source, self-hosted, framework-agnostic rich te
 ### NPM Installation
 
 ```bash
-npm install @nomadprogrammer/likha
+npm install @likhaeditor/likhaeditor
 ```
 
 ```javascript
-import { createEditor } from '@nomadprogrammer/likha';
-import '@nomadprogrammer/likha/dist/likha-editor.css';
+import { createEditor } from '@likhaeditor/likhaeditor';
+import '@likhaeditor/likhaeditor/dist/likha-editor.css';
 
 const editor = createEditor({
   element: document.getElementById('editor'),
@@ -259,12 +259,12 @@ All packages are published under the `@nomadprogrammer` scope on npm:
 
 | Package | Version | Description |
 |---------|---------|-------------|
-| [@nomadprogrammer/likha-core](https://www.npmjs.com/package/@nomadprogrammer/likha-core) | ![npm](https://img.shields.io/npm/v/@nomadprogrammer/likha-core) | Framework-agnostic editor engine |
-| [@nomadprogrammer/likha-ui](https://www.npmjs.com/package/@nomadprogrammer/likha-ui) | ![npm](https://img.shields.io/npm/v/@nomadprogrammer/likha-ui) | Toolbar and UI components |
-| [@nomadprogrammer/likha-plugins](https://www.npmjs.com/package/@nomadprogrammer/likha-plugins) | ![npm](https://img.shields.io/npm/v/@nomadprogrammer/likha-plugins) | Official plugin collection |
-| [@nomadprogrammer/likha](https://www.npmjs.com/package/@nomadprogrammer/likha) | ![npm](https://img.shields.io/npm/v/@nomadprogrammer/likha) | Vanilla JS wrapper (recommended) |
+| [@likhaeditor/core](https://www.npmjs.com/package/@likhaeditor/core) | ![npm](https://img.shields.io/npm/v/@likhaeditor/core) | Framework-agnostic editor engine |
+| [@likhaeditor/ui](https://www.npmjs.com/package/@likhaeditor/ui) | ![npm](https://img.shields.io/npm/v/@likhaeditor/ui) | Toolbar and UI components |
+| [@likhaeditor/plugins](https://www.npmjs.com/package/@likhaeditor/plugins) | ![npm](https://img.shields.io/npm/v/@likhaeditor/plugins) | Official plugin collection |
+| [@likhaeditor/likhaeditor](https://www.npmjs.com/package/@likhaeditor/likhaeditor) | ![npm](https://img.shields.io/npm/v/@likhaeditor/likhaeditor) | Vanilla JS wrapper (recommended) |
 
-**Coming soon:** `@nomadprogrammer/likha-react`, `@nomadprogrammer/likha-laravel`, `@nomadprogrammer/likha-livewire`
+**Coming soon:** `@likhaeditor/likhaeditor-react`, `@likhaeditor/likhaeditor-laravel`, `@likhaeditor/likhaeditor-livewire`
 
 ### Project Structure
 
@@ -296,13 +296,13 @@ likha/
 
 All official packages are published under the `@nomadprogrammer` scope on npm:
 
-- `@nomadprogrammer/likha-core` - Editor engine
-- `@nomadprogrammer/likha-ui` - UI components
-- `@nomadprogrammer/likha-plugins` - Official plugins
-- `@nomadprogrammer/likha` - Vanilla JS wrapper
-- `@nomadprogrammer/likha-react` - React components (coming soon)
-- `@nomadprogrammer/likha-laravel` - Laravel integration (coming soon)
-- `@nomadprogrammer/likha-livewire` - Livewire integration (coming soon)
+- `@likhaeditor/core` - Editor engine
+- `@likhaeditor/ui` - UI components
+- `@likhaeditor/plugins` - Official plugins
+- `@likhaeditor/likhaeditor` - Vanilla JS wrapper
+- `@likhaeditor/likhaeditor-react` - React components (coming soon)
+- `@likhaeditor/likhaeditor-laravel` - Laravel integration (coming soon)
+- `@likhaeditor/likhaeditor-livewire` - Livewire integration (coming soon)
 
 ## License
 
@@ -374,12 +374,12 @@ Likha targets modern evergreen browsers (Chrome, Firefox, Safari, Edge). IE11 is
 
 ### How can I get help?
 
-Check the [documentation](https://likha-doc.netlify.app/), browse [examples](https://likha-doc.netlify.app/examples/), open an [issue](https://github.com/ProgrammerNomad/likha/issues), or join our community discussions.
+Check the [documentation](https://likhaeditor.netlify.app/), browse [examples](https://likhaeditor.netlify.app/examples/), open an [issue](https://github.com/ProgrammerNomad/likhaeditor/issues), or join our community discussions.
 
 ## Community and Support
 
-- [GitHub Discussions](https://github.com/ProgrammerNomad/likha/discussions) - Ask questions and share ideas
-- [Issue Tracker](https://github.com/ProgrammerNomad/likha/issues) - Report bugs and request features  
+- [GitHub Discussions](https://github.com/ProgrammerNomad/likhaeditor/discussions) - Ask questions and share ideas
+- [Issue Tracker](https://github.com/ProgrammerNomad/likhaeditor/issues) - Report bugs and request features  
 - [Discord Server](https://discord.gg/likha) - Join the community (Coming soon)
 - [Twitter](https://twitter.com/likhaeditor) - Follow for updates (Coming soon)
 
@@ -387,7 +387,7 @@ Check the [documentation](https://likha-doc.netlify.app/), browse [examples](htt
 
 Likha is and always will be free. You can support its development by:
 
-- Star the repository on [GitHub](https://github.com/ProgrammerNomad/likha)
+- Star the repository on [GitHub](https://github.com/ProgrammerNomad/likhaeditor)
 - Share Likha with your network and colleagues
 - Report bugs with detailed reproduction steps
 - Suggest features and integrations
@@ -401,7 +401,7 @@ Likha is and always will be free. You can support its development by:
 Likha is built on the shoulders of giants:
 
 - [ProseMirror](https://prosemirror.net/) - The powerful editing framework
-- All our [contributors](https://github.com/ProgrammerNomad/likha/graphs/contributors)
+- All our [contributors](https://github.com/ProgrammerNomad/likhaeditor/graphs/contributors)
 - The open-source community
 
 ## Author

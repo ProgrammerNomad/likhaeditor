@@ -1,4 +1,4 @@
-import { Plugin } from '@likha/core';
+import { Plugin } from '@likhaeditor/core';
 import { wrapInList, liftListItem, splitListItem } from 'prosemirror-schema-list';
 
 /**
