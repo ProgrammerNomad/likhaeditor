@@ -34,6 +34,12 @@ export default defineConfig({
           ]
         },
         {
+          text: 'Advanced',
+          items: [
+            { text: 'Custom Plugins', link: '/guide/custom-plugins' }
+          ]
+        },
+        {
           text: 'Framework Integration',
           items: [
             { text: 'React', link: '/guide/react' },
