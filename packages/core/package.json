@@ -1,5 +1,5 @@
 {
-  "name": "@likha/core",
+  "name": "@nomadprogrammer/likha-core",
   "version": "0.0.1",
   "description": "Core editor engine for Likha - framework-agnostic",
   "type": "module",

@@ -1,5 +1,5 @@
 {
-  "name": "@likha/plugins",
+  "name": "@nomadprogrammer/likha-plugins",
   "version": "0.0.1",
   "description": "Official plugins for Likha editor",
   "type": "module",
@@ -41,7 +41,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@likha/core": "^0.0.1",
+    "@nomadprogrammer/likha-core": "^0.0.1",
     "prosemirror-commands": "^1.5.2",
     "prosemirror-inputrules": "^1.5.1",
     "prosemirror-keymap": "^1.2.2",

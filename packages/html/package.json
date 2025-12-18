@@ -1,5 +1,5 @@
 {
-  "name": "@likha/html",
+  "name": "@nomadprogrammer/likha",
   "version": "0.0.1",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -40,9 +40,9 @@
     "build": "vite build && tsc --emitDeclarationOnly && node -e \"require('fs').copyFileSync('src/likha-editor.css', 'dist/likha-editor.css')\""
   },
   "dependencies": {
-    "@likha/core": "^0.0.1",
-    "@likha/plugins": "^0.0.1",
-    "@likha/ui": "^0.0.1",
+    "@nomadprogrammer/likha-core": "^0.0.1",
+    "@nomadprogrammer/likha-plugins": "^0.0.1",
+    "@nomadprogrammer/likha-ui": "^0.0.1",
     "prosemirror-commands": "^1.5.2",
     "prosemirror-history": "^1.3.2",
     "prosemirror-inputrules": "^1.5.1",
