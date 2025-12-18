@@ -1,18 +1,18 @@
-# @likha/ui
+# @nomadprogrammer/likha-ui
 
 UI components for Likha editor - toolbars, menus, and controls.
 
 ## Installation
 
 ```bash
-npm install @likha/ui @likha/core
+npm install @nomadprogrammer/likha-ui @nomadprogrammer/likha-core
 ```
 
 ## Usage
 
 ```typescript
-import { Toolbar } from '@likha/ui';
-import { Editor } from '@likha/core';
+import { Toolbar } from '@nomadprogrammer/likha-ui';
+import { Editor } from '@nomadprogrammer/likha-core';
 
 const editor = new Editor({ element: document.getElementById('editor') });
 const toolbar = new Toolbar({

@@ -1,18 +1,18 @@
-# @likha/plugins
+# @nomadprogrammer/likha-plugins
 
 Official plugins for Likha editor.
 
 ## Installation
 
 ```bash
-npm install @likha/plugins @likha/core
+npm install @nomadprogrammer/likha-plugins @nomadprogrammer/likha-core
 ```
 
 ## Usage
 
 ```typescript
-import { Editor } from '@likha/core';
-import { BulletListPlugin, OrderedListPlugin } from '@likha/plugins';
+import { Editor } from '@nomadprogrammer/likha-core';
+import { BulletListPlugin, OrderedListPlugin } from '@nomadprogrammer/likha-plugins';
 
 const editor = new Editor({
   element: document.getElementById('editor'),

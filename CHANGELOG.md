@@ -59,7 +59,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial alpha release
 - Core editor engine with ProseMirror foundation
 - 14 official plugins
-- Vanilla JS wrapper (@likha/html)
+- Vanilla JS wrapper (@nomadprogrammer/likha)
 - Default toolbar with 27+ controls
 - Color picker for text color and highlight
 - Keyboard shortcuts for common operations
@@ -67,14 +67,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0-alpha] - 2025-12-17
 
 ### Added
-- **Core Package** (@likha/core)
+- **Core Package** (@nomadprogrammer/likha-core)
   - Framework-agnostic editor engine
   - Custom ProseMirror schema with text alignment support
   - Basic editing commands (bold, italic, underline, etc.)
   - Plugin architecture
   - Undo/redo functionality
 
-- **Plugins Package** (@likha/plugins) - 14 plugins
+- **Plugins Package** (@nomadprogrammer/likha-plugins) - 14 plugins
   - PlaceholderPlugin - Show placeholder text
   - CharacterCountPlugin - Track character/word count
   - HeadingPlugin - H1-H6 heading support
@@ -95,13 +95,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - ClearFormattingPlugin - Remove all formatting
   - HTMLSourceViewPlugin - Toggle HTML source view
 
-- **UI Package** (@likha/ui)
+- **UI Package** (@nomadprogrammer/likha-ui)
   - Toolbar component
   - Button component
   - Dropdown component
   - Color picker with 80-color palette
 
-- **HTML Package** (@likha/html)
+- **HTML Package** (@nomadprogrammer/likha)
   - `createEditor()` function for vanilla JS usage
   - Auto-generated toolbar with all features
   - UMD build for CDN usage
@@ -150,9 +150,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive test coverage (Vitest)
 
 ### Bundle Sizes
-- @likha/core: 3.3 KB gzipped
-- @likha/plugins: 25 KB gzipped
-- @likha/html: 85 KB gzipped (UMD)
+- @nomadprogrammer/likha-core: 3.3 KB gzipped
+- @nomadprogrammer/likha-plugins: 25 KB gzipped
+- @nomadprogrammer/likha: 85 KB gzipped (UMD)
 
 ## Known Issues
 

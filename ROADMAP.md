@@ -53,7 +53,7 @@ This document outlines the complete development plan for Likha, divided into man
 
 ### Tasks
 - [x] Study ProseMirror architecture and examples
-- [x] Create @likha/core package structure
+- [x] Create @nomadprogrammer/likha-core package structure
 - [x] Implement basic document schema (paragraph, heading, text)
 - [x] Set up editor view and state management
 - [x] Implement basic marks (bold, italic, code)
@@ -67,7 +67,7 @@ This document outlines the complete development plan for Likha, divided into man
 - [ ] Implement copy/paste handling (deferred to Phase 6)
 
 ### Deliverables
-- ✅ @likha/core package (4.55 KB gzipped)
+- ✅ @nomadprogrammer/likha-core package (4.55 KB gzipped)
 - ✅ Working demo in plain HTML
 - ✅ Test coverage 100% for core
 
@@ -92,7 +92,7 @@ This document outlines the complete development plan for Likha, divided into man
 
 ### Deliverables
 - ✅ Working plugin system
-- ✅ Example plugins (@likha/plugins - 1.77 KB gzipped)
+- ✅ Example plugins (@nomadprogrammer/likha-plugins - 1.77 KB gzipped)
 - [ ] Plugin development documentation (deferred)
 
 ---
@@ -102,7 +102,7 @@ This document outlines the complete development plan for Likha, divided into man
 **Goal:** Build toolbar, menus, and UI elements
 
 ### Tasks
-- [x] Create @likha/ui package
+- [x] Create @nomadprogrammer/likha-ui package
 - [x] Design UI component architecture
 - [x] Build toolbar component
 - [x] Create button components
@@ -118,7 +118,7 @@ This document outlines the complete development plan for Likha, divided into man
 - [ ] Make UI components accessible (ARIA) (ongoing)
 
 ### Deliverables
-- ✅ @likha/ui package (11.98 KB, 2.96 KB gzipped)
+- ✅ @nomadprogrammer/likha-ui package (11.98 KB, 2.96 KB gzipped)
 - ✅ Default and dark themes with CSS
 - ✅ Toolbar, Button, and Dropdown components
 - ✅ 30 UI component tests passing
@@ -158,7 +158,7 @@ This document outlines the complete development plan for Likha, divided into man
 - [ ] Character count plugin (already exists, needs toolbar integration)
 
 ### Deliverables
-- ✅ @likha/plugins package (114.07 KB, 23.73 KB gzipped)
+- ✅ @nomadprogrammer/likha-plugins package (114.07 KB, 23.73 KB gzipped)
 - ✅ 14/14 medium+ priority plugins COMPLETE!
   - ✅ PlaceholderPlugin (4 tests)
   - ✅ CharacterCountPlugin (4 tests)
@@ -187,7 +187,7 @@ This document outlines the complete development plan for Likha, divided into man
 **Goal:** Create integrations for popular frameworks
 
 ### Plain HTML Adapter (Week 17) ✅
-- [x] Create @likha/html package
+- [x] Create @nomadprogrammer/likha package
 - [x] Build vanilla JS wrapper (createEditor helper)
 - [x] Add CDN build configuration (UMD 85 KB gzipped)
 - [x] Create initialization helpers (plugin loading, toolbar)
@@ -208,7 +208,7 @@ This document outlines the complete development plan for Likha, divided into man
   - See: https://vitepress.dev/guide/getting-started
 
 ### React Adapter (Week 18)
-- [ ] Create @likha/react package
+- [ ] Create @nomadprogrammer/likha-react package
 - [ ] Build React component wrapper
 - [ ] Implement hooks (useEditor, useEditorContent)
 - [ ] Add TypeScript definitions
@@ -216,7 +216,7 @@ This document outlines the complete development plan for Likha, divided into man
 - [ ] Test with Next.js
 
 ### Laravel Package (Week 19)
-- [ ] Create @likha/laravel package
+- [ ] Create @nomadprogrammer/likha-laravel package
 - [ ] Build Blade component
 - [ ] Add service provider
 - [ ] Create configuration file
@@ -225,7 +225,7 @@ This document outlines the complete development plan for Likha, divided into man
 - [ ] Write Laravel documentation
 
 ### Livewire Integration (Week 20)
-- [ ] Create @likha/livewire package
+- [ ] Create @nomadprogrammer/likha-livewire package
 - [ ] Build Livewire component
 - [ ] Implement wire:model support
 - [ ] Handle real-time updates

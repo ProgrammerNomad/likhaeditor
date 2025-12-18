@@ -259,9 +259,9 @@ const editor = new Editor({
 
 After trying the demos:
 
-1. **Install via NPM**: `npm install @likha/core @likha/ui @likha/plugins`
-2. **Use in React**: Check out `@likha/react` package
-3. **Use in Laravel**: Check out `@likha/laravel` package
+1. **Install via NPM**: `npm install @nomadprogrammer/likha`
+2. **Use in React**: Check out `@nomadprogrammer/likha-react` package (coming soon)
+3. **Use in Laravel**: Check out `@nomadprogrammer/likha-laravel` package (coming soon)
 4. **Build from source**: See [CONTRIBUTING.md](../CONTRIBUTING.md)
 
 ---

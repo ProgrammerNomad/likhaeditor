@@ -1,4 +1,4 @@
-# @likha/html
+# @nomadprogrammer/likha
 
 Vanilla JavaScript wrapper for Likha editor - works without build tools.
 
@@ -7,14 +7,14 @@ Vanilla JavaScript wrapper for Likha editor - works without build tools.
 ### npm
 
 ```bash
-npm install @likha/html
+npm install @nomadprogrammer/likha
 ```
 
 ### CDN
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@likha/html/dist/likha-editor.css">
-<script src="https://cdn.jsdelivr.net/npm/@likha/html/dist/likha-editor.umd.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@nomadprogrammer/likha/dist/likha-editor.css">
+<script src="https://cdn.jsdelivr.net/npm/@nomadprogrammer/likha/dist/likha-editor.umd.js"></script>
 ```
 
 ## Usage
@@ -22,8 +22,8 @@ npm install @likha/html
 ### ES Module
 
 ```javascript
-import { createEditor } from '@likha/html';
-import '@likha/html/style.css';
+import { createEditor } from '@nomadprogrammer/likha';
+import '@nomadprogrammer/likha/dist/likha-editor.css';
 
 createEditor({
   element: '#editor',
@@ -37,12 +37,12 @@ createEditor({
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@likha/html/dist/likha-editor.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@nomadprogrammer/likha/dist/likha-editor.css">
 </head>
 <body>
   <div id="editor"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@likha/html/dist/likha-editor.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@nomadprogrammer/likha/dist/likha-editor.umd.js"></script>
   <script>
     const { createEditor } = LikhaEditor;
     

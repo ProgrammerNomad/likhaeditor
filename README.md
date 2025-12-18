@@ -29,15 +29,14 @@ Likha is a completely free, open-source, self-hosted, framework-agnostic rich te
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@likha/ui/dist/likha.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@nomadprogrammer/likha/dist/likha-editor.css">
 </head>
 <body>
   <div id="editor"></div>
   
-  <script type="module">
-    import { Editor } from "https://cdn.jsdelivr.net/npm/@likha/core/dist/likha.js";
-    
-    const editor = new Editor({
+  <script src="https://cdn.jsdelivr.net/npm/@nomadprogrammer/likha/dist/likha-editor.umd.js"></script>
+  <script>
+    const editor = Likha.createEditor({
       element: document.getElementById("editor"),
       content: "<p>Start writing...</p>"
     });
@@ -49,23 +48,23 @@ Likha is a completely free, open-source, self-hosted, framework-agnostic rich te
 ### NPM Installation
 
 ```bash
-npm install @likha/core @likha/ui @likha/plugins
+npm install @nomadprogrammer/likha
 ```
 
-```ts
-import { Editor } from '@likha/core';
-import '@likha/ui/dist/likha.css';
+```javascript
+import { createEditor } from '@nomadprogrammer/likha';
+import '@nomadprogrammer/likha/dist/likha-editor.css';
 
-const editor = new Editor({
+const editor = createEditor({
   element: document.getElementById('editor'),
-  plugins: [/* your plugins */]
+  content: '<p>Start writing...</p>'
 });
 ```
 
 ### Laravel
 
 ```bash
-composer require likha/laravel
+composer require nomadprogrammer/likha-laravel
 ```
 
 ```blade
@@ -295,15 +294,15 @@ likha/
 
 ## Package Naming
 
-All official packages live under the @likha scope:
+All official packages are published under the `@nomadprogrammer` scope on npm:
 
-- @likha/core
-- @likha/ui
-- @likha/plugins
-- @likha/html
-- @likha/react
-- @likha/laravel
-- @likha/livewire
+- `@nomadprogrammer/likha-core` - Editor engine
+- `@nomadprogrammer/likha-ui` - UI components
+- `@nomadprogrammer/likha-plugins` - Official plugins
+- `@nomadprogrammer/likha` - Vanilla JS wrapper
+- `@nomadprogrammer/likha-react` - React components (coming soon)
+- `@nomadprogrammer/likha-laravel` - Laravel integration (coming soon)
+- `@nomadprogrammer/likha-livewire` - Livewire integration (coming soon)
 
 ## License
 

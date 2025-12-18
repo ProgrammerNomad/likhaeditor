@@ -163,7 +163,7 @@ Branch naming conventions:
 pnpm test
 
 # Run specific package tests
-pnpm --filter @likha/core test
+pnpm --filter @nomadprogrammer/likha-core test
 
 # Run linting
 pnpm lint
@@ -388,7 +388,7 @@ How has this been tested?
 ### Creating a New Plugin
 
 ```typescript
-import { Plugin } from '@likha/core';
+import { Plugin } from '@nomadprogrammer/likha-core';
 
 export class MyPlugin extends Plugin {
   name = 'my-plugin';
