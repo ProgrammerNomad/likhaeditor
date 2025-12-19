@@ -1,3 +1,8 @@
+---
+title: Changelog
+description: Release history and version updates for Likha Editor
+---
+
 # Changelog
 
 All notable changes to Likha Editor are documented here.
