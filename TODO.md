@@ -15,7 +15,7 @@
 - ✅ Phase 1: Core Editor Engine - **100% Complete**
 - ✅ Phase 2: Plugin System - **100% Complete**
 - ✅ Phase 3: UI Components - **100% Complete**
-- ✅ Phase 4: Official Plugins - **100% Complete (19 plugins)**
+- ✅ Phase 4: Official Plugins - **100% Complete (20 plugins)**
 - 🚧 Phase 5: Framework Adapters - **90% Complete**
 - ⏳ Phase 6: Advanced Features - **0% Complete**
 - 🚧 Phase 7: Documentation - **50% Complete (VitePress live)**
@@ -122,10 +122,10 @@ Track progress for the Likha editor development.
 ### Text Formatting (Marks)
 - ✅ Implement bold mark
 - ✅ Implement italic mark
-- ⏸️ Implement underline mark (deferred)
-- ⏸️ Implement strike mark (deferred)
+- ✅ Implement underline mark (UnderlinePlugin - Mod-u)
+- ✅ Implement strikethrough mark (StrikethroughPlugin)
 - ✅ Implement code mark
-- ⏸️ Implement link mark with href attribute (deferred to Phase 4)
+- ⏸️ Implement link mark with href attribute (deferred to Phase 4) ✅
 
 ### Lists
 - ✅ Implement bullet list
@@ -277,8 +277,8 @@ Track progress for the Likha editor development.
 - ✅ Heading plugin (H1-H6 with Ctrl+Alt+1-6)
 - ✅ Bold plugin (core mark)
 - ✅ Italic plugin (core mark)
-- ⏳ Underline plugin
-- ✅ Strikethrough plugin
+- ✅ Underline plugin (Mod-u)
+- ✅ Strikethrough plugin (Mod-Shift-s)
 - ✅ Code plugin (core mark)
 - ✅ Subscript plugin
 - ✅ Superscript plugin

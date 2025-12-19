@@ -161,7 +161,7 @@ This document outlines the complete development plan for Likha, divided into man
 
 ### Deliverables
 - ✅ @likhaeditor/plugins package (114.07 KB, 23.73 KB gzipped)
-- ✅ 17/17 core plugins COMPLETE!
+- ✅ 20/20 core plugins COMPLETE!
   - ✅ PlaceholderPlugin (4 tests)
   - ✅ CharacterCountPlugin (4 tests)
   - ✅ HeadingPlugin (25 tests)
@@ -176,6 +176,7 @@ This document outlines the complete development plan for Likha, divided into man
   - ✅ ImagePlugin (24 tests)
   - ✅ TextColorPlugin (20 tests)
   - ✅ HighlightPlugin (25 tests)
+  - ✅ UnderlinePlugin (implemented)
   - ✅ StrikethroughPlugin (implemented)
   - ✅ SubscriptPlugin (implemented)
   - ✅ SuperscriptPlugin (implemented)
@@ -492,7 +493,7 @@ This document outlines the complete development plan for Likha, divided into man
 - **Overall Progress:** ~80% toward MVP
 - **Latest Version:** v0.0.2 (published to npm)
 - **Documentation:** Live at https://likhaeditor.netlify.app
-- **Plugins:** 19 production-ready plugins
+- **Plugins:** 20 production-ready plugins
 - **Tests:** 260+ tests passing
 
 ### Completed Phases
@@ -500,7 +501,7 @@ This document outlines the complete development plan for Likha, divided into man
 - ✅ Phase 1: Core Editor Engine (100%)
 - ✅ Phase 2: Plugin System (100%)
 - ✅ Phase 3: UI Components (100%)
-- ✅ Phase 4: Official Plugins (100% - 19 plugins)
+- ✅ Phase 4: Official Plugins (100% - 20 plugins)
 
 ### In Progress
 - 🚧 Phase 5: Framework Adapters (90%)
@@ -516,7 +517,7 @@ This document outlines the complete development plan for Likha, divided into man
   - ⏳ Video tutorials (pending)
 
 ### Key Achievements
-- 19 production-ready plugins (all core features)
+- 20 production-ready plugins (all core features)
 - 4 npm packages published (@likhaeditor/core, ui, plugins, likhaeditor)
 - CDN build available (85 KB gzipped)
 - 260+ tests passing across all packages

@@ -268,6 +268,16 @@ export const likhaSchema: Schema = new Schema({
         return ['mark', { style: `background-color: ${color}` }, 0];
       }
     })
+    .addToEnd('underline', {
+      parseDOM: [
+        { tag: 'u' },
+        { 
+          style: 'text-decoration',
+          getAttrs: (value: any) => value === 'underline' && null
+        }
+      ],
+      toDOM: () => ['u', 0]
+    })
     .addToEnd('strikethrough', {
       parseDOM: [
         { tag: 's' },

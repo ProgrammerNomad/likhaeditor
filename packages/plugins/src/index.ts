@@ -13,7 +13,9 @@ export { ImagePlugin } from './image';
 export { TextColorPlugin } from './text-color';
 export { HighlightPlugin } from './highlight';
 export { HTMLSourceViewPlugin } from './html-source-view';
+export { UnderlinePlugin } from './underline';
 export { StrikethroughPlugin } from './strikethrough';
 export { SubscriptPlugin } from './subscript';
 export { SuperscriptPlugin } from './superscript';
 export { ClearFormattingPlugin } from './clear-formatting';
+

@@ -16,6 +16,7 @@ import {
   TextColorPlugin,
   HighlightPlugin,
   HTMLSourceViewPlugin,
+  UnderlinePlugin,
   StrikethroughPlugin,
   SubscriptPlugin,
   SuperscriptPlugin,
@@ -198,6 +199,7 @@ export function createEditor(options: LikhaEditorOptions) {
     'textColor',
     'highlight',
     'htmlSourceView',
+    'underline',
     'strikethrough',
     'subscript',
     'superscript',
@@ -250,6 +252,9 @@ export function createEditor(options: LikhaEditorOptions) {
   }
   if (enabledPlugins.includes('htmlSourceView')) {
     plugins.push(new HTMLSourceViewPlugin());
+  }
+  if (enabledPlugins.includes('underline')) {
+    plugins.push(new UnderlinePlugin());
   }
   if (enabledPlugins.includes('strikethrough')) {
     plugins.push(new StrikethroughPlugin());
@@ -515,7 +520,7 @@ function createDefaultToolbar(editor: Editor, container: HTMLElement, buttonConf
   const underlineBtn = new Button({
     icon: icons.underline,
     title: 'Underline (Ctrl+U)',
-    onClick: () => editor.underline(),
+    onClick: () => editor.executeCommand('toggleUnderline'),
     isActive: () => editor.isActive('underline')
   });
 
