@@ -1,5 +1,5 @@
 import { Plugin } from '@likhaeditor/core';
-import { wrapInList, liftListItem, splitListItem } from 'prosemirror-schema-list';
+import { wrapInList, liftListItem } from 'prosemirror-schema-list';
 
 /**
  * Ordered list plugin
@@ -66,27 +66,6 @@ export class OrderedListPlugin extends Plugin {
 
   keymap() {
     return {
-      'Enter': (_editor: any, state: any, dispatch: any) => {
-        const itemType = state.schema.nodes.list_item;
-        const listType = state.schema.nodes.ordered_list;
-        if (!itemType || !listType) return false;
-        
-        // Only handle Enter if we're in an ordered list
-        const { $from } = state.selection;
-        let depth = $from.depth;
-        let inOrderedList = false;
-        while (depth > 0) {
-          const node = $from.node(depth);
-          if (node.type === listType) {
-            inOrderedList = true;
-            break;
-          }
-          depth--;
-        }
-        
-        if (!inOrderedList) return false;
-        return splitListItem(itemType)(state, dispatch);
-      },
       'Mod-]': (editor: any) => {
         const { state, dispatch } = editor.view;
         const itemType = state.schema.nodes.list_item;

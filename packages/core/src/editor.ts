@@ -5,6 +5,7 @@ import { likhaSchema } from './schema';
 import { keymap } from 'prosemirror-keymap';
 import { history, undo, redo } from 'prosemirror-history';
 import { baseKeymap, toggleMark } from 'prosemirror-commands';
+import { splitListItem, liftListItem } from 'prosemirror-schema-list';
 import { Plugin, type PluginRegistry, type Commands } from './plugin';
 
 export interface EditorOptions {
@@ -53,7 +54,13 @@ export class Editor {
       doc: this.parseContent(options.content || '', editorSchema),
       plugins: [
         history(),
-        // Place custom plugin keymaps before baseKeymap so list Enter handlers take priority
+        // List-specific keybindings MUST come before baseKeymap
+        keymap({
+          'Enter': splitListItem(editorSchema.nodes.list_item),
+          'Mod-[': liftListItem(editorSchema.nodes.list_item),
+          'Mod-]': liftListItem(editorSchema.nodes.list_item),
+        }),
+        // Place custom plugin keymaps before baseKeymap
         keymap(customKeymaps),
         ...proseMirrorPlugins,
         keymap({
