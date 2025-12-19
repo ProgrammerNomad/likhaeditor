@@ -111,7 +111,7 @@ npm install @likhaeditor/likhaeditor
 - **NPM:** [View all packages](https://www.npmjs.com/search?q=%40likhaeditor)
 - **Issues:** [GitHub Issues](https://github.com/ProgrammerNomad/likhaeditor/issues)
 - **Discussions:** [GitHub Discussions](https://github.com/ProgrammerNomad/likhaeditor/discussions)
-- **Changelog:** [CHANGELOG.md](https://github.com/ProgrammerNomad/likhaeditor/blob/main/CHANGELOG.md)
+- **Changelog:** [View Release History](https://likhaeditor.netlify.app/changelog)
 - **License:** [MIT](https://github.com/ProgrammerNomad/likhaeditor/blob/main/LICENSE)
 
 ## Credits

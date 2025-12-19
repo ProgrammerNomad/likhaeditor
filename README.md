@@ -11,7 +11,7 @@
 
 LikhaEditor is a completely free, open-source, self-hosted, framework-agnostic rich text editor built for developers who demand flexibility without vendor lock-in. Run it anywhere: static HTML, Laravel, Livewire, React, Next.js, and more. The name "Likha" comes from the Hindi word "लिखा", meaning "written".
 
-[Documentation](https://likhaeditor.netlify.app/) | [Examples](https://likhaeditor.netlify.app/examples/) | [API Reference](https://likhaeditor.netlify.app/api/core) | [npm Package](https://www.npmjs.com/package/@likhaeditor/likhaeditor)
+[Documentation](https://likhaeditor.netlify.app/) | [Examples](https://likhaeditor.netlify.app/examples/) | [API Reference](https://likhaeditor.netlify.app/api/core) | [Changelog](https://likhaeditor.netlify.app/changelog) | [npm Package](https://www.npmjs.com/package/@likhaeditor/likhaeditor)
 
 ## Why LikhaEditor
 
