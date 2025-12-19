@@ -1,7 +1,7 @@
 # Livewire Integration
 
 ::: warning Coming Soon
-The Livewire integration for LikhaEditor is currently under development and will be available in **v0.2.0** (February 2025).
+The Livewire integration for LikhaEditor is currently under development and will be available in **v0.2.0** (February 2026).
 :::
 
 ## Planned Features
@@ -185,9 +185,9 @@ Interested in helping build the Livewire integration? Check out:
 
 ## Timeline
 
-- **v0.2.0** (February 2025) - Initial Livewire component release
-- **v0.3.0** (March 2025) - File upload integration
-- **v0.4.0** (April 2025) - Real-time collaboration features
+- **v0.2.0** (February 2026) - Initial Livewire component release
+- **v0.3.0** (March 2026) - File upload integration
+- **v0.4.0** (April 2026) - Real-time collaboration features
 
 ## Related
 

@@ -3,7 +3,7 @@
 Customize the editor toolbar to match your needs.
 
 ::: warning Coming Soon
-Advanced toolbar customization is planned for **v0.1.0** (January 2025).
+Advanced toolbar customization is planned for **v0.1.0** (January 2026).
 
 Current version (v0.0.1) includes a default toolbar with all formatting options enabled.
 :::

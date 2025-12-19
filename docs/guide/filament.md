@@ -1,7 +1,7 @@
 # Filament Integration
 
 ::: warning Coming Soon
-The Filament integration for LikhaEditor is currently under development and will be available in **v0.3.0** (March 2025).
+The Filament integration for LikhaEditor is currently under development and will be available in **v0.3.0** (March 2026).
 :::
 
 ## Planned Features
@@ -313,8 +313,8 @@ Interested in helping build the Filament integration? Check out:
 
 ## Timeline
 
-- **v0.3.0** (March 2025) - Initial Filament form field
-- **v0.4.0** (April 2025) - Table column and infolist entry
+- **v0.3.0** (March 2026) - Initial Filament form field
+- **v0.4.0** (April 2026) - Table column and infolist entry
 - **v0.5.0** (May 2025) - Advanced file upload integration
 - **v0.6.0** (June 2025) - Custom toolbar builder and theme support
 

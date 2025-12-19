@@ -1,7 +1,7 @@
 # React Integration
 
 ::: warning Coming Soon
-The React integration for LikhaEditor is currently under development and will be available in **v0.1.0** (January 2025).
+The React integration for LikhaEditor is currently under development and will be available in **v0.1.0** (January 2026).
 :::
 
 ## Planned Features
@@ -123,6 +123,6 @@ Interested in helping build the React integration? Check out:
 
 ## Timeline
 
-- **v0.1.0** (January 2025) - Initial React package release
-- **v0.2.0** (February 2025) - Advanced React features (controlled components, hooks)
-- **v0.3.0** (March 2025) - Next.js App Router optimizations
+- **v0.1.0** (January 2026) - Initial React package release
+- **v0.2.0** (February 2026) - Advanced React features (controlled components, hooks)
+- **v0.3.0** (March 2026) - Next.js App Router optimizations
