@@ -22,6 +22,9 @@ export class Dropdown {
   private menu: HTMLElement;
   private options: DropdownOptions;
   private isOpen: boolean = false;
+  private outsideClick = (event: MouseEvent) => {
+    if (!this.element.contains(event.target as Node)) this.close();
+  };
 
   constructor(options: DropdownOptions) {
     this.options = options;
@@ -80,9 +83,12 @@ export class Dropdown {
     this.element.appendChild(this.menu);
 
     // Close on outside click
-    document.addEventListener('click', (e) => {
-      if (!this.element.contains(e.target as Node)) {
+    document.addEventListener('click', this.outsideClick);
+    this.button.setAttribute('aria-expanded', 'false');
+    this.element.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
         this.close();
+        this.button.focus();
       }
     });
   }
@@ -103,6 +109,7 @@ export class Dropdown {
    */
   open(): void {
     this.isOpen = true;
+    this.button.setAttribute('aria-expanded', 'true');
     this.menu.style.display = 'block';
     this.element.classList.add('likha-dropdown--open');
   }
@@ -112,6 +119,7 @@ export class Dropdown {
    */
   close(): void {
     this.isOpen = false;
+    this.button.setAttribute('aria-expanded', 'false');
     this.menu.style.display = 'none';
     this.element.classList.remove('likha-dropdown--open');
   }
@@ -139,6 +147,7 @@ export class Dropdown {
    * Destroy the dropdown
    */
   destroy(): void {
+    document.removeEventListener('click', this.outsideClick);
     this.element.remove();
   }
 }

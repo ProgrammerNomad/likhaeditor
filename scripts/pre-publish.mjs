@@ -10,7 +10,7 @@ import { existsSync, readFileSync } from 'fs';
 import { join } from 'path';
 
 const PACKAGES = ['core', 'ui', 'plugins', 'html'];
-const REQUIRED_FILES = ['package.json', 'README.md', 'dist/index.js'];
+const REQUIRED_FILES = ['package.json', 'README.md', 'dist/index.js', 'dist/index.cjs', 'dist/index.d.ts'];
 const REQUIRED_FIELDS = [
   'name',
   'version',
@@ -80,6 +80,20 @@ PACKAGES.forEach(pkg => {
       hasErrors = true;
     }
   });
+  const manifest = JSON.parse(readFileSync(join('packages', pkg, 'package.json'), 'utf-8'));
+  const checkExports = (value) => {
+    if (typeof value === 'string' && !existsSync(join('packages', pkg, value))) {
+      console.error(`Missing export for ${pkg}: ${value}`);
+      hasErrors = true;
+    } else if (value && typeof value === 'object') {
+      Object.values(value).forEach(checkExports);
+    }
+  };
+  checkExports(manifest.exports);
+  if (pkg === 'html' && !existsSync(join('packages', pkg, 'dist/likha-editor.umd.js'))) {
+    console.error('Missing CDN bundle');
+    hasErrors = true;
+  }
   
   if (!hasErrors) {
     console.log(`✓ ${pkg}: all files present`);
@@ -91,11 +105,11 @@ console.log('');
 // 4. Run tests
 console.log('🧪 Running tests...');
 try {
-  execSync('pnpm test -- --run', { stdio: 'inherit' });
+  execSync('pnpm test', { stdio: 'inherit' });
   console.log('✓ All tests passed');
 } catch (error) {
-  console.warn('⚠️  Tests skipped or failed');
-  // Don't fail on test errors for now
+  console.error('Tests failed');
+  hasErrors = true;
 }
 
 console.log('');
@@ -110,6 +124,13 @@ try {
   hasErrors = true;
 }
 
+try {
+  execSync('node scripts/smoke-dist.mjs', { stdio: 'inherit' });
+} catch {
+  console.error('Distribution smoke checks failed');
+  hasErrors = true;
+}
+
 console.log('');
 
 // Summary
@@ -121,8 +142,5 @@ if (hasErrors) {
   console.log('✅ Pre-publish validation PASSED');
   console.log('\nReady to publish! Run:');
   console.log('  npm login');
-  console.log('  pnpm --filter @likhaeditor/likha-core publish --access public');
-  console.log('  pnpm --filter @likhaeditor/likha-ui publish --access public');
-  console.log('  pnpm --filter @likhaeditor/likha-plugins publish --access public');
-  console.log('  pnpm --filter @likhaeditor/likha publish --access public');
+  console.log('  pnpm publish:all');
 }

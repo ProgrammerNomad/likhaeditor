@@ -163,6 +163,8 @@ export interface LikhaEditorOptions {
   darkTheme?: boolean;
   /** Callback when content changes */
   onChange?: (content: string) => void;
+  /** Allow user editing (default: true). Programmatic updates remain available. */
+  editable?: boolean;
 }
 
 /**
@@ -273,22 +275,10 @@ export function createEditor(options: LikhaEditorOptions) {
   const editor = new Editor({
     element,
     content: options.content,
-    plugins
+    plugins,
+    editable: options.editable,
+    onChange: options.onChange
   });
-
-  // Setup onChange callback
-  if (options.onChange) {
-    let timeout: any;
-    editor.view.setProps({
-      dispatchTransaction(transaction) {
-        editor.view.updateState(editor.view.state.apply(transaction));
-        clearTimeout(timeout);
-        timeout = setTimeout(() => {
-          options.onChange!(editor.getHTML());
-        }, 300);
-      }
-    });
-  }
 
   // Create toolbar if enabled
   let toolbar: Toolbar | null = null;
@@ -297,34 +287,42 @@ export function createEditor(options: LikhaEditorOptions) {
       ? (typeof options.toolbarContainer === 'string'
           ? document.querySelector(options.toolbarContainer) as HTMLElement
           : options.toolbarContainer)
-      : null;
+      : element;
 
     if (toolbarContainer) {
       toolbar = createDefaultToolbar(editor, toolbarContainer, options.toolbarButtons);
+      if (!options.toolbarContainer) element.insertBefore(toolbar.getElement(), editor.view.dom);
     }
   }
+
+  toolbar?.getElement().toggleAttribute('inert', options.editable === false);
 
   return {
     editor,
     toolbar,
     getContent: () => editor.getHTML(),
     setContent: (html: string) => editor.setContent(html),
-    destroy: () => editor.view.destroy()
+    getText: () => editor.getText(),
+    setEditable: (editable: boolean) => {
+      editor.setEditable(editable);
+      toolbar?.getElement().toggleAttribute('inert', !editable);
+    },
+    destroy: () => {
+      toolbar?.destroy();
+      editor.destroy();
+    }
   };
 }
 
 // Track currently open color picker popup
-let currentColorPickerPopup: HTMLElement | null = null;
+let closeCurrentColorPicker: (() => void) | null = null;
 
 /**
  * Show color picker popup
  */
 function showColorPicker(button: HTMLElement, onSelect: (color: string) => void) {
   // Close any existing color picker first
-  if (currentColorPickerPopup && currentColorPickerPopup.parentNode) {
-    document.body.removeChild(currentColorPickerPopup);
-    currentColorPickerPopup = null;
-  }
+  closeCurrentColorPicker?.();
 
   // Common color palette
   const colors = [
@@ -361,7 +359,9 @@ function showColorPicker(button: HTMLElement, onSelect: (color: string) => void)
 
   // Add color squares
   colors.forEach(color => {
-    const square = document.createElement('div');
+    const square = document.createElement('button');
+    square.type = 'button';
+    square.setAttribute('aria-label', `Use color ${color}`);
     square.style.cssText = `
       width: 20px;
       height: 20px;
@@ -385,35 +385,31 @@ function showColorPicker(button: HTMLElement, onSelect: (color: string) => void)
     square.addEventListener('click', (e) => {
       e.stopPropagation();
       onSelect(color);
-      if (popup.parentNode) {
-        document.body.removeChild(popup);
-      }
-      currentColorPickerPopup = null;
-      document.removeEventListener('click', closePopup);
+      cleanup();
     });
 
     popup.appendChild(square);
   });
 
   // Store reference to current popup
-  currentColorPickerPopup = popup;
+  const cleanup = () => {
+    popup.remove();
+    document.removeEventListener('click', closePopup);
+    if (closeCurrentColorPicker === cleanup) closeCurrentColorPicker = null;
+  };
+  closeCurrentColorPicker = cleanup;
 
   // Close popup when clicking outside
   const closePopup = (e: MouseEvent) => {
     if (!popup.contains(e.target as Node) && e.target !== button) {
-      if (popup.parentNode) {
-        document.body.removeChild(popup);
-      }
-      currentColorPickerPopup = null;
-      document.removeEventListener('click', closePopup);
+      cleanup();
     }
   };
 
-  setTimeout(() => {
-    document.addEventListener('click', closePopup);
-  }, 10);
+  document.addEventListener('click', closePopup);
 
   document.body.appendChild(popup);
+  return cleanup;
 }
 
 /**
@@ -424,6 +420,8 @@ function createDefaultToolbar(editor: Editor, container: HTMLElement, buttonConf
     container,
     sticky: false
   });
+  let closeColorPicker: (() => void) | undefined;
+  toolbar.onDestroy(() => closeColorPicker?.());
 
   // Determine which buttons to show
   const showAll = !buttonConfig || buttonConfig === 'all';
@@ -682,11 +680,13 @@ function createDefaultToolbar(editor: Editor, container: HTMLElement, buttonConf
   tableBtn.appendChild(tableGridContainer);
 
   // Close grid when clicking outside
-  document.addEventListener('click', (e) => {
+  const closeTableGrid = (e: MouseEvent) => {
     if (!tableBtn.contains(e.target as Node)) {
       tableGridContainer.style.display = 'none';
     }
-  });
+  };
+  document.addEventListener('click', closeTableGrid);
+  toolbar.onDestroy(() => document.removeEventListener('click', closeTableGrid));
 
   const hrBtn = new Button({
     icon: icons.hr,
@@ -713,7 +713,7 @@ function createDefaultToolbar(editor: Editor, container: HTMLElement, buttonConf
     title: 'Text Color',
     onClick: (e) => {
       e.stopPropagation();
-      showColorPicker(e.currentTarget as HTMLElement, (color) => {
+      closeColorPicker = showColorPicker(e.currentTarget as HTMLElement, (color) => {
         editor.executeCommand('setTextColor', color);
       });
     }
@@ -724,7 +724,7 @@ function createDefaultToolbar(editor: Editor, container: HTMLElement, buttonConf
     title: 'Highlight',
     onClick: (e) => {
       e.stopPropagation();
-      showColorPicker(e.currentTarget as HTMLElement, (color) => {
+      closeColorPicker = showColorPicker(e.currentTarget as HTMLElement, (color) => {
         editor.executeCommand('setHighlight', color);
       });
     }
@@ -744,6 +744,30 @@ function createDefaultToolbar(editor: Editor, container: HTMLElement, buttonConf
   
   toolbar.addButton(sourceViewBtn.getElement());
 
+  const controls: Array<[string, { getElement(): HTMLElement; destroy(): void }]> = [
+    ['heading', headingDropdown], ['undo', undoBtn], ['redo', redoBtn],
+    ['bold', boldBtn], ['italic', italicBtn], ['underline', underlineBtn],
+    ['strikethrough', strikethroughBtn], ['subscript', subscriptBtn],
+    ['superscript', superscriptBtn], ['clearFormatting', clearFormatBtn],
+    ['link', linkBtn], ['bulletList', bulletBtn], ['orderedList', numberedBtn],
+    ['blockquote', blockquoteBtn], ['alignLeft', alignLeftBtn],
+    ['alignCenter', alignCenterBtn], ['alignRight', alignRightBtn],
+    ['image', imageBtn], ['table', tableBtnInner], ['horizontalRule', hrBtn],
+    ['codeBlock', codeBtn], ['textColor', colorBtn], ['highlight', highlightBtn],
+    ['htmlSourceView', sourceViewBtn],
+  ];
+  controls.forEach(([name, control]) => {
+    if (!shouldShow(name)) control.destroy();
+    else toolbar.onDestroy(() => control.destroy());
+  });
+  if (!shouldShow('table')) tableBtn.remove();
+  toolbar.getElement().querySelectorAll('.likha-toolbar__group').forEach(group => {
+    if (!group.children.length) group.remove();
+  });
+  toolbar.getElement().querySelectorAll('.likha-toolbar__separator').forEach(separator => {
+    if (!separator.previousElementSibling || !separator.nextElementSibling ||
+        separator.previousElementSibling.classList.contains('likha-toolbar__separator')) separator.remove();
+  });
   return toolbar;
 }
 

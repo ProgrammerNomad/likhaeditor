@@ -5,7 +5,7 @@ import { likhaSchema } from './schema';
 import { keymap } from 'prosemirror-keymap';
 import { history, undo, redo } from 'prosemirror-history';
 import { baseKeymap, toggleMark } from 'prosemirror-commands';
-import { splitListItem, liftListItem } from 'prosemirror-schema-list';
+import { splitListItem, liftListItem, sinkListItem } from 'prosemirror-schema-list';
 import { Plugin, type PluginRegistry, type Commands } from './plugin';
 
 export interface EditorOptions {
@@ -13,6 +13,8 @@ export interface EditorOptions {
   content?: string;
   schema?: Schema;
   plugins?: Plugin[];
+  editable?: boolean;
+  onChange?: (html: string) => void;
 }
 
 export class Editor {
@@ -20,6 +22,7 @@ export class Editor {
   private element: HTMLElement;
   private plugins: PluginRegistry = {};
   private customCommands: Commands = {};
+  private destroyed = false;
 
   constructor(options: EditorOptions) {
     this.element = options.element;
@@ -55,20 +58,21 @@ export class Editor {
       plugins: [
         history(),
         // List-specific keybindings MUST come before baseKeymap
-        keymap({
+        keymap(editorSchema.nodes.list_item ? {
           'Enter': splitListItem(editorSchema.nodes.list_item),
           'Mod-[': liftListItem(editorSchema.nodes.list_item),
-          'Mod-]': liftListItem(editorSchema.nodes.list_item),
-        }),
+          'Mod-]': sinkListItem(editorSchema.nodes.list_item),
+        } : {}),
         // Place custom plugin keymaps before baseKeymap
         keymap(customKeymaps),
         ...proseMirrorPlugins,
         keymap({
           'Mod-z': undo,
           'Mod-y': redo,
-          'Mod-b': toggleMark(editorSchema.marks.strong),
-          'Mod-i': toggleMark(editorSchema.marks.em),
-          'Mod-u': toggleMark(editorSchema.marks.code),
+          'Mod-Shift-z': redo,
+          ...(editorSchema.marks.strong ? { 'Mod-b': toggleMark(editorSchema.marks.strong) } : {}),
+          ...(editorSchema.marks.em ? { 'Mod-i': toggleMark(editorSchema.marks.em) } : {}),
+          ...(editorSchema.marks.underline ? { 'Mod-u': toggleMark(editorSchema.marks.underline) } : {}),
         }),
         keymap(baseKeymap),
       ],
@@ -77,6 +81,14 @@ export class Editor {
     // Create editor view
     this.view = new EditorView(this.element, {
       state,
+      editable: () => options.editable !== false,
+      attributes: { role: 'textbox', 'aria-multiline': 'true', 'aria-label': 'Rich text editor' },
+      dispatchTransaction: (transaction) => {
+        const previous = this.view.state.doc;
+        const result = this.view.state.applyTransaction(transaction);
+        this.view.updateState(result.state);
+        if (!previous.eq(result.state.doc)) options.onChange?.(this.getHTML());
+      },
     });
 
     // Initialize plugins after view is created
@@ -129,21 +141,18 @@ export class Editor {
   }
 
   public getText(): string {
-    return this.view.state.doc.textContent;
+    return this.view.state.doc.textBetween(0, this.view.state.doc.content.size, '\n');
   }
 
   public setContent(content: string): void {
     const doc = this.parseContent(content, this.view.state.schema);
-    const state = EditorState.create({
-      doc,
-      plugins: this.view.state.plugins,
-    });
-    this.view.updateState(state);
-    // Set selection to start of document
-    const tr = this.view.state.tr.setSelection(
-      TextSelection.atStart(this.view.state.doc)
-    );
+    const tr = this.view.state.tr.replaceWith(0, this.view.state.doc.content.size, doc.content);
+    tr.setSelection(TextSelection.atStart(tr.doc));
     this.view.dispatch(tr);
+  }
+
+  public setEditable(editable: boolean): void {
+    this.view.setProps({ editable: () => editable });
   }
 
   public focus(): void {
@@ -151,7 +160,13 @@ export class Editor {
   }
 
   public destroy(): void {
-    this.view.destroy();
+    if (this.destroyed) return;
+    this.destroyed = true;
+    try {
+      Object.values(this.plugins).forEach((plugin) => plugin.destroy());
+    } finally {
+      this.view.destroy();
+    }
   }
 
   // Formatting commands - Simple API that hides ProseMirror complexity
@@ -191,10 +206,13 @@ export class Editor {
   // Check if a mark is active
   public isActive(markName: string): boolean {
     const { state } = this.view;
-    const mark = state.schema.marks[markName];
+    const mark = state.schema.marks[markName === 'bold' ? 'strong' : markName === 'italic' ? 'em' : markName];
     if (!mark) return false;
 
     const { from, to } = state.selection;
+    if (state.selection.empty) {
+      return !!mark.isInSet(state.storedMarks || state.selection.$from.marks());
+    }
     let active = false;
 
     state.doc.nodesBetween(from, to, (node) => {

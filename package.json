@@ -10,13 +10,13 @@
     "url": "https://github.com/ProgrammerNomad/likhaeditor.git"
   },
   "scripts": {
-    "build": "pnpm --filter \"./packages/**\" build",
+    "build": "pnpm --filter \"@likhaeditor/*\" build",
     "dev": "pnpm --filter \"./packages/**\" dev",
-    "test": "vitest",
-    "test:watch": "vitest --watch",
+    "test": "node scripts/test.mjs run",
+    "test:watch": "node scripts/test.mjs",
     "lint": "eslint . --ext .ts,.tsx",
     "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
-    "typecheck": "pnpm --filter \"./packages/**\" typecheck",
+    "typecheck": "pnpm --filter \"@likhaeditor/*\" typecheck",
     "clean": "pnpm --filter \"./packages/**\" clean && rm -rf node_modules",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
@@ -25,21 +25,26 @@
     "publish:all": "pnpm pre-publish && pnpm --filter @likhaeditor/core publish --access public && pnpm --filter @likhaeditor/ui publish --access public && pnpm --filter @likhaeditor/plugins publish --access public && pnpm --filter @likhaeditor/likhaeditor publish --access public"
   },
   "devDependencies": {
-    "@types/node": "^20.10.0",
-    "@typescript-eslint/eslint-plugin": "^6.13.0",
-    "@typescript-eslint/parser": "^6.13.0",
-    "eslint": "^8.55.0",
-    "happy-dom": "^20.0.11",
-    "prettier": "^3.1.0",
-    "terser": "^5.44.1",
-    "typescript": "^5.3.0",
-    "vite": "^5.0.0",
+    "@types/node": "^20.19.43",
+    "@typescript-eslint/eslint-plugin": "^8.72.0",
+    "@typescript-eslint/parser": "^8.72.0",
+    "eslint": "^8.57.1",
+    "happy-dom": "^20.14.6",
+    "prettier": "^3.9.10",
+    "terser": "^5.51.2",
+    "typescript": "^5.9.3",
+    "vite": "^6.4.5",
     "vitepress": "^1.6.4",
-    "vitest": "^1.0.0"
+    "vitest": "^4.1.12"
   },
   "packageManager": "pnpm@8.12.0",
   "engines": {
-    "node": ">=18.0.0",
+    "node": ">=22.12.0",
     "pnpm": ">=8.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "vite": "^6.4.5"
+    }
   }
 }

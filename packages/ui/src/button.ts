@@ -26,6 +26,7 @@ export class Button {
     
     if (options.title) {
       this.element.title = options.title;
+      this.element.setAttribute('aria-label', options.title);
     }
     
     if (options.disabled) {
@@ -36,6 +37,7 @@ export class Button {
     if (options.icon) {
       const iconEl = document.createElement('span');
       iconEl.className = 'likha-button__icon';
+      iconEl.setAttribute('aria-hidden', 'true');
       iconEl.innerHTML = options.icon;
       this.element.appendChild(iconEl);
     }
@@ -49,6 +51,7 @@ export class Button {
     }
 
     // Attach click handler
+    this.element.addEventListener('mousedown', event => event.preventDefault());
     if (options.onClick) {
       this.element.addEventListener('click', options.onClick);
     }
@@ -78,6 +81,7 @@ export class Button {
     if (!this.options.isActive) return;
 
     const isActive = this.options.isActive();
+    this.element.setAttribute('aria-pressed', String(isActive));
     if (isActive) {
       this.element.classList.add('likha-button--active');
     } else {
@@ -103,6 +107,7 @@ export class Button {
    * Manually set active state
    */
   setActive(active: boolean): void {
+    this.element.setAttribute('aria-pressed', String(active));
     if (active) {
       this.element.classList.add('likha-button--active');
     } else {

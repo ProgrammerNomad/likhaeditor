@@ -2,6 +2,11 @@
 
 # LikhaEditor
 
+> **Pre-1.0:** advanced features below include planned work. See
+> [Production readiness](PRODUCTION-READINESS.md) for verified milestones,
+> current limitations, and self-hosted build instructions. Comments, tracked
+> changes, collaboration, and framework adapters are not shipped yet.
+
 [![npm version](https://img.shields.io/npm/v/@likhaeditor/likhaeditor.svg)](https://www.npmjs.com/package/@likhaeditor/likhaeditor)
 [![npm downloads](https://img.shields.io/npm/dm/@likhaeditor/likhaeditor.svg)](https://www.npmjs.com/package/@likhaeditor/likhaeditor)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
@@ -110,7 +115,7 @@ composer require nomadprogrammer/likha-laravel
 | Laravel Support | First-class | Manual | Manual | Manual | Manual |
 | Plugin System | Yes | Yes | Limited | Yes | Custom |
 | Commercial Use | Free | Free | Free | Paid/GPL | Free |
-| Track Changes | Yes | Premium | No | Premium | Custom |
+| Track Changes | Planned | Premium | No | Premium | Custom |
 | Collaborative | Planned | Premium | No | Premium | Custom |
 
 ## Feature Roadmap
@@ -301,7 +306,7 @@ likha/
 LikhaEditor is distributed under the MIT License.
 
 - Free for personal and commercial use
-- Redistribution allowed without attribution
+- Redistribution allowed with the MIT copyright and license notice
 - No hidden clauses or feature gating
 
 ## Contributing
@@ -335,7 +340,7 @@ LikhaEditor aims to become the default open-source editor for developers seeking
 
 ### Is LikhaEditor really free?
 
-Yes, completely free. MIT licensed with no hidden costs, premium tiers, or feature gating. Use it in commercial projects without attribution requirements.
+Yes, completely free. MIT licensed with no hidden costs, premium tiers, or feature gating. Commercial use is allowed; retain the MIT copyright and license notice when redistributing.
 
 ### Does LikhaEditor require a backend server?
 

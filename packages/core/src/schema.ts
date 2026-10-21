@@ -1,12 +1,13 @@
 import { Schema } from 'prosemirror-model';
 import { schema as basicSchema } from 'prosemirror-schema-basic';
 import { addListNodes } from 'prosemirror-schema-list';
+import { isSafeURL } from './url';
 
 /**
  * Extended schema with headings, lists, blockquote, HR, links, code blocks, and text alignment
  */
 export const likhaSchema: Schema = new Schema({
-  nodes: addListNodes(basicSchema.spec.nodes, 'paragraph', 'block')
+  nodes: addListNodes(basicSchema.spec.nodes, 'paragraph block*', 'block')
     .update('paragraph', {
       attrs: { textAlign: { default: 'left' } },
       content: 'inline*',
@@ -191,16 +192,16 @@ export const likhaSchema: Schema = new Schema({
       draggable: true,
       parseDOM: [{
         tag: 'img[src]',
-        getAttrs: (dom: any) => ({
+        getAttrs: (dom: any) => isSafeURL(dom.getAttribute('src'), true) ? ({
           src: dom.getAttribute('src'),
           alt: dom.getAttribute('alt'),
           title: dom.getAttribute('title'),
           width: dom.getAttribute('width') ? parseInt(dom.getAttribute('width'), 10) : null,
           height: dom.getAttribute('height') ? parseInt(dom.getAttribute('height'), 10) : null
-        })
+        }) : false
       }],
       toDOM: (node) => {
-        const attrs: any = { src: node.attrs.src };
+        const attrs: any = { src: isSafeURL(node.attrs.src, true) ? node.attrs.src : null };
         if (node.attrs.alt) attrs.alt = node.attrs.alt;
         if (node.attrs.title) attrs.title = node.attrs.title;
         if (node.attrs.width) attrs.width = node.attrs.width;
@@ -217,13 +218,13 @@ export const likhaSchema: Schema = new Schema({
       inclusive: false,
       parseDOM: [{
         tag: 'a[href]',
-        getAttrs: (dom: any) => ({
+        getAttrs: (dom: any) => isSafeURL(dom.getAttribute('href')) ? ({
           href: dom.getAttribute('href'),
           title: dom.getAttribute('title')
-        })
+        }) : false
       }],
       toDOM: (node) => ['a', {
-        href: node.attrs.href,
+        href: isSafeURL(node.attrs.href) ? node.attrs.href : null,
         title: node.attrs.title
       }, 0]
     })

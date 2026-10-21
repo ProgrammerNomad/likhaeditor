@@ -1,4 +1,4 @@
-import { Plugin } from '@likhaeditor/core';
+import { Plugin, isSafeURL } from '@likhaeditor/core';
 import type { Editor } from '@likhaeditor/core';
 import type { Node as ProseMirrorNode } from 'prosemirror-model';
 
@@ -6,7 +6,7 @@ export class ImagePlugin extends Plugin {
   name = 'image';
 
   insertImage(editor: Editor, src: string, alt?: string, title?: string): boolean {
-    if (!src) return false;
+    if (!isSafeURL(src, true)) return false;
     const { view } = editor;
     const { schema, tr } = view.state;
     const imageNode = schema.nodes.image;

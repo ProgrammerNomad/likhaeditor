@@ -1,4 +1,4 @@
-import { Plugin } from '@likhaeditor/core';
+import { Plugin, isSafeURL } from '@likhaeditor/core';
 import { Plugin as ProseMirrorPlugin } from 'prosemirror-state';
 import { keymap } from 'prosemirror-keymap';
 
@@ -12,6 +12,7 @@ export class LinkPlugin extends Plugin {
   commands() {
     return {
       setLink: (editor: any, href: string): boolean => {
+        if (!isSafeURL(href)) return false;
         const { state, dispatch } = editor.view;
         const linkMark = state.schema.marks.link;
         
@@ -135,7 +136,7 @@ export class LinkPlugin extends Plugin {
           // Prompt for URL (will be enhanced with dialog later)
           const url = prompt('Enter URL:', existingHref || 'https://');
           
-          if (!url) return false;
+          if (!isSafeURL(url)) return false;
 
           if (dispatch) {
             const tr = state.tr.addMark(from, to, linkMark.create({ href: url }));

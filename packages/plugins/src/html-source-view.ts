@@ -30,7 +30,8 @@ export class HTMLSourceViewPlugin extends Plugin {
       
       // Create textarea
       this.sourceTextarea = document.createElement('textarea');
-      this.sourceTextarea.value = this.formatHTML(html);
+      this.sourceTextarea.value = html;
+      this.sourceTextarea.setAttribute('aria-label', 'HTML source');
       this.sourceTextarea.style.cssText = `
         width: 100%;
         min-height: 400px;
@@ -82,29 +83,11 @@ export class HTMLSourceViewPlugin extends Plugin {
   /**
    * Format HTML for better readability
    */
-  private formatHTML(html: string): string {
-    let formatted = '';
-    let indent = 0;
-    const tab = '  ';
-
-    html.split(/(<[^>]+>)/g).forEach((part) => {
-      if (part.match(/^<\//)) {
-        // Closing tag
-        indent--;
-        formatted += tab.repeat(Math.max(0, indent)) + part + '\n';
-      } else if (part.match(/^<[^/][^>]*>$/)) {
-        // Opening tag
-        formatted += tab.repeat(indent) + part + '\n';
-        if (!part.match(/\/>$/)) {
-          indent++;
-        }
-      } else if (part.trim()) {
-        // Text content
-        formatted += tab.repeat(indent) + part.trim() + '\n';
-      }
-    });
-
-    return formatted.trim();
+  destroy(): void {
+    this.sourceTextarea?.remove();
+    this.sourceTextarea = null;
+    if (this.editorElement) this.editorElement.style.display = '';
+    this.sourceMode = false;
   }
 
   commands() {

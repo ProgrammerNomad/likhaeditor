@@ -12,12 +12,19 @@ export interface ToolbarOptions {
 export class Toolbar {
   private element: HTMLElement;
   private container: HTMLElement;
+  private cleanups: Array<() => void> = [];
+
+  onDestroy(cleanup: () => void): void {
+    this.cleanups.push(cleanup);
+  }
 
   constructor(options: ToolbarOptions = {}) {
     
     // Create toolbar element
     this.element = document.createElement('div');
     this.element.className = `likha-toolbar ${options.className || ''}`.trim();
+    this.element.setAttribute('role', 'toolbar');
+    this.element.setAttribute('aria-label', 'Text formatting');
     
     if (options.sticky) {
       this.element.classList.add('likha-toolbar--sticky');
@@ -95,6 +102,7 @@ export class Toolbar {
    * Destroy the toolbar
    */
   destroy(): void {
+    this.cleanups.splice(0).forEach(cleanup => cleanup());
     this.element.remove();
   }
 }
