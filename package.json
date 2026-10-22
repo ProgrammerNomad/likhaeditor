@@ -10,19 +10,20 @@
     "url": "https://github.com/ProgrammerNomad/likhaeditor.git"
   },
   "scripts": {
-    "build": "pnpm --filter \"@likhaeditor/*\" build",
+    "build": "pnpm -r --filter \"@likhaeditor/*\" run build",
     "dev": "pnpm --filter \"./packages/**\" dev",
     "test": "node scripts/test.mjs run",
     "test:watch": "node scripts/test.mjs",
     "lint": "eslint \"packages/**/*.ts\" \"*.ts\" --max-warnings=0",
     "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
-    "typecheck": "pnpm --filter \"@likhaeditor/*\" typecheck",
+    "typecheck": "pnpm -r --filter \"@likhaeditor/*\" run typecheck",
     "clean": "pnpm --filter \"./packages/**\" clean && rm -rf node_modules",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
     "pre-publish": "node scripts/pre-publish.mjs",
     "publish:all": "pnpm pre-publish && pnpm --filter @likhaeditor/core publish --access public && pnpm --filter @likhaeditor/ui publish --access public && pnpm --filter @likhaeditor/plugins publish --access public && pnpm --filter @likhaeditor/likhaeditor publish --access public && pnpm --filter @likhaeditor/likhaeditor-react publish --access public",
+    "publish:react": "pnpm --filter @likhaeditor/likhaeditor-react publish --access public",
     "test:browser": "playwright test",
     "test:site": "playwright test --config playwright.site.config.ts",
     "test:packages": "node scripts/test-packages.mjs"
