@@ -4,7 +4,7 @@
 
 A free, MIT-licensed rich text editor built on ProseMirror. Self-host the JavaScript and CSS or serve a pinned release from a CDN. No account, license key, mandatory cloud API, or paid feature tier.
 
-**Pre-1.0 development:** this checkout includes features that are not yet published to npm. See [production readiness](PRODUCTION-READINESS.md) for verified checks and remaining release work. The repository owner handles publishing.
+**Pre-1.0:** manifests target **v0.0.3**. See [production readiness](PRODUCTION-READINESS.md) and [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md). The repository owner runs `npm login` and `pnpm publish:all` after committing.
 
 [Documentation](https://likhaeditor.netlify.app/) · [Playground](https://likhaeditor.netlify.app/playground) · [Release status](https://likhaeditor.netlify.app/status)
 
@@ -57,7 +57,7 @@ Pin the exact released version in production, including CDN URLs. New local feat
 
 Comments are separate metadata; snapshots currently contain only the document. Deleted comment ranges become orphaned. Markdown cannot preserve every HTML feature. Upload security, content validation, authentication, and storage belong to the host application.
 
-Tracked changes, real-time collaboration, media crop/resize UI, syntax highlighting, dedicated framework adapters, and formal accessibility certification remain future work. This is not a claim of complete parity with established commercial editors. See [the broader wishlist](ROADMAP.md).
+Hosted multi-user collaboration, Filament package, media crop/resize UI, and formal accessibility certification remain open. Track changes, syntax highlighting, and React/Laravel/Livewire adapters ship in 0.0.3. See [ROADMAP.md](ROADMAP.md) for `[x]` / `[ ]` phase checklists and [release status](https://likhaeditor.netlify.app/status).
 
 ## Packages
 
@@ -67,8 +67,11 @@ Tracked changes, real-time collaboration, media crop/resize UI, syntax highlight
 | packages/ui | @likhaeditor/ui | Toolbar and menus |
 | packages/plugins | @likhaeditor/plugins | Official plugins |
 | packages/html | @likhaeditor/likhaeditor | Vanilla adapter and standalone bundle |
+| packages/react | @likhaeditor/likhaeditor-react | React component and `useEditor` hook |
+| packages/laravel | likha/laravel (Composer) | Blade component |
+| packages/livewire | likha/livewire (Composer) | Livewire 3 component |
 
-React can mount the vanilla adapter in an effect and destroy it on cleanup. Blade can use the standalone build and a form field. Dedicated React, Laravel, Livewire, and Filament packages are not shipped.
+Filament remains a documentation-only integration pattern; use Laravel Blade or the vanilla adapter.
 
 ## Verification and website
 

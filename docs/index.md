@@ -82,8 +82,8 @@ LikhaEditor is a **modern, framework-agnostic rich text editor** built on ProseM
 
 ## Current Status
 
-**Package manifest version:** 0.0.2<br>
-**Development status:** New features are implemented locally and await the next release. The playground uses this website’s repository build. See [release status](/status) for verified capabilities and remaining work.
+**Package manifest version:** 0.0.3<br>
+**Development status:** Pre-1.0. See [release status](/status) for capabilities, adapter packages, and remaining 1.0 work.
 
 ### NPM Packages
 
@@ -95,9 +95,9 @@ The four editor packages use the `@likhaeditor` npm scope. Planned adapters are 
 | [@likhaeditor/ui](https://www.npmjs.com/package/@likhaeditor/ui) | ![npm](https://img.shields.io/npm/v/@likhaeditor/ui) | Toolbar and UI components | Pre-1.0 |
 | [@likhaeditor/plugins](https://www.npmjs.com/package/@likhaeditor/plugins) | ![npm](https://img.shields.io/npm/v/@likhaeditor/plugins) | Official plugin collection | Pre-1.0 |
 | [@likhaeditor/likhaeditor](https://www.npmjs.com/package/@likhaeditor/likhaeditor) | ![npm](https://img.shields.io/npm/v/@likhaeditor/likhaeditor) | Vanilla JS wrapper | Pre-1.0 |
-| `@likhaeditor/likhaeditor-react` | - | React components | 🚧 Planned |
-| `@likhaeditor/likhaeditor-laravel` | - | Laravel Blade components | 🚧 Planned |
-| `@likhaeditor/likhaeditor-livewire` | - | Livewire integration | 🚧 Planned |
+| [@likhaeditor/likhaeditor-react](https://www.npmjs.com/package/@likhaeditor/likhaeditor-react) | ![npm](https://img.shields.io/npm/v/@likhaeditor/likhaeditor-react) | React component and hooks | Pre-1.0 |
+| `likha/laravel` (Composer) | - | Blade component + asset publish | In repository |
+| `likha/livewire` (Composer) | - | Livewire 3 component | In repository |
 
 **Installation:**
 ```bash

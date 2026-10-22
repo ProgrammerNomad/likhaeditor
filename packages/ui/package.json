@@ -1,6 +1,6 @@
 {
   "name": "@likhaeditor/ui",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "UI components for Likha editor",
   "type": "module",
   "main": "./dist/index.cjs",

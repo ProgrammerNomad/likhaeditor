@@ -9,7 +9,7 @@ import { execSync } from 'child_process';
 import { existsSync, readFileSync } from 'fs';
 import { join } from 'path';
 
-const PACKAGES = ['core', 'ui', 'plugins', 'html'];
+const PACKAGES = ['core', 'ui', 'plugins', 'html', 'react'];
 const REQUIRED_FILES = ['package.json', 'README.md', 'dist/index.js', 'dist/index.cjs', 'dist/index.d.ts', 'dist/THIRD-PARTY-NOTICES.txt'];
 const REQUIRED_FIELDS = [
   'name',

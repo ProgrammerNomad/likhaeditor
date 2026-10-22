@@ -232,10 +232,10 @@ abstract class Plugin {
 - `ClearFormattingPlugin` - Clear formatting
 - `HTMLSourceViewPlugin` - HTML source view
 
-See [Plugins Documentation](../plugins/README.md) for detailed usage.
+See [Plugins Documentation](/plugins/README) for detailed usage.
 
 ## Next Steps
 
-- [Plugins Guide](../plugins/README.md)
+- [Plugins Guide](/plugins/README)
 - [Customization](/guide/configuration)
 - [Examples](/examples/)

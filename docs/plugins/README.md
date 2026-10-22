@@ -217,6 +217,6 @@ editor.executeCommand('myCommand');
 
 ## Next Steps
 
-- [API Reference](../api/README.md)
+- [API Reference](/api/README)
 - [Examples](/examples/)
 - [Customization](/guide/configuration)

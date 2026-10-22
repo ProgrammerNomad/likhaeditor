@@ -1,6 +1,6 @@
 {
   "name": "likhaeditor",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "description": "Open-source, self-hosted, framework-agnostic rich text editor",
   "author": "Shiv Singh <shiv@srapsware.com>",
@@ -22,7 +22,7 @@
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
     "pre-publish": "node scripts/pre-publish.mjs",
-    "publish:all": "pnpm pre-publish && pnpm --filter @likhaeditor/core publish --access public && pnpm --filter @likhaeditor/ui publish --access public && pnpm --filter @likhaeditor/plugins publish --access public && pnpm --filter @likhaeditor/likhaeditor publish --access public",
+    "publish:all": "pnpm pre-publish && pnpm --filter @likhaeditor/core publish --access public && pnpm --filter @likhaeditor/ui publish --access public && pnpm --filter @likhaeditor/plugins publish --access public && pnpm --filter @likhaeditor/likhaeditor publish --access public && pnpm --filter @likhaeditor/likhaeditor-react publish --access public",
     "test:browser": "playwright test",
     "test:site": "playwright test --config playwright.site.config.ts",
     "test:packages": "node scripts/test-packages.mjs"

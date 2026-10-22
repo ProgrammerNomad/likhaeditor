@@ -7,6 +7,28 @@ description: Release history and version updates for Likha Editor
 
 All notable changes to Likha Editor are documented here.
 
+## [0.0.3] - 2026-10-22
+
+### Added
+
+- Professional editing: find/replace, markdown import/export, autosave, version snapshots, comments, track changes plugin, syntax highlighting, typography controls
+- Image upload adapter, review panel hooks, dialogs replacing browser prompts
+- Plugins: embeds, mentions, slash-command hook, emoji insert, collab foundation, media-library callback
+- `@likhaeditor/likhaeditor-react` with `LikhaEditor` component and `useEditor` hook
+- Composer packages `likha/laravel` (Blade component) and `likha/livewire` (Livewire 3 component)
+- Documentation playground, self-hosting guide, release checklist, GitHub issue/PR templates
+
+### Changed
+
+- `onChange` runs synchronously when the document changes (including `setContent` and undo). Debounce persistence in your application if needed.
+- URL policy: HTTP(S), relative, mailto/tel links; HTTP(S)/blob images; data URLs rejected; embeds limited to supported HTTPS iframe hosts.
+
+### Fixed
+
+- Toolbar lifecycle, read-only controls, nested lists, table keyboard navigation, and distribution hardening from Milestone 1–2 validation.
+
+---
+
 ## [0.0.2] - 2025-12-19
 
 ### 🐛 Bug Fixes

@@ -1,28 +1,35 @@
 # React integration
 
-Use the vanilla adapter inside a client component. A dedicated React package is planned; it is not required for this integration. New development features require the local build until the next npm release.
+## Package (recommended)
+
+```bash
+pnpm add @likhaeditor/likhaeditor @likhaeditor/likhaeditor-react
+```
 
 ```tsx
 'use client';
-import { useEffect, useRef } from 'react';
-import { createEditor } from '@likhaeditor/likhaeditor';
-import '@likhaeditor/likhaeditor/dist/likha-editor.css';
+import { LikhaEditor } from '@likhaeditor/likhaeditor-react';
 
 export function RichTextEditor() {
-  const host = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (!host.current) return;
-    const instance = createEditor({
-      element: host.current,
-      content: '<p>Start writing</p>',
-      onChange: html => console.log(html),
-    });
-    return () => instance.destroy();
-  }, []);
-  return <div ref={host} />;
+  return (
+    <LikhaEditor
+      content="<p>Start writing</p>"
+      onChange={(html) => console.log(html)}
+      toolbarButtons={['heading', 'bold', 'italic', 'link', 'undo', 'redo']}
+    />
+  );
 }
 ```
 
-Keep the instance for programmatic updates. Avoid calling `setContent` on every render: it replaces the document and can disrupt selection. Destroy the instance when the component unmounts, including during React development remounts.
+Use `useEditor` when you need the underlying instance:
 
-See [configuration](/guide/configuration) and [persistence adapters](/guide/professional-editing).
+```tsx
+import { useEditor } from '@likhaeditor/likhaeditor-react';
+
+const { hostRef, instance, ready } = useEditor({ content: '<p></p>' });
+return <div ref={hostRef} />;
+```
+
+Destroy is handled automatically on unmount. Avoid calling `setContent` on every render.
+
+See [configuration](/guide/configuration) and [professional editing](/guide/professional-editing).

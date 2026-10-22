@@ -1,33 +1,32 @@
 # Release status
 
-LikhaEditor is **pre-1.0**. This documentation and playground describe the current repository build. The package manifests still identify version 0.0.2; new changes are unreleased until the maintainer publishes a new version.
+LikhaEditor is **pre-1.0**. Published npm packages target **0.0.3** after maintainer release validation. This site and playground describe the repository build.
 
-## Implemented in the development build
+## Implemented
 
 | Area | Available |
 | --- | --- |
-| Editing | Headings, inline formatting, nested lists, links, blockquotes, undo/redo |
-| Tables | Row/column insertion and removal, header toggles, selection, merge/split, deletion |
-| Productivity | Find-next, replace-all, character/word count, placeholders, read-only mode |
-| Content | HTML, schema-validated JSON, CommonMark subset import/export |
-| Review | Selected-text comments, resolve/reopen/delete, mapped anchors |
-| Persistence | Autosave callback, explicit version snapshots, local or custom version store |
-| Media | URL insertion and optional application-owned upload adapter; file picker, paste/drop |
-| Delivery | ESM, CommonJS, standalone UMD, CSS and TypeScript declarations |
-
-Comments are separate metadata. Removing their selected text leaves an orphaned comment; undo does not currently revive that anchor. Version snapshots contain document JSON, not comment metadata. Store both together in your application if you need complete review snapshots.
+| Editing | Headings, inline formatting, nested lists, links, blockquotes, undo/redo, typography (font family/size) |
+| Tables | Row/column operations, headers, selection, merge/split, deletion |
+| Productivity | Find/replace, character count, placeholders, read-only mode, slash-command hook, emoji insert |
+| Content | HTML, JSON, CommonMark subset, embed blocks (YouTube/Vimeo), mentions mark |
+| Review | Comments, track changes plugin (accept/reject via commands), optional collab transport hooks |
+| Persistence | Autosave, version snapshots, media-library callback (host-owned assets) |
+| Media | URL images, upload adapter, paste/drop |
+| Delivery | ESM, CommonJS, UMD, CSS, TypeScript declarations |
+| Adapters | `@likhaeditor/likhaeditor-react`, Composer packages `likha/laravel` and `likha/livewire` in-repo |
 
 ## Verification and limits
 
-The repository has unit tests and browser checks across Chromium, Firefox, and WebKit. Browser checks cover formatting, dialogs, tables, read-only mode, multiple instances, paste parsing, comments, upload integration, and narrow layouts. These checks are not a WCAG certification or a guarantee for every operating system, mobile device, clipboard format, or IME.
+Automated unit and Playwright checks run in CI on push. They are not WCAG certification, full IME/device coverage, or large-document performance guarantees. See [PRODUCTION-READINESS.md](https://github.com/ProgrammerNomad/likhaeditor/blob/main/PRODUCTION-READINESS.md) for release gates.
 
-## Still planned
+## Still planned for 1.0
 
-- Automatic tracked changes with per-change accept/reject.
-- Multi-user collaboration, presence, and a self-hosted authenticated server.
-- Image crop/rotate UI, media library, attachments, and embeds.
-- Syntax highlighting, mentions, slash commands, and localization.
-- Official framework-specific adapters; plain JavaScript integration is available now.
-- Full accessibility audit, real device/IME testing, and large-document performance budgets.
+See [ROADMAP.md](https://github.com/ProgrammerNomad/likhaeditor/blob/main/ROADMAP.md) for the full checklist. Highlights:
 
-[Self-host the current build](/guide/self-hosting). No npm publication is needed to develop or test this website.
+- [ ] Hosted collaboration server, presence, and authenticated multi-user editing
+- [ ] Rich media UI (crop/rotate, bundled library UI)
+- [ ] Localization, mention autocomplete UI, polished slash menu
+- [ ] Formal accessibility audit and community launch milestones (Phase 8)
+
+[Self-host the build](/guide/self-hosting) · [Release checklist](https://github.com/ProgrammerNomad/likhaeditor/blob/main/RELEASE_CHECKLIST.md)

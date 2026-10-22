@@ -1,0 +1,60 @@
+{
+  "name": "@likhaeditor/likhaeditor-react",
+  "version": "0.0.3",
+  "description": "React components and hooks for Likha editor",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build && tsc --emitDeclarationOnly && node ../../scripts/finalize-declarations.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "editor",
+    "react",
+    "rich-text",
+    "wysiwyg"
+  ],
+  "author": "Shiv Singh <shiv@srapsware.com> (https://github.com/ProgrammerNomad)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ProgrammerNomad/likhaeditor.git",
+    "directory": "packages/react"
+  },
+  "homepage": "https://github.com/ProgrammerNomad/likhaeditor#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "dependencies": {
+    "@likhaeditor/likhaeditor": "workspace:^"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@testing-library/react": "^16.3.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "typescript": "^5.9.3",
+    "vite": "^6.4.5",
+    "vitest": "^4.1.12",
+    "happy-dom": "^20.14.6"
+  }
+}

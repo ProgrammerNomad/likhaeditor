@@ -1,7 +1,8 @@
 # Production readiness
 
 LikhaEditor is a pre-1.0 editor. This file records verified milestones and release
-blockers; the broader ROADMAP.md is a wishlist, not a list of shipped features.
+blockers. Planned work is tracked in [ROADMAP.md](ROADMAP.md) with `[x]` / `[ ]`
+checklists; public summary lives in [docs/status.md](docs/status.md).
 
 ## Product commitments
 
@@ -58,34 +59,32 @@ fragments, mailto/tel links, and HTTP(S)/relative/blob images. Data URLs are rej
 - Removed speculative install commands for unshipped framework packages.
 - Packed all four packages and installed them in a clean npm consumer outside the workspace. ESM/CommonJS/CSS resolution, included licenses, and strict NodeNext declaration compilation pass. Fixed missing relative extensions in generated declarations.
 
-Verified locally: 305 unit tests across 25 files, 33 editor browser checks across
-three browser engines, and 4 website checks across desktop Chromium and mobile
-WebKit. Package builds, typechecking, lint, export/ESM/CommonJS/UMD smoke checks,
-documentation build, and dependency audit pass. Audit reports no known vulnerabilities.
-The website checks cover editing, export, read-only/reset controls, page loads,
-and horizontal overflow. CI includes both browser suites; remote results depend
-on the owner's next push.
+Verified locally (2026-10-22): 319 unit tests across 30 files, 45 editor browser
+checks across three browser engines, and 4 website checks across desktop Chromium
+and mobile WebKit. Five npm packages build and typecheck (`core`, `ui`, `plugins`,
+`html`, `react`). Lint, export/ESM/CommonJS/UMD smoke checks, packed consumer
+install, documentation build (dead links fixed), and dependency audit pass.
+npm publish requires a logged-in maintainer (`npm login`) and a clean git commit;
+attempting publish without scope credentials returns registry 404.
 
 Comments remain separate metadata; deleting a range orphans its anchor and undo
 does not revive it. Version snapshots contain only document JSON. Markdown is a
 supported subset and rejects unsupported nodes/marks. Uploads need the host app's
 authorization, server validation, and storage. The toolbar provides no crop/resize UI.
 
-No npm release is needed for the website: its playground bundles this checkout's
-editor. Publish updated packages only after remaining release validation; public
-CDN consumers cannot use unpublished changes. The owner performs GitHub pushes
-and npm publication. Current package versions still read 0.0.2.
+Package manifests target **0.0.3**. `@likhaeditor/likhaeditor-react`, `likha/laravel`,
+and `likha/livewire` ship from this repository. Track changes, collab transport hooks,
+mentions, slash-command hooks, embeds, and syntax highlighting are implemented as plugins;
+a hosted collaboration server and polished review UI remain application-owned.
 
 ## Remaining release work
 
-1. Verify bundled third-party license notices and measure large-document performance.
+1. Verify bundled third-party license notices and measure large-document performance on maintainer hardware.
 2. Test real IME composition, native clipboard formats, touch devices, screen
    readers, and keyboard-only workflows comprehensively. Automated browser tests
    do not establish WCAG compliance.
-3. Add tracked changes with acceptance/rejection and optional authenticated
-   self-hosted collaboration. Neither is implemented today.
-4. Add richer media controls, syntax highlighting, localization, mentions, slash
-   commands, and dedicated framework adapters as separately tested milestones.
+3. Optional authenticated multi-user collaboration server (transport is host-owned today).
+4. Open [ROADMAP.md](ROADMAP.md) Phase 6–8 items still marked `[ ]` (collab server, Filament package, WCAG audit, launch metrics).
 
 ## Self-hosted build
 

@@ -2,7 +2,7 @@ import { tableNodes } from 'prosemirror-tables';
 import { Schema } from 'prosemirror-model';
 import { schema as basicSchema } from 'prosemirror-schema-basic';
 import { addListNodes } from 'prosemirror-schema-list';
-import { isSafeURL } from './url';
+import { isSafeEmbedURL, isSafeURL } from './url';
 import { fontFamily, fontSize } from './typography';
 
 /**
@@ -161,6 +161,28 @@ export const likhaSchema: Schema = new Schema({
         if (node.attrs.height) attrs.height = node.attrs.height;
         return ['img', attrs];
       }
+    })
+    .addToEnd('embed', {
+      group: 'block',
+      atom: true,
+      attrs: {
+        src: { default: null },
+        provider: { default: 'video' },
+      },
+      parseDOM: [{
+        tag: 'iframe[src]',
+        getAttrs: (dom: HTMLElement) => {
+          const src = dom.getAttribute('src');
+          return isSafeEmbedURL(src) ? { src, provider: 'video' } : false;
+        },
+      }],
+      toDOM: (node) => ['iframe', {
+        src: isSafeEmbedURL(node.attrs.src) ? node.attrs.src : null,
+        allowfullscreen: 'true',
+        frameborder: '0',
+        loading: 'lazy',
+        style: 'width:100%;aspect-ratio:16/9;border:0;border-radius:4px',
+      }],
     }),
   marks: basicSchema.spec.marks
     .addToEnd('fontFamily', {
@@ -267,5 +289,23 @@ export const likhaSchema: Schema = new Schema({
       excludes: 'subscript',
       parseDOM: [{ tag: 'sup' }],
       toDOM: () => ['sup', 0]
+    })
+    .addToEnd('mention', {
+      attrs: {
+        id: {},
+        label: { default: '' },
+      },
+      inclusive: false,
+      parseDOM: [{
+        tag: 'span[data-mention-id]',
+        getAttrs: (dom: HTMLElement) => ({
+          id: dom.getAttribute('data-mention-id'),
+          label: dom.textContent ?? '',
+        }),
+      }],
+      toDOM: (node) => ['span', {
+        'data-mention-id': node.attrs.id,
+        class: 'likha-mention',
+      }, `@${node.attrs.label || node.attrs.id}`],
     }),
 });

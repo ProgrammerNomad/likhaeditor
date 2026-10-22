@@ -1,9 +1,18 @@
 # Livewire integration
 
-A dedicated Livewire adapter is planned. The current supported building block is the vanilla `createEditor` API; there is no shipped `wire:model` editor component.
+Requires `likha/laravel` assets to be published.
 
-For a manual integration, give Livewire a `wire:ignore` editor container, initialize the editor after that container mounts, and forward `onChange(html)` to your component's state using the API supported by your Livewire version. Debounce network persistence outside the editor. Call `destroy()` before the container is removed or navigation replaces it.
+```bash
+composer require likha/laravel likha/livewire
+php artisan vendor:publish --tag=likha-assets
+```
 
-Do not let DOM reconciliation replace ProseMirror's editable children while an instance is mounted. External document loads should use `instance.setContent(html)` explicitly, with a guard against echoing the same update back to the server.
+Register the component in a Livewire 3 app (auto-discovered via the package service provider):
 
-See the [Blade form example](/guide/laravel), [configuration](/guide/configuration), and [autosave callback](/guide/professional-editing). A version-specific Livewire lifecycle example remains to be validated before a dedicated adapter release.
+```blade
+<livewire:likha-editor wire:model="post.content" placeholder="Write your post..." />
+```
+
+The editor mounts inside `wire:ignore` and pushes HTML back through `Livewire.find(id).set('content', html)`.
+
+See [Laravel integration](/guide/laravel) and [configuration](/guide/configuration).
