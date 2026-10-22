@@ -4,11 +4,11 @@ Don't see your framework listed? LikhaEditor is designed to work with any JavaSc
 
 ## Supported Frameworks
 
-- [x] **Vanilla JavaScript** — npm package and CDN UMD bundle
-- [x] **React** — `@likhaeditor/likhaeditor-react`
-- [x] **Laravel Blade** — `likha/laravel` Composer package
-- [x] **Livewire** — `likha/livewire` Composer package
-- [ ] **Filament** — custom field pattern documented; no packaged field yet
+- [x] **Vanilla JavaScript** - npm package and CDN UMD bundle
+- [x] **React** - `@likhaeditor/likhaeditor-react`
+- [x] **Laravel Blade** - `likha/laravel` Composer package
+- [x] **Livewire** - `likha/livewire` Composer package
+- [ ] **Filament** - custom field pattern documented; no packaged field yet
 
 ## Need Another Framework?
 
