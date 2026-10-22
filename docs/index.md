@@ -61,13 +61,13 @@ LikhaEditor is a **modern, framework-agnostic rich text editor** built on ProseM
 
 ### Key Features
 
-- **Framework-Agnostic Core** - Vanilla API; dedicated framework adapters remain planned
+- **Framework-Agnostic Core** - Vanilla npm package plus React, Laravel, and Livewire adapters (0.0.3)
 - **Self-hosted delivery** - Standalone browser bundle and CSS for your server or CDN
 - **Plugin-Based Architecture** - Only load what you need
 - **Self-Hosted** - No cloud dependencies or telemetry
 - **Keyboard controls** - Tested dialogs, dropdowns, and table navigation; accessibility audit planned
 - **MIT Licensed** - Free for commercial use
-- **Professional editing** - Table operations, find/replace, comments, JSON/Markdown, autosave and upload callbacks in the development build
+- **Professional editing** - Table operations, find/replace, comments, JSON/Markdown, autosave and upload callbacks in **0.0.3**
 
 ## Quick Links
 
@@ -87,7 +87,7 @@ LikhaEditor is a **modern, framework-agnostic rich text editor** built on ProseM
 
 ### NPM Packages
 
-The four editor packages use the `@likhaeditor` npm scope. Planned adapters are listed separately below. npm badges show published versions; they do not include unreleased development changes.
+Five packages use the `@likhaeditor` npm scope at **0.0.3**. Composer adapters (`likha/laravel`, `likha/livewire`) ship from this repository. npm badges reflect the latest published version on the registry.
 
 | Package | npm | Description | Status |
 |---------|-----|-------------|--------|

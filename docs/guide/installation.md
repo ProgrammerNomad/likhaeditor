@@ -47,8 +47,18 @@ Then initialize the editor:
 </script>
 ```
 
-## Current source and framework integration
+## Framework integration (0.0.3)
 
-The website demo uses a local build; newly added features may not yet be in npm. See [self-hosting](/guide/self-hosting) to build the current source.
+Install the main wrapper from npm:
 
-Official framework-specific packages remain planned. Use the vanilla adapter inside your framework lifecycle today. See [React](/guide/react), [Laravel](/guide/laravel), and [Livewire](/guide/livewire).
+```bash
+npm install @likhaeditor/likhaeditor@0.0.3
+```
+
+Framework-specific packages are available:
+
+- [React](/guide/react) — `@likhaeditor/likhaeditor-react`
+- [Laravel](/guide/laravel) — `likha/laravel` (Composer)
+- [Livewire](/guide/livewire) — `likha/livewire` (Composer)
+
+The [playground](/playground) and this site can use the repository build for previews. See [self-hosting](/guide/self-hosting) to run from source.

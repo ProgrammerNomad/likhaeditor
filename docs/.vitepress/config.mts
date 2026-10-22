@@ -84,7 +84,7 @@ export default defineConfig({
 
     footer: {
       message: 'Released under the MIT License.',
-      copyright: 'Copyright © 2025 <a href=\"https://github.com/ProgrammerNomad\">ProgrammerNomad</a>'
+      copyright: 'Copyright © 2026 <a href=\"https://github.com/ProgrammerNomad\">ProgrammerNomad</a>'
     },
 
     search: {

@@ -1,6 +1,6 @@
 # Configuration
 
-This page describes the current development build. See [release status](/status) for published-package limitations.
+This page describes `@likhaeditor/likhaeditor` **0.0.3** on npm. See [release status](/status) for pre-1.0 limits and roadmap items.
 
 ```js
 const instance = createEditor({

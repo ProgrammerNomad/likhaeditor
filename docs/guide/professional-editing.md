@@ -1,6 +1,6 @@
 # Professional editing
 
-These APIs describe the current development build. Check [release status](/status) before using a published npm version.
+These APIs are available in `@likhaeditor/likhaeditor` **0.0.3** on npm. See [release status](/status) for known limits (comments metadata, markdown subset, host-owned uploads).
 
 ## Tables and search
 

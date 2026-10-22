@@ -1,8 +1,8 @@
 # Release status
 
-LikhaEditor is **pre-1.0**. On npm, `@likhaeditor/core`, `ui`, `plugins`, and `likhaeditor` are published at **0.0.3**. `@likhaeditor/likhaeditor-react` is in the monorepo; if it is not yet on npm, use the [React guide](/guide/react) with `@likhaeditor/likhaeditor` or republish per [RELEASE_CHECKLIST](https://github.com/ProgrammerNomad/likhaeditor/blob/main/RELEASE_CHECKLIST.md). This site and playground describe the repository build.
+LikhaEditor is **pre-1.0**. All five `@likhaeditor/*` npm packages are published at **0.0.3**, including `@likhaeditor/likhaeditor-react`. This site and playground describe the repository build.
 
-After publishing, wait a few minutes before `npm view @scope/pkg@0.0.3` - an immediate 404 is often registry propagation delay, not a failed upload.
+Right after publish, `npm view @scope/pkg@0.0.3` can 404 for a few minutes while the registry index updates.
 
 ## Implemented
 

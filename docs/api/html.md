@@ -2,11 +2,10 @@
 
 The `@likhaeditor/likhaeditor` package provides a simple wrapper for using Likha in vanilla HTML/JavaScript projects.
 
-The development build also supports `editable`, `autosave`, `imageUpload`,
+`@likhaeditor/likhaeditor` **0.0.3+** supports `editable`, `autosave`, `imageUpload`,
 `comments`, and `versions` options. See [configuration](/guide/configuration)
 and [professional editing](/guide/professional-editing) for their complete
 contracts and JSON/Markdown, upload, autosave, comments, and version methods.
-These additions require the local build until the next npm release.
 
 ## createEditor()
 
