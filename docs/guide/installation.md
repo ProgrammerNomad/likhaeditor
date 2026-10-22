@@ -47,36 +47,8 @@ Then initialize the editor:
 </script>
 ```
 
-## Framework Packages
+## Current source and framework integration
 
-### React
+The website demo uses a local build; newly added features may not yet be in npm. See [self-hosting](/guide/self-hosting) to build the current source.
 
-```bash
-npm install @likhaeditor/react
-```
-
-```jsx
-import { LikhaEditor } from '@likhaeditor/react';
-
-function MyComponent() {
-  return <LikhaEditor content="<p>Hello World</p>" />;
-}
-```
-
-### Laravel (Coming Soon)
-
-```bash
-composer require likhaeditor/laravel
-```
-
-### Livewire (Coming Soon)
-
-```bash
-composer require likhaeditor/livewire
-```
-
-## Next Steps
-
-- [Getting Started Guide](/guide/getting-started)
-- [Configuration Options](/guide/configuration)
-- [Basic Examples](/examples/basic)
+Official framework-specific packages remain planned. Use the vanilla adapter inside your framework lifecycle today. See [React](/guide/react), [Laravel](/guide/laravel), and [Livewire](/guide/livewire).

@@ -150,4 +150,4 @@ No IE11 support (uses modern ES6+ features).
 
 - [Getting Started Guide](./getting-started.md)
 - [API Reference](./api/README.md)
-- [Configuration Options](./configuration.md)
+- [Configuration Options](/guide/configuration)

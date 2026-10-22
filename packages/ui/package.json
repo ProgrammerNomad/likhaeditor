@@ -18,7 +18,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "vite build && tsc --emitDeclarationOnly && node -e \"require('fs').copyFileSync('src/editor.css', 'dist/style.css')\"",
+    "build": "vite build && tsc --emitDeclarationOnly && node ../../scripts/finalize-declarations.mjs && node -e \"require('fs').copyFileSync('src/editor.css', 'dist/style.css')\"",
     "dev": "vite build --watch",
     "test": "vitest run",
     "test:watch": "vitest",

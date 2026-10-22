@@ -1,6 +1,5 @@
 import { Plugin } from '@likhaeditor/core';
 import type { Editor } from '@likhaeditor/core';
-import { setBlockType } from 'prosemirror-commands';
 
 /**
  * Clear Formatting Plugin
@@ -22,13 +21,8 @@ export class ClearFormattingPlugin extends Plugin {
         tr.removeMark(from, to);
         
         // Reset to paragraph if it's a special block type
-        const $from = tr.selection.$from;
-        const blockType = $from.parent.type;
-        
-        if (blockType !== schema.nodes.paragraph && blockType !== schema.nodes.doc) {
-          setBlockType(schema.nodes.paragraph)(state, dispatch);
-          return true;
-        }
+        if (schema.nodes.paragraph) tr.setBlockType(from, to, schema.nodes.paragraph);
+        tr.setStoredMarks([]);
         
         if (dispatch) {
           dispatch(tr);
@@ -41,7 +35,7 @@ export class ClearFormattingPlugin extends Plugin {
   keymap() {
     return {
       'Mod-\\': (editor: Editor) => {
-        return editor.executeCommand('clearFormat');
+        return editor.executeCommand('clearFormat') === true;
       }
     };
   }

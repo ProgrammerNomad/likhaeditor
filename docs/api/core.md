@@ -56,12 +56,12 @@ Sets the editor content.
 editor.setContent('<p>New content</p>');
 ```
 
-#### `executeCommand(name: string, ...args: any[]): any`
+#### `executeCommand(name: string, ...args: unknown[]): unknown`
 
 Executes a registered command.
 
 ```typescript
-editor.executeCommand('bold');
+editor.bold(); // Built-in formatting method
 editor.executeCommand('toggleHeading', 2);
 editor.executeCommand('setLink', 'https://example.com');
 ```

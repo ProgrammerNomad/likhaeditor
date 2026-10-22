@@ -1,3 +1,4 @@
+import type { Editor } from '@likhaeditor/core';
 import { Plugin } from '@likhaeditor/core';
 import { setBlockType } from 'prosemirror-commands';
 
@@ -10,7 +11,7 @@ export class HeadingPlugin extends Plugin {
 
   commands() {
     return {
-      setHeading: (editor: any, level: 1 | 2 | 3 | 4 | 5 | 6) => {
+      setHeading: (editor: Editor, level: 1 | 2 | 3 | 4 | 5 | 6) => {
         const { state, dispatch } = editor.view;
         const headingType = state.schema.nodes.heading;
         
@@ -22,7 +23,7 @@ export class HeadingPlugin extends Plugin {
         return setBlockType(headingType, { level })(state, dispatch);
       },
 
-      setParagraph: (editor: any) => {
+      setParagraph: (editor: Editor) => {
         const { state, dispatch } = editor.view;
         const paragraphType = state.schema.nodes.paragraph;
         
@@ -34,7 +35,7 @@ export class HeadingPlugin extends Plugin {
         return setBlockType(paragraphType)(state, dispatch);
       },
 
-      toggleHeading: (editor: any, level: 1 | 2 | 3 | 4 | 5 | 6) => {
+      toggleHeading: (editor: Editor, level: 1 | 2 | 3 | 4 | 5 | 6) => {
         const { state } = editor.view;
         const { $from } = state.selection;
         const node = $from.node($from.depth);
@@ -48,7 +49,7 @@ export class HeadingPlugin extends Plugin {
         return this.commands().setHeading(editor, level);
       },
 
-      isHeadingActive: (editor: any, level: 1 | 2 | 3 | 4 | 5 | 6): boolean => {
+      isHeadingActive: (editor: Editor, level: 1 | 2 | 3 | 4 | 5 | 6): boolean => {
         const { state } = editor.view;
         const { $from } = state.selection;
         const node = $from.node($from.depth);
@@ -60,12 +61,12 @@ export class HeadingPlugin extends Plugin {
 
   keymap() {
     return {
-      'Ctrl-Alt-1': (editor: any) => this.commands().toggleHeading(editor, 1),
-      'Ctrl-Alt-2': (editor: any) => this.commands().toggleHeading(editor, 2),
-      'Ctrl-Alt-3': (editor: any) => this.commands().toggleHeading(editor, 3),
-      'Ctrl-Alt-4': (editor: any) => this.commands().toggleHeading(editor, 4),
-      'Ctrl-Alt-5': (editor: any) => this.commands().toggleHeading(editor, 5),
-      'Ctrl-Alt-6': (editor: any) => this.commands().toggleHeading(editor, 6),
+      'Ctrl-Alt-1': (editor: Editor) => this.commands().toggleHeading(editor, 1),
+      'Ctrl-Alt-2': (editor: Editor) => this.commands().toggleHeading(editor, 2),
+      'Ctrl-Alt-3': (editor: Editor) => this.commands().toggleHeading(editor, 3),
+      'Ctrl-Alt-4': (editor: Editor) => this.commands().toggleHeading(editor, 4),
+      'Ctrl-Alt-5': (editor: Editor) => this.commands().toggleHeading(editor, 5),
+      'Ctrl-Alt-6': (editor: Editor) => this.commands().toggleHeading(editor, 6),
     };
   }
 }

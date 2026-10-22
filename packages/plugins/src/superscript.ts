@@ -31,7 +31,7 @@ export class SuperscriptPlugin extends Plugin {
   keymap() {
     return {
       'Mod-.': (editor: Editor) => {
-        return editor.executeCommand('toggleSuperscript');
+        return editor.executeCommand('toggleSuperscript') === true;
       }
     };
   }

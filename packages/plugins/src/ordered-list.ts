@@ -1,3 +1,4 @@
+import type { Editor } from '@likhaeditor/core';
 import { Plugin } from '@likhaeditor/core';
 import { wrapInList, liftListItem } from 'prosemirror-schema-list';
 
@@ -10,7 +11,7 @@ export class OrderedListPlugin extends Plugin {
 
   commands() {
     return {
-      toggleOrderedList: (editor: any) => {
+      toggleOrderedList: (editor: Editor) => {
         const { state, dispatch } = editor.view;
         const listType = state.schema.nodes.ordered_list;
         const itemType = state.schema.nodes.list_item;
@@ -43,7 +44,7 @@ export class OrderedListPlugin extends Plugin {
         }
       },
 
-      isOrderedListActive: (editor: any): boolean => {
+      isOrderedListActive: (editor: Editor): boolean => {
         const { state } = editor.view;
         const { $from } = state.selection;
         const listType = state.schema.nodes.ordered_list;
@@ -66,13 +67,13 @@ export class OrderedListPlugin extends Plugin {
 
   keymap() {
     return {
-      'Mod-]': (editor: any) => {
+      'Mod-]': (editor: Editor) => {
         const { state, dispatch } = editor.view;
         const itemType = state.schema.nodes.list_item;
         if (!itemType) return false;
         return liftListItem(itemType)(state, dispatch);
       },
-      'Ctrl-Shift-9': (editor: any) => this.commands().toggleOrderedList(editor),
+      'Ctrl-Shift-9': (editor: Editor) => this.commands().toggleOrderedList(editor),
     };
   }
 }

@@ -1,3 +1,4 @@
+import type { Editor } from '@likhaeditor/core';
 import { Plugin } from '@likhaeditor/core';
 import { wrapIn, lift } from 'prosemirror-commands';
 
@@ -10,7 +11,7 @@ export class BlockquotePlugin extends Plugin {
 
   commands() {
     return {
-      toggleBlockquote: (editor: any) => {
+      toggleBlockquote: (editor: Editor) => {
         const { state, dispatch } = editor.view;
         const blockquoteType = state.schema.nodes.blockquote;
         
@@ -35,7 +36,7 @@ export class BlockquotePlugin extends Plugin {
         return wrapIn(blockquoteType)(state, dispatch);
       },
 
-      isBlockquoteActive: (editor: any): boolean => {
+      isBlockquoteActive: (editor: Editor): boolean => {
         const { state } = editor.view;
         const { $from } = state.selection;
         const blockquoteType = state.schema.nodes.blockquote;
@@ -56,8 +57,8 @@ export class BlockquotePlugin extends Plugin {
 
   keymap() {
     return {
-      'Ctrl->': (editor: any) => this.commands().toggleBlockquote(editor),
-      'Ctrl-Shift-b': (editor: any) => this.commands().toggleBlockquote(editor),
+      'Ctrl->': (editor: Editor) => this.commands().toggleBlockquote(editor),
+      'Ctrl-Shift-b': (editor: Editor) => this.commands().toggleBlockquote(editor),
     };
   }
 }

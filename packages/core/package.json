@@ -17,7 +17,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "vite build && tsc --emitDeclarationOnly",
+    "build": "vite build && tsc --emitDeclarationOnly && node ../../scripts/finalize-declarations.mjs",
     "dev": "vite build --watch",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -49,6 +49,7 @@
     "prosemirror-schema-basic": "^1.2.5",
     "prosemirror-schema-list": "^1.5.1",
     "prosemirror-state": "^1.4.4",
+    "prosemirror-tables": "^1.8.5",
     "prosemirror-transform": "^1.12.2",
     "prosemirror-view": "^1.42.3"
   },

@@ -1,3 +1,4 @@
+import type { Editor } from '@likhaeditor/core';
 import { Plugin } from '@likhaeditor/core';
 import { Plugin as ProseMirrorPlugin } from 'prosemirror-state';
 import { keymap } from 'prosemirror-keymap';
@@ -11,7 +12,7 @@ export class TextAlignmentPlugin extends Plugin {
 
   commands() {
     return {
-      setTextAlign: (editor: any, alignment: 'left' | 'center' | 'right' | 'justify'): boolean => {
+      setTextAlign: (editor: Editor, alignment: 'left' | 'center' | 'right' | 'justify'): boolean => {
         const { state, dispatch } = editor.view;
         const { from, to } = state.selection;
 
@@ -19,7 +20,7 @@ export class TextAlignmentPlugin extends Plugin {
 
         const tr = state.tr;
         
-        state.doc.nodesBetween(from, to, (node: any, pos: number) => {
+        state.doc.nodesBetween(from, to, (node, pos: number) => {
           if (node.isBlock && node.type.name !== 'doc' && node.type.name !== 'list_item') {
             // Preserve all existing attributes and only update textAlign
             const attrs = { ...node.attrs, textAlign: alignment };
@@ -31,23 +32,23 @@ export class TextAlignmentPlugin extends Plugin {
         return true;
       },
 
-      setAlignLeft: (editor: any): boolean => {
+      setAlignLeft: (editor: Editor): boolean => {
         return this.commands().setTextAlign(editor, 'left');
       },
 
-      setAlignCenter: (editor: any): boolean => {
+      setAlignCenter: (editor: Editor): boolean => {
         return this.commands().setTextAlign(editor, 'center');
       },
 
-      setAlignRight: (editor: any): boolean => {
+      setAlignRight: (editor: Editor): boolean => {
         return this.commands().setTextAlign(editor, 'right');
       },
 
-      setAlignJustify: (editor: any): boolean => {
+      setAlignJustify: (editor: Editor): boolean => {
         return this.commands().setTextAlign(editor, 'justify');
       },
 
-      getTextAlign: (editor: any): string | null => {
+      getTextAlign: (editor: Editor): string | null => {
         const { state } = editor.view;
         const { $from } = state.selection;
         
@@ -55,7 +56,7 @@ export class TextAlignmentPlugin extends Plugin {
         return node.attrs.textAlign || 'left';
       },
 
-      isAlignActive: (editor: any, alignment: 'left' | 'center' | 'right' | 'justify'): boolean => {
+      isAlignActive: (editor: Editor, alignment: 'left' | 'center' | 'right' | 'justify'): boolean => {
         const currentAlign = this.commands().getTextAlign(editor);
         return currentAlign === alignment;
       }
@@ -70,7 +71,7 @@ export class TextAlignmentPlugin extends Plugin {
           const tr = state.tr;
           const { from, to } = state.selection;
           
-          state.doc.nodesBetween(from, to, (node: any, pos: number) => {
+          state.doc.nodesBetween(from, to, (node, pos: number) => {
             if (node.isBlock && node.type.name !== 'doc' && node.type.name !== 'list_item') {
               const attrs = { ...node.attrs, textAlign: 'left' };
               tr.setNodeMarkup(pos, undefined, attrs);
@@ -85,7 +86,7 @@ export class TextAlignmentPlugin extends Plugin {
           const tr = state.tr;
           const { from, to } = state.selection;
           
-          state.doc.nodesBetween(from, to, (node: any, pos: number) => {
+          state.doc.nodesBetween(from, to, (node, pos: number) => {
             if (node.isBlock && node.type.name !== 'doc' && node.type.name !== 'list_item') {
               const attrs = { ...node.attrs, textAlign: 'center' };
               tr.setNodeMarkup(pos, undefined, attrs);
@@ -100,7 +101,7 @@ export class TextAlignmentPlugin extends Plugin {
           const tr = state.tr;
           const { from, to } = state.selection;
           
-          state.doc.nodesBetween(from, to, (node: any, pos: number) => {
+          state.doc.nodesBetween(from, to, (node, pos: number) => {
             if (node.isBlock && node.type.name !== 'doc' && node.type.name !== 'list_item') {
               const attrs = { ...node.attrs, textAlign: 'right' };
               tr.setNodeMarkup(pos, undefined, attrs);
@@ -115,7 +116,7 @@ export class TextAlignmentPlugin extends Plugin {
           const tr = state.tr;
           const { from, to } = state.selection;
           
-          state.doc.nodesBetween(from, to, (node: any, pos: number) => {
+          state.doc.nodesBetween(from, to, (node, pos: number) => {
             if (node.isBlock && node.type.name !== 'doc' && node.type.name !== 'list_item') {
               const attrs = { ...node.attrs, textAlign: 'justify' };
               tr.setNodeMarkup(pos, undefined, attrs);

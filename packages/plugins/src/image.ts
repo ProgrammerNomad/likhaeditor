@@ -1,3 +1,4 @@
+import { NodeSelection } from 'prosemirror-state';
 import { Plugin, isSafeURL } from '@likhaeditor/core';
 import type { Editor } from '@likhaeditor/core';
 import type { Node as ProseMirrorNode } from 'prosemirror-model';
@@ -11,7 +12,7 @@ export class ImagePlugin extends Plugin {
     const { schema, tr } = view.state;
     const imageNode = schema.nodes.image;
     if (!imageNode) return false;
-    const attrs: any = { src };
+    const attrs: Record<string, string> = { src };
     if (alt) attrs.alt = alt;
     if (title) attrs.title = title;
     const node = imageNode.create(attrs);
@@ -20,15 +21,16 @@ export class ImagePlugin extends Plugin {
   }
 
   setImageSize(editor: Editor, width?: number, height?: number): boolean {
+    if ([width, height].some(value => value !== undefined && (!Number.isInteger(value) || value < 0 || value > 16384))) return false;
     const { view } = editor;
     const { selection, tr } = view.state;
     const { $from } = selection;
     let imagePos = -1;
     let imageNode: ProseMirrorNode | null = null;
 
-    if ('node' in selection && (selection as any).node?.type.name === 'image') {
+    if (selection instanceof NodeSelection && selection.node?.type.name === 'image') {
       imagePos = selection.from;
-      imageNode = (selection as any).node;
+      imageNode = selection.node;
     } else {
       const before = $from.nodeBefore;
       if (before?.type.name === 'image') {
@@ -41,15 +43,14 @@ export class ImagePlugin extends Plugin {
     const attrs = { ...imageNode.attrs };
     if (width !== undefined) attrs.width = width;
     if (height !== undefined) attrs.height = height;
-    const newNode = imageNode.type.create(attrs);
-    view.dispatch(tr.replaceWith(imagePos, imagePos + imageNode.nodeSize, newNode));
+    view.dispatch(tr.setNodeMarkup(imagePos, undefined, attrs));
     return true;
   }
 
   getImageSrc(editor: Editor): string | null {
     const { selection } = editor.view.state;
-    if ('node' in selection && (selection as any).node?.type.name === 'image') {
-      return (selection as any).node.attrs.src || null;
+    if (selection instanceof NodeSelection && selection.node?.type.name === 'image') {
+      return selection.node.attrs.src || null;
     }
     const before = selection.$from.nodeBefore;
     return (before?.type.name === 'image') ? before.attrs.src || null : null;
@@ -57,7 +58,7 @@ export class ImagePlugin extends Plugin {
 
   isImageSelected(editor: Editor): boolean {
     const { selection } = editor.view.state;
-    if ('node' in selection && (selection as any).node?.type.name === 'image') return true;
+    if (selection instanceof NodeSelection && selection.node?.type.name === 'image') return true;
     const before = selection.$from.nodeBefore;
     return before?.type.name === 'image';
   }
@@ -68,9 +69,9 @@ export class ImagePlugin extends Plugin {
     let imagePos = -1;
     let imageNode: ProseMirrorNode | null = null;
 
-    if ('node' in selection && (selection as any).node?.type.name === 'image') {
+    if (selection instanceof NodeSelection && selection.node?.type.name === 'image') {
       imagePos = selection.from;
-      imageNode = (selection as any).node;
+      imageNode = selection.node;
     } else {
       const before = selection.$from.nodeBefore;
       if (before?.type.name === 'image') {
@@ -81,8 +82,7 @@ export class ImagePlugin extends Plugin {
 
     if (!imageNode || imagePos === -1) return false;
     const attrs = { ...imageNode.attrs, alt };
-    const newNode = imageNode.type.create(attrs);
-    view.dispatch(tr.replaceWith(imagePos, imagePos + imageNode.nodeSize, newNode));
+    view.dispatch(tr.setNodeMarkup(imagePos, undefined, attrs));
     return true;
   }
 

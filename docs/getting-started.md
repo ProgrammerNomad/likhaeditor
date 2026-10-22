@@ -138,4 +138,4 @@ The default toolbar includes:
 - [Installation Guide](./installation.md) - Detailed installation for different frameworks
 - [API Reference](./api/README.md) - Complete API documentation
 - [Plugins](./plugins/README.md) - Available plugins and how to use them
-- [Customization](./customization.md) - Customize toolbar and behavior
+- [Customization](/guide/configuration) - Customize toolbar and behavior

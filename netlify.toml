@@ -3,20 +3,16 @@
   base = "."
   
   # Build command
-  command = "pnpm install && pnpm docs:build"
+  command = "pnpm install --frozen-lockfile && pnpm build && pnpm docs:build"
   
   # Output directory (VitePress builds to docs/.vitepress/dist)
   publish = "docs/.vitepress/dist"
 
 [build.environment]
   # Use Node.js 18 or higher
-  NODE_VERSION = "18"
+  NODE_VERSION = "24"
 
-# SPA fallback for client-side routing
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# VitePress generates real HTML pages and its own 404 page.
 
 # Headers for security and caching
 [[headers]]

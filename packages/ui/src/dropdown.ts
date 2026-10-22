@@ -38,12 +38,16 @@ export class Dropdown {
     this.button.type = 'button';
     this.button.className = 'likha-dropdown__button';
     this.button.textContent = options.placeholder || 'Select...';
+    this.button.setAttribute('aria-label', options.placeholder || 'Select style');
+    this.button.setAttribute('aria-haspopup', 'menu');
+    this.button.addEventListener('mousedown', event => event.preventDefault());
     this.button.addEventListener('click', () => this.toggle());
 
     // Create menu
     this.menu = document.createElement('div');
     this.menu.className = 'likha-dropdown__menu';
     this.menu.style.display = 'none';
+    this.menu.setAttribute('role', 'menu');
 
     // Add items to menu
     options.items.forEach(item => {
@@ -51,6 +55,8 @@ export class Dropdown {
       menuItem.type = 'button';
       menuItem.className = 'likha-dropdown__item';
       menuItem.dataset.value = item.value;
+      menuItem.setAttribute('role', 'menuitem');
+      menuItem.tabIndex = -1;
       
       if (item.disabled) {
         menuItem.disabled = true;
@@ -87,8 +93,19 @@ export class Dropdown {
     this.button.setAttribute('aria-expanded', 'false');
     this.element.addEventListener('keydown', event => {
       if (event.key === 'Escape') {
+        event.preventDefault();
         this.close();
         this.button.focus();
+      } else if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
+        event.preventDefault();
+        this.open();
+        const items = [...this.menu.querySelectorAll<HTMLButtonElement>('button:not(:disabled)')];
+        const index = items.indexOf(document.activeElement as HTMLButtonElement);
+        const next = event.key === 'Home' ? 0 : event.key === 'End' ? items.length - 1 :
+          (index + (event.key === 'ArrowUp' ? -1 : 1) + items.length) % items.length;
+        items[next]?.focus();
+      } else if (event.key === 'Tab') {
+        this.close();
       }
     });
   }

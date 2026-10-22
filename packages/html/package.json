@@ -38,7 +38,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "vite build && node -e \"require('fs').copyFileSync('src/likha-editor.css', 'dist/likha-editor.css')\" && tsc --emitDeclarationOnly",
+    "build": "vite build && node -e \"require('fs').copyFileSync('src/likha-editor.css', 'dist/likha-editor.css')\" && tsc --emitDeclarationOnly && node ../../scripts/finalize-declarations.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

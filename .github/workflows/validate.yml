@@ -23,6 +23,11 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
+      - run: pnpm lint
       - run: pnpm pre-publish
+      - run: pnpm test:packages
+      - run: pnpm exec playwright install --with-deps chromium firefox webkit
+      - run: pnpm test:browser
       - run: pnpm docs:build
+      - run: pnpm test:site
       - run: pnpm audit --audit-level=high

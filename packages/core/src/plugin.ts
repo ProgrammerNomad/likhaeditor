@@ -1,4 +1,4 @@
-import { Plugin as ProseMirrorPlugin } from 'prosemirror-state';
+import { Plugin as ProseMirrorPlugin, type Command } from 'prosemirror-state';
 import type { Editor } from './editor';
 
 export interface PluginConfig {
@@ -6,7 +6,7 @@ export interface PluginConfig {
 }
 
 export interface CommandFunction {
-  (editor: Editor, ...args: any[]): any;
+  (editor: Editor, ...args: never[]): unknown;
 }
 
 export interface Commands {
@@ -14,7 +14,7 @@ export interface Commands {
 }
 
 export interface KeyboardShortcuts {
-  [key: string]: CommandFunction;
+  [key: string]: (editor: Editor, ...args: Parameters<Command>) => boolean;
 }
 
 export abstract class Plugin {

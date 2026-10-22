@@ -1,0 +1,14 @@
+.playground { border: 1px solid var(--vp-c-divider); border-radius: 16px; overflow: hidden; margin: 24px 0; background: var(--vp-c-bg); }
+.playground-header { padding: 20px; border-bottom: 1px solid var(--vp-c-divider); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.playground-title { font-weight: 650; font-size: 16px; }
+.playground-subtitle { color: var(--vp-c-text-2); font-size: 13px; }
+.playground-controls { display: flex; flex-wrap: wrap; gap: 8px; }
+.playground-controls button { border: 1px solid var(--vp-c-divider); border-radius: 8px; padding: 6px 12px; font-size: 13px; background: var(--vp-c-bg-soft); }
+.playground-controls button:focus-visible { outline: 3px solid var(--vp-c-brand-1); }
+.playground-editor { background: white; color: #172033; }
+.playground-editor .ProseMirror { min-height: 320px; padding: 24px; }
+.playground-editor .ProseMirror h2 { border-top: 0; padding-top: 0; }
+.playground-editor .likha-toolbar { border-radius: 0; border-width: 0 0 1px; gap: 3px; }
+.playground-output { padding: 16px 20px; border-top: 1px solid var(--vp-c-divider); }
+.playground-output textarea { width: 100%; box-sizing: border-box; min-height: 140px; padding: 12px; border: 1px solid var(--vp-c-divider); border-radius: 8px; font: 12px/1.6 monospace; resize: vertical; }
+.playground-status { font-size: 13px; color: var(--vp-c-text-2); margin-bottom: 8px; }

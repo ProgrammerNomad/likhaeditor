@@ -1,3 +1,4 @@
+import type { Editor } from '@likhaeditor/core';
 import { Plugin } from '@likhaeditor/core';
 import { keymap } from 'prosemirror-keymap';
 import { setBlockType } from 'prosemirror-commands';
@@ -12,7 +13,7 @@ export class CodeBlockPlugin extends Plugin {
 
   commands() {
     return {
-      setCodeBlock: (editor: any, language?: string): boolean => {
+      setCodeBlock: (editor: Editor, language?: string): boolean => {
         const { state, dispatch } = editor.view;
         const codeBlockType = state.schema.nodes.code_block;
         
@@ -25,7 +26,7 @@ export class CodeBlockPlugin extends Plugin {
         return setBlockType(codeBlockType, attrs)(state, dispatch);
       },
 
-      toggleCodeBlock: (editor: any, language?: string): boolean => {
+      toggleCodeBlock: (editor: Editor, language?: string): boolean => {
         const isActive = this.commands().isCodeBlockActive(editor);
         
         if (isActive) {
@@ -38,7 +39,7 @@ export class CodeBlockPlugin extends Plugin {
         return this.commands().setCodeBlock(editor, language);
       },
 
-      isCodeBlockActive: (editor: any): boolean => {
+      isCodeBlockActive: (editor: Editor): boolean => {
         const { state } = editor.view;
         const codeBlockType = state.schema.nodes.code_block;
         
@@ -47,7 +48,7 @@ export class CodeBlockPlugin extends Plugin {
         const { $from, to } = state.selection;
         let isActive = false;
 
-        state.doc.nodesBetween($from.pos, to, (node: any) => {
+        state.doc.nodesBetween($from.pos, to, (node) => {
           if (node.type === codeBlockType) {
             isActive = true;
           }
@@ -56,7 +57,7 @@ export class CodeBlockPlugin extends Plugin {
         return isActive;
       },
 
-      getCodeBlockLanguage: (editor: any): string | null => {
+      getCodeBlockLanguage: (editor: Editor): string | null => {
         const { state } = editor.view;
         const codeBlockType = state.schema.nodes.code_block;
         

@@ -38,7 +38,10 @@ export class TableGrid {
     // Create cells
     for (let row = 0; row < this.maxRows; row++) {
       for (let col = 0; col < this.maxCols; col++) {
-        const cell = document.createElement('div');
+        const cell = document.createElement('button');
+        cell.type = 'button';
+        cell.setAttribute('aria-label', `${row + 1} rows by ${col + 1} columns`);
+        cell.tabIndex = row === 0 && col === 0 ? 0 : -1;
         cell.className = 'likha-table-grid__cell';
         cell.dataset.row = String(row);
         cell.dataset.col = String(col);
@@ -50,6 +53,15 @@ export class TableGrid {
         cell.addEventListener('click', () => {
           this.select(row + 1, col + 1);
         });
+        cell.addEventListener('focus', () => this.updateHover(row + 1, col + 1));
+        cell.addEventListener('keydown', event => {
+          const offsets: Record<string, number> = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: this.maxCols, ArrowUp: -this.maxCols };
+          if (!(event.key in offsets)) return;
+          event.preventDefault();
+          const index = Math.min(this.maxRows * this.maxCols - 1, Math.max(0, row * this.maxCols + col + offsets[event.key]));
+          const next = this.grid.children[index] as HTMLButtonElement;
+          cell.tabIndex = -1; next.tabIndex = 0; next.focus();
+        });
 
         this.grid.appendChild(cell);
       }
@@ -59,6 +71,7 @@ export class TableGrid {
     this.label = document.createElement('div');
     this.label.className = 'likha-table-grid__label';
     this.label.textContent = 'Insert Table';
+    this.label.setAttribute('aria-live', 'polite');
 
     // Assemble
     this.element.appendChild(this.grid);

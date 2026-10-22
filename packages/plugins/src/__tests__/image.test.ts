@@ -1,3 +1,4 @@
+import { TextSelection } from 'prosemirror-state';
 import { describe, it, expect, beforeEach } from 'vitest';
 import { Editor } from '@likhaeditor/core';
 import { ImagePlugin } from '../image';
@@ -40,11 +41,11 @@ describe('ImagePlugin', () => {
     it('should replace current selection when inserting image', () => {
       editor.setContent('<p>Hello world</p>');
       editor.view.dispatch(editor.view.state.tr.setSelection(
-        editor.view.state.selection.constructor.create(
+        TextSelection.create(
           editor.view.state.doc,
           0,
           editor.view.state.doc.content.size
-        ) as any
+        )
       ));
       plugin.insertImage(editor, 'https://example.com/test.png');
       const html = editor.getHTML();
@@ -54,6 +55,14 @@ describe('ImagePlugin', () => {
   });
 
   describe('setImageSize', () => {
+    it('rejects invalid dimensions', () => {
+      plugin.insertImage(editor, 'https://example.com/test.jpg');
+      const before = editor.getHTML();
+      for (const value of [-1, Number.NaN, Number.POSITIVE_INFINITY, 1.2, 16385]) {
+        expect(plugin.setImageSize(editor, value)).toBe(false);
+        expect(editor.getHTML()).toBe(before);
+      }
+    });
     beforeEach(() => {
       plugin.insertImage(editor, 'https://example.com/image.jpg');
     });
@@ -110,10 +119,10 @@ describe('ImagePlugin', () => {
       // Move cursor to after the image
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             2
-          ) as any
+          )
         )
       );
       const src = plugin.getImageSrc(editor);
@@ -138,10 +147,10 @@ describe('ImagePlugin', () => {
       editor.setContent('<p><img src="https://example.com/test.jpg">text</p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             2
-          ) as any
+          )
         )
       );
       const isSelected = plugin.isImageSelected(editor);

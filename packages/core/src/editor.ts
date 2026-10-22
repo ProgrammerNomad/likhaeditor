@@ -1,4 +1,4 @@
-import { EditorState, Plugin as ProseMirrorPlugin, TextSelection } from 'prosemirror-state';
+import { EditorState, Plugin as ProseMirrorPlugin, TextSelection, type Command } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { Schema, DOMParser, DOMSerializer } from 'prosemirror-model';
 import { likhaSchema } from './schema';
@@ -7,6 +7,7 @@ import { history, undo, redo } from 'prosemirror-history';
 import { baseKeymap, toggleMark } from 'prosemirror-commands';
 import { splitListItem, liftListItem, sinkListItem } from 'prosemirror-schema-list';
 import { Plugin, type PluginRegistry, type Commands } from './plugin';
+import { isSafeURL } from './url';
 
 export interface EditorOptions {
   element: HTMLElement;
@@ -20,8 +21,8 @@ export interface EditorOptions {
 export class Editor {
   public view: EditorView;
   private element: HTMLElement;
-  private plugins: PluginRegistry = {};
-  private customCommands: Commands = {};
+  private plugins: PluginRegistry = Object.create(null);
+  private customCommands: Commands = Object.create(null);
   private destroyed = false;
 
   constructor(options: EditorOptions) {
@@ -36,7 +37,7 @@ export class Editor {
 
     // Collect ProseMirror plugins and keymaps from custom plugins
     const proseMirrorPlugins: ProseMirrorPlugin[] = [];
-    const customKeymaps: { [key: string]: any } = {};
+    const customKeymaps: Record<string, Command> = {};
     
     Object.values(this.plugins).forEach((plugin) => {
       proseMirrorPlugins.push(...plugin.prosemirrorPlugins());
@@ -45,7 +46,7 @@ export class Editor {
       const bindings = plugin.keymap();
       if (bindings && Object.keys(bindings).length > 0) {
         Object.entries(bindings).forEach(([key, fn]) => {
-          customKeymaps[key] = (state: any, dispatch: any, view: any) => {
+          customKeymaps[key] = (state, dispatch, view) => {
             return fn(this, state, dispatch, view);
           };
         });
@@ -116,13 +117,15 @@ export class Editor {
     return this.plugins[name];
   }
 
-  public executeCommand(name: string, ...args: any[]): any {
+  public executeCommand(name: string, ...args: unknown[]): unknown {
     const command = this.customCommands[name];
     if (!command) {
       console.warn(`Command "${name}" not found`);
       return false;
     }
-    return command(this, ...args);
+    // The string-based API is a dynamic boundary; concrete plugin methods keep
+    // their typed argument lists for consumers that need compile-time checking.
+    return (command as (editor: Editor, ...args: unknown[]) => unknown)(this, ...args);
   }
 
   private parseContent(content: string, schema: Schema) {
@@ -142,6 +145,23 @@ export class Editor {
 
   public getText(): string {
     return this.view.state.doc.textBetween(0, this.view.state.doc.content.size, '\n');
+  }
+
+  public getJSON(): Record<string, unknown> {
+    return this.view.state.doc.toJSON();
+  }
+
+  /** Validate structured content before applying it as a single undoable change. */
+  public setJSON(content: unknown): void {
+    const doc = this.view.state.schema.nodeFromJSON(content);
+    doc.check();
+    if (doc.type !== this.view.state.schema.topNodeType) throw new Error('Expected a document node');
+    doc.descendants(node => {
+      if (node.type.name === 'image' && !isSafeURL(node.attrs.src, true)) throw new Error('Unsupported image URL');
+      if (node.marks.some(mark => mark.type.name === 'link' && !isSafeURL(mark.attrs.href))) throw new Error('Unsupported link URL');
+    });
+    const tr = this.view.state.tr.replaceWith(0, this.view.state.doc.content.size, doc.content);
+    this.view.dispatch(tr.setSelection(TextSelection.atStart(tr.doc)));
   }
 
   public setContent(content: string): void {
@@ -173,16 +193,19 @@ export class Editor {
   
   public bold(): boolean {
     const { state, dispatch } = this.view;
+    if (!state.schema.marks.strong) return false;
     return toggleMark(state.schema.marks.strong)(state, dispatch);
   }
 
   public italic(): boolean {
     const { state, dispatch } = this.view;
+    if (!state.schema.marks.em) return false;
     return toggleMark(state.schema.marks.em)(state, dispatch);
   }
 
   public code(): boolean {
     const { state, dispatch } = this.view;
+    if (!state.schema.marks.code) return false;
     return toggleMark(state.schema.marks.code)(state, dispatch);
   }
 

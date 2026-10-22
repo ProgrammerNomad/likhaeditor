@@ -1,31 +1,24 @@
 import { Plugin } from '@likhaeditor/core';
+import { Plugin as StatePlugin } from 'prosemirror-state';
+import { Decoration, DecorationSet } from 'prosemirror-view';
 
-/**
- * Placeholder plugin
- * Shows placeholder text when editor is empty
- */
+/** Per-editor placeholder, without interpolated CSS or global style side effects. */
 export class PlaceholderPlugin extends Plugin {
   name = 'placeholder';
   private text: string;
-
   constructor(config: { text?: string } = {}) {
     super(config);
-    this.text = config.text || 'Start typing...';
+    this.text = config.text ?? 'Start typing...';
   }
-
-  init(editor: any): void {
-    super.init(editor);
-    
-    // Add placeholder CSS
-    const style = document.createElement('style');
-    style.textContent = `
-      .ProseMirror p.is-empty:first-child::before {
-        content: "${this.text}";
-        color: #aaa;
-        pointer-events: none;
-        position: absolute;
-      }
-    `;
-    document.head.appendChild(style);
+  prosemirrorPlugins(): StatePlugin[] {
+    return [new StatePlugin({ props: {
+      decorations: state => {
+        const first = state.doc.firstChild;
+        if (state.doc.childCount !== 1 || !first?.isTextblock || first.content.size) return null;
+        return DecorationSet.create(state.doc, [Decoration.node(0, first.nodeSize, {
+          class: 'is-empty', 'data-placeholder': this.text,
+        })]);
+      },
+    } })];
   }
 }

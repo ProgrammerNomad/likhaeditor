@@ -19,3 +19,14 @@ export { SubscriptPlugin } from './subscript';
 export { SuperscriptPlugin } from './superscript';
 export { ClearFormattingPlugin } from './clear-formatting';
 
+export { FindReplacePlugin } from './find-replace';
+export type { SearchMatch } from './find-replace';
+export { MarkdownPlugin } from './markdown';
+export { ImageUploadPlugin } from './image-upload';
+export type { ImageUploadOptions } from './image-upload';
+export { CommentsPlugin } from './comments';
+export { TrackChangesPlugin } from './track-changes';
+export { SyntaxHighlightPlugin } from './syntax-highlight';
+export { TypographyPlugin } from './typography';
+export type { TrackChangesOptions, TrackedChange } from './track-changes';
+export type { EditorComment, CommentsOptions } from './comments';

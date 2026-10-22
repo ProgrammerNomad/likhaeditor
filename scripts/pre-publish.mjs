@@ -10,7 +10,7 @@ import { existsSync, readFileSync } from 'fs';
 import { join } from 'path';
 
 const PACKAGES = ['core', 'ui', 'plugins', 'html'];
-const REQUIRED_FILES = ['package.json', 'README.md', 'dist/index.js', 'dist/index.cjs', 'dist/index.d.ts'];
+const REQUIRED_FILES = ['package.json', 'README.md', 'dist/index.js', 'dist/index.cjs', 'dist/index.d.ts', 'dist/THIRD-PARTY-NOTICES.txt'];
 const REQUIRED_FIELDS = [
   'name',
   'version',
@@ -128,6 +128,13 @@ try {
   execSync('node scripts/smoke-dist.mjs', { stdio: 'inherit' });
 } catch {
   console.error('Distribution smoke checks failed');
+  hasErrors = true;
+}
+
+try {
+  execSync('pnpm lint', { stdio: 'inherit' });
+} catch {
+  console.error('Lint failed');
   hasErrors = true;
 }
 

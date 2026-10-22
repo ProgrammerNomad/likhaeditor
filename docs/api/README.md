@@ -237,5 +237,5 @@ See [Plugins Documentation](../plugins/README.md) for detailed usage.
 ## Next Steps
 
 - [Plugins Guide](../plugins/README.md)
-- [Customization](../customization.md)
-- [Examples](../examples.md)
+- [Customization](/guide/configuration)
+- [Examples](/examples/)

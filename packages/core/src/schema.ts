@@ -1,7 +1,9 @@
+import { tableNodes } from 'prosemirror-tables';
 import { Schema } from 'prosemirror-model';
 import { schema as basicSchema } from 'prosemirror-schema-basic';
 import { addListNodes } from 'prosemirror-schema-list';
 import { isSafeURL } from './url';
+import { fontFamily, fontSize } from './typography';
 
 /**
  * Extended schema with headings, lists, blockquote, HR, links, code blocks, and text alignment
@@ -14,7 +16,7 @@ export const likhaSchema: Schema = new Schema({
       group: 'block',
       parseDOM: [{
         tag: 'p',
-        getAttrs: (dom: any) => ({
+        getAttrs: (dom: HTMLElement) => ({
           textAlign: dom.style.textAlign || 'left'
         })
       }],
@@ -31,7 +33,7 @@ export const likhaSchema: Schema = new Schema({
       defining: true,
       parseDOM: [{
         tag: 'blockquote',
-        getAttrs: (dom: any) => ({
+        getAttrs: (dom: HTMLElement) => ({
           textAlign: dom.style.textAlign || 'left'
         })
       }],
@@ -53,7 +55,7 @@ export const likhaSchema: Schema = new Schema({
         { 
           tag: 'h1', 
           attrs: { level: 1 },
-          getAttrs: (dom: any) => ({
+          getAttrs: (dom: HTMLElement) => ({
             level: 1,
             textAlign: dom.style.textAlign || 'left'
           })
@@ -61,7 +63,7 @@ export const likhaSchema: Schema = new Schema({
         { 
           tag: 'h2', 
           attrs: { level: 2 },
-          getAttrs: (dom: any) => ({
+          getAttrs: (dom: HTMLElement) => ({
             level: 2,
             textAlign: dom.style.textAlign || 'left'
           })
@@ -69,7 +71,7 @@ export const likhaSchema: Schema = new Schema({
         { 
           tag: 'h3', 
           attrs: { level: 3 },
-          getAttrs: (dom: any) => ({
+          getAttrs: (dom: HTMLElement) => ({
             level: 3,
             textAlign: dom.style.textAlign || 'left'
           })
@@ -77,7 +79,7 @@ export const likhaSchema: Schema = new Schema({
         { 
           tag: 'h4', 
           attrs: { level: 4 },
-          getAttrs: (dom: any) => ({
+          getAttrs: (dom: HTMLElement) => ({
             level: 4,
             textAlign: dom.style.textAlign || 'left'
           })
@@ -85,7 +87,7 @@ export const likhaSchema: Schema = new Schema({
         { 
           tag: 'h5', 
           attrs: { level: 5 },
-          getAttrs: (dom: any) => ({
+          getAttrs: (dom: HTMLElement) => ({
             level: 5,
             textAlign: dom.style.textAlign || 'left'
           })
@@ -93,7 +95,7 @@ export const likhaSchema: Schema = new Schema({
         { 
           tag: 'h6', 
           attrs: { level: 6 },
-          getAttrs: (dom: any) => ({
+          getAttrs: (dom: HTMLElement) => ({
             level: 6,
             textAlign: dom.style.textAlign || 'left'
           })
@@ -115,7 +117,7 @@ export const likhaSchema: Schema = new Schema({
       parseDOM: [{
         tag: 'pre',
         preserveWhitespace: 'full' as const,
-        getAttrs: (dom: any) => {
+        getAttrs: (dom: HTMLElement) => {
           const code = dom.querySelector('code');
           const className = code?.getAttribute('class') || '';
           const match = /language-(\w+)/.exec(className);
@@ -129,56 +131,7 @@ export const likhaSchema: Schema = new Schema({
         return ['pre', ['code', { class: className }, 0]];
       }
     })
-    .addToEnd('table', {
-      content: 'table_row+',
-      tableRole: 'table',
-      isolating: true,
-      group: 'block',
-      parseDOM: [{ tag: 'table' }],
-      toDOM: () => ['table', ['tbody', 0]]
-    })
-    .addToEnd('table_row', {
-      content: 'table_cell+',
-      tableRole: 'row',
-      parseDOM: [{ tag: 'tr' }],
-      toDOM: () => ['tr', 0]
-    })
-    .addToEnd('table_cell', {
-      content: 'paragraph+',
-      tableRole: 'cell',
-      isolating: true,
-      attrs: {
-        colspan: { default: 1 },
-        rowspan: { default: 1 },
-        colwidth: { default: null }
-      },
-      parseDOM: [{
-        tag: 'td',
-        getAttrs: (dom: any) => ({
-          colspan: parseInt(dom.getAttribute('colspan') || '1', 10),
-          rowspan: parseInt(dom.getAttribute('rowspan') || '1', 10),
-          colwidth: dom.getAttribute('data-colwidth') ? 
-            dom.getAttribute('data-colwidth').split(',').map((s: string) => parseInt(s, 10)) : 
-            null
-        })
-      }, {
-        tag: 'th',
-        getAttrs: (dom: any) => ({
-          colspan: parseInt(dom.getAttribute('colspan') || '1', 10),
-          rowspan: parseInt(dom.getAttribute('rowspan') || '1', 10),
-          colwidth: dom.getAttribute('data-colwidth') ? 
-            dom.getAttribute('data-colwidth').split(',').map((s: string) => parseInt(s, 10)) : 
-            null
-        })
-      }],
-      toDOM: (node) => {
-        const attrs: any = {};
-        if (node.attrs.colspan !== 1) attrs.colspan = node.attrs.colspan;
-        if (node.attrs.rowspan !== 1) attrs.rowspan = node.attrs.rowspan;
-        if (node.attrs.colwidth) attrs['data-colwidth'] = node.attrs.colwidth.join(',');
-        return ['td', attrs, 0];
-      }
-    })
+    .append(tableNodes({ tableGroup: 'block', cellContent: 'block+', cellAttributes: {} }))
     .addToEnd('image', {
       inline: true,
       attrs: {
@@ -192,16 +145,16 @@ export const likhaSchema: Schema = new Schema({
       draggable: true,
       parseDOM: [{
         tag: 'img[src]',
-        getAttrs: (dom: any) => isSafeURL(dom.getAttribute('src'), true) ? ({
+        getAttrs: (dom: HTMLElement) => isSafeURL(dom.getAttribute('src'), true) ? ({
           src: dom.getAttribute('src'),
           alt: dom.getAttribute('alt'),
           title: dom.getAttribute('title'),
-          width: dom.getAttribute('width') ? parseInt(dom.getAttribute('width'), 10) : null,
-          height: dom.getAttribute('height') ? parseInt(dom.getAttribute('height'), 10) : null
+          width: dom.getAttribute('width') ? parseInt(dom.getAttribute('width')!, 10) : null,
+          height: dom.getAttribute('height') ? parseInt(dom.getAttribute('height')!, 10) : null
         }) : false
       }],
       toDOM: (node) => {
-        const attrs: any = { src: isSafeURL(node.attrs.src, true) ? node.attrs.src : null };
+        const attrs: Record<string, string | number | null> = { src: isSafeURL(node.attrs.src, true) ? node.attrs.src : null };
         if (node.attrs.alt) attrs.alt = node.attrs.alt;
         if (node.attrs.title) attrs.title = node.attrs.title;
         if (node.attrs.width) attrs.width = node.attrs.width;
@@ -210,6 +163,20 @@ export const likhaSchema: Schema = new Schema({
       }
     }),
   marks: basicSchema.spec.marks
+    .addToEnd('fontFamily', {
+      attrs: { family: { default: 'Arial', validate: value => { if (!fontFamily(value)) throw new Error('Unsupported font family'); } } },
+      parseDOM: [{ style: 'font-family', getAttrs: value => fontFamily(value) ? { family: fontFamily(value) } : false }],
+      toDOM: mark => ['span', { style: `font-family: ${fontFamily(mark.attrs.family) ?? 'Arial'}` }, 0],
+    })
+    .addToEnd('fontSize', {
+      attrs: { size: { default: 12, validate: value => { if (!fontSize(value)) throw new Error('Unsupported font size'); } } },
+      parseDOM: [{ style: 'font-size', getAttrs: value => {
+        const match = /^(\d+)(pt|px)$/.exec(String(value));
+        const size = match ? Math.round(Number(match[1]) * (match[2] === 'px' ? 0.75 : 1)) : null;
+        return fontSize(size) ? { size } : false;
+      } }],
+      toDOM: mark => ['span', { style: `font-size: ${fontSize(mark.attrs.size) ?? 12}pt` }, 0],
+    })
     .update('link', {
       attrs: {
         href: {},
@@ -218,7 +185,7 @@ export const likhaSchema: Schema = new Schema({
       inclusive: false,
       parseDOM: [{
         tag: 'a[href]',
-        getAttrs: (dom: any) => isSafeURL(dom.getAttribute('href')) ? ({
+        getAttrs: (dom: HTMLElement) => isSafeURL(dom.getAttribute('href')) ? ({
           href: dom.getAttribute('href'),
           title: dom.getAttribute('title')
         }) : false
@@ -274,7 +241,7 @@ export const likhaSchema: Schema = new Schema({
         { tag: 'u' },
         { 
           style: 'text-decoration',
-          getAttrs: (value: any) => value === 'underline' && null
+          getAttrs: (value: string) => value === 'underline' && null
         }
       ],
       toDOM: () => ['u', 0]
@@ -286,7 +253,7 @@ export const likhaSchema: Schema = new Schema({
         { tag: 'strike' },
         { 
           style: 'text-decoration',
-          getAttrs: (value: any) => value === 'line-through' && null
+          getAttrs: (value: string) => value === 'line-through' && null
         }
       ],
       toDOM: () => ['s', 0]

@@ -85,7 +85,7 @@ describe('Button', () => {
   });
 
   it('should check active state periodically when isActive provided', () => {
-    let isActive = false;
+    const isActive = false;
     const button = new Button({ 
       label: 'Test',
       isActive: () => isActive

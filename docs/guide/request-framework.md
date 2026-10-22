@@ -7,8 +7,8 @@ Don't see your framework listed? LikhaEditor is designed to work with any JavaSc
 Currently, we have official integrations planned for:
 
 - ✅ **Vanilla JavaScript** - Available now via CDN
-- 🚧 **React** - Coming in v0.1.0 (January 2026)
-- 🚧 **Laravel Blade** - Coming in v0.1.0 (January 2026)
+- 🚧 **React** - Coming in a future release
+- 🚧 **Laravel Blade** - Coming in a future release
 - 🚧 **Livewire** - Coming in v0.2.0 (February 2026)
 - 🚧 **Filament** - Coming in v0.3.0 (March 2026)
 

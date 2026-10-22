@@ -1,3 +1,4 @@
+import { TextSelection } from 'prosemirror-state';
 import { describe, it, expect, beforeEach } from 'vitest';
 import { Editor } from '@likhaeditor/core';
 import { TextColorPlugin } from '../text-color';
@@ -20,11 +21,11 @@ describe('TextColorPlugin', () => {
       editor.setContent('<p>Hello world</p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             1,
             6
-          ) as any
+          )
         )
       );
       plugin.setTextColor(editor, 'red');
@@ -37,11 +38,11 @@ describe('TextColorPlugin', () => {
       editor.setContent('<p>Colorful text</p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             1,
             10
-          ) as any
+          )
         )
       );
       plugin.setTextColor(editor, '#ff5733');
@@ -53,11 +54,11 @@ describe('TextColorPlugin', () => {
       editor.setContent('<p>RGB colored text</p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             1,
             4
-          ) as any
+          )
         )
       );
       plugin.setTextColor(editor, 'rgb(255, 0, 0)');
@@ -75,11 +76,11 @@ describe('TextColorPlugin', () => {
       editor.setContent('<p>First word and second word</p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             1,
             11
-          ) as any
+          )
         )
       );
       plugin.setTextColor(editor, 'green');
@@ -94,11 +95,11 @@ describe('TextColorPlugin', () => {
       editor.setContent('<p><span style="color: red">Red text</span></p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             1,
             9
-          ) as any
+          )
         )
       );
       plugin.removeTextColor(editor);
@@ -111,11 +112,11 @@ describe('TextColorPlugin', () => {
       editor.setContent('<p><span style="color: blue">Blue text here</span></p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             1,
             5
-          ) as any
+          )
         )
       );
       plugin.removeTextColor(editor);
@@ -128,11 +129,11 @@ describe('TextColorPlugin', () => {
       editor.setContent('<p>Plain text</p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             1,
             6
-          ) as any
+          )
         )
       );
       const result = plugin.removeTextColor(editor);
@@ -145,10 +146,10 @@ describe('TextColorPlugin', () => {
       editor.setContent('<p><span style="color: purple">Purple</span> text</p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             3
-          ) as any
+          )
         )
       );
       const color = plugin.getTextColor(editor);
@@ -159,10 +160,10 @@ describe('TextColorPlugin', () => {
       editor.setContent('<p>No color</p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             3
-          ) as any
+          )
         )
       );
       const color = plugin.getTextColor(editor);
@@ -173,10 +174,10 @@ describe('TextColorPlugin', () => {
       editor.setContent('<p><span style="color: #123456">Hex</span></p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             2
-          ) as any
+          )
         )
       );
       const color = plugin.getTextColor(editor);
@@ -189,10 +190,10 @@ describe('TextColorPlugin', () => {
       editor.setContent('<p><span style="color: orange">Orange</span></p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             3
-          ) as any
+          )
         )
       );
       const isActive = plugin.isTextColorActive(editor);
@@ -203,10 +204,10 @@ describe('TextColorPlugin', () => {
       editor.setContent('<p>Plain</p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             2
-          ) as any
+          )
         )
       );
       const isActive = plugin.isTextColorActive(editor);
@@ -217,10 +218,10 @@ describe('TextColorPlugin', () => {
       editor.setContent('<p><span style="color: cyan">Cyan</span></p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             2
-          ) as any
+          )
         )
       );
       expect(plugin.isTextColorActive(editor, 'cyan')).toBe(true);
@@ -231,10 +232,10 @@ describe('TextColorPlugin', () => {
       editor.setContent('<p><span style="color: yellow">Yellow</span></p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             2
-          ) as any
+          )
         )
       );
       expect(plugin.isTextColorActive(editor)).toBe(true);
@@ -248,11 +249,11 @@ describe('TextColorPlugin', () => {
         editor.setContent('<p>Text</p>');
         editor.view.dispatch(
           editor.view.state.tr.setSelection(
-            editor.view.state.selection.constructor.create(
+            TextSelection.create(
               editor.view.state.doc,
               1,
               5
-            ) as any
+            )
           )
         );
         plugin.setTextColor(editor, color);
@@ -265,11 +266,11 @@ describe('TextColorPlugin', () => {
       editor.setContent('<p>Transparent</p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             1,
             12
-          ) as any
+          )
         )
       );
       plugin.setTextColor(editor, 'rgba(255, 0, 0, 0.5)');
@@ -289,11 +290,11 @@ describe('TextColorPlugin', () => {
       editor.setContent('<p><strong><em>Bold italic</em></strong></p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             1,
             12
-          ) as any
+          )
         )
       );
       plugin.setTextColor(editor, 'teal');

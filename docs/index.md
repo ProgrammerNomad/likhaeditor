@@ -4,7 +4,7 @@ layout: home
 hero:
   name: 'LikhaEditor'
   text: 'Modern Rich Text Editor'
-  tagline: 'Framework-agnostic, self-hosted, built on ProseMirror. Works everywhere - from vanilla HTML to React, Laravel & Livewire.'
+  tagline: 'Free, framework-agnostic, and built on ProseMirror. Self-host the editor or serve it from a CDN.'
   image:
     src: /logo.svg
     alt: LikhaEditor
@@ -20,11 +20,11 @@ features:
   - icon:
       src: /icons/code.svg
     title: Framework-Agnostic Core
-    details: Works with vanilla JS, React, Laravel, Livewire - integrate anywhere
+    details: Vanilla JavaScript API for your frontend or backend framework
   - icon:
       src: /icons/tag.svg
     title: Lightweight
-    details: Core bundle under 100KB gzipped, only load what you need
+    details: Standalone browser bundle and CSS, with no required cloud services
   - icon:
       src: /icons/grid.svg
     title: Plugin-Based Architecture
@@ -36,11 +36,11 @@ features:
   - icon:
       src: /icons/info.svg
     title: Accessible
-    details: WCAG 2.1 AA compliant with keyboard navigation
+    details: Keyboard navigation and accessible controls; full accessibility audit planned
   - icon:
       src: /icons/file.svg
     title: MIT Licensed
-    details: Free for commercial use, no restrictions
+    details: Free for personal and commercial use under the MIT license
   - icon:
       src: /icons/plus.svg
     title: Built on ProseMirror
@@ -61,36 +61,40 @@ LikhaEditor is a **modern, framework-agnostic rich text editor** built on ProseM
 
 ### Key Features
 
-- **Framework-Agnostic Core** - Works with vanilla JS, React, Laravel, Livewire
-- **Lightweight** - Core bundle < 100KB gzipped
+- **Framework-Agnostic Core** - Vanilla API; dedicated framework adapters remain planned
+- **Self-hosted delivery** - Standalone browser bundle and CSS for your server or CDN
 - **Plugin-Based Architecture** - Only load what you need
 - **Self-Hosted** - No cloud dependencies or telemetry
-- **Accessible** - WCAG 2.1 AA compliant
+- **Keyboard controls** - Tested dialogs, dropdowns, and table navigation; accessibility audit planned
 - **MIT Licensed** - Free for commercial use
+- **Professional editing** - Table operations, find/replace, comments, JSON/Markdown, autosave and upload callbacks in the development build
 
 ## Quick Links
 
 - [Getting Started](/guide/getting-started)
 - [Installation](/guide/installation)
+- [Interactive Playground](/playground)
+- [Professional Editing](/guide/professional-editing)
+- [Self-hosting](/guide/self-hosting)
 - [API Reference](/api/core)
-- [Plugins](/plugins/)
+- [Plugins](/plugins/README)
 - [GitHub Repository](https://github.com/ProgrammerNomad/likhaeditor)
 
 ## Current Status
 
-**Version:** 0.0.2  
-**Released:** December 18, 2025
+**Package manifest version:** 0.0.2<br>
+**Development status:** New features are implemented locally and await the next release. The playground uses this website’s repository build. See [release status](/status) for verified capabilities and remaining work.
 
 ### NPM Packages
 
-All packages are available on npm under the `@likhaeditor` scope:
+The four editor packages use the `@likhaeditor` npm scope. Planned adapters are listed separately below. npm badges show published versions; they do not include unreleased development changes.
 
 | Package | npm | Description | Status |
 |---------|-----|-------------|--------|
-| [@likhaeditor/core](https://www.npmjs.com/package/@likhaeditor/core) | ![npm](https://img.shields.io/npm/v/@likhaeditor/core) | Framework-agnostic editor engine | ✅ Stable |
-| [@likhaeditor/ui](https://www.npmjs.com/package/@likhaeditor/ui) | ![npm](https://img.shields.io/npm/v/@likhaeditor/ui) | Toolbar and UI components | ✅ Stable |
-| [@likhaeditor/plugins](https://www.npmjs.com/package/@likhaeditor/plugins) | ![npm](https://img.shields.io/npm/v/@likhaeditor/plugins) | Official plugin collection | ✅ Alpha |
-| [@likhaeditor/likhaeditor](https://www.npmjs.com/package/@likhaeditor/likhaeditor) | ![npm](https://img.shields.io/npm/v/@likhaeditor/likhaeditor) | Vanilla JS wrapper | ✅ Alpha |
+| [@likhaeditor/core](https://www.npmjs.com/package/@likhaeditor/core) | ![npm](https://img.shields.io/npm/v/@likhaeditor/core) | Framework-agnostic editor engine | Pre-1.0 |
+| [@likhaeditor/ui](https://www.npmjs.com/package/@likhaeditor/ui) | ![npm](https://img.shields.io/npm/v/@likhaeditor/ui) | Toolbar and UI components | Pre-1.0 |
+| [@likhaeditor/plugins](https://www.npmjs.com/package/@likhaeditor/plugins) | ![npm](https://img.shields.io/npm/v/@likhaeditor/plugins) | Official plugin collection | Pre-1.0 |
+| [@likhaeditor/likhaeditor](https://www.npmjs.com/package/@likhaeditor/likhaeditor) | ![npm](https://img.shields.io/npm/v/@likhaeditor/likhaeditor) | Vanilla JS wrapper | Pre-1.0 |
 | `@likhaeditor/likhaeditor-react` | - | React components | 🚧 Planned |
 | `@likhaeditor/likhaeditor-laravel` | - | Laravel Blade components | 🚧 Planned |
 | `@likhaeditor/likhaeditor-livewire` | - | Livewire integration | 🚧 Planned |
@@ -102,9 +106,9 @@ npm install @likhaeditor/likhaeditor
 
 ## Browser Support
 
-- Chrome/Edge (latest 2 versions)
-- Firefox (latest 2 versions)
-- Safari (latest 2 versions)
+- Targets modern Chrome, Edge, Firefox, and Safari
+- Automated editor tests run in Chromium, Firefox, and WebKit
+- Real-device, IME, and screen-reader verification remains in progress
 
 ## Community
 

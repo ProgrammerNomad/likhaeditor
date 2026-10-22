@@ -1,411 +1,90 @@
-<img src="./assets/logo.svg" alt="लिखा Logo" width="100">
+<img src="./assets/logo.svg" alt="LikhaEditor logo" width="100">
 
 # LikhaEditor
 
-> **Pre-1.0:** advanced features below include planned work. See
-> [Production readiness](PRODUCTION-READINESS.md) for verified milestones,
-> current limitations, and self-hosted build instructions. Comments, tracked
-> changes, collaboration, and framework adapters are not shipped yet.
+A free, MIT-licensed rich text editor built on ProseMirror. Self-host the JavaScript and CSS or serve a pinned release from a CDN. No account, license key, mandatory cloud API, or paid feature tier.
 
-[![npm version](https://img.shields.io/npm/v/@likhaeditor/likhaeditor.svg)](https://www.npmjs.com/package/@likhaeditor/likhaeditor)
-[![npm downloads](https://img.shields.io/npm/dm/@likhaeditor/likhaeditor.svg)](https://www.npmjs.com/package/@likhaeditor/likhaeditor)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
-[![GitHub Stars](https://img.shields.io/github/stars/ProgrammerNomad/likha)](https://github.com/ProgrammerNomad/likhaeditor/stargazers)
-[![GitHub Issues](https://img.shields.io/github/issues/ProgrammerNomad/likha)](https://github.com/ProgrammerNomad/likhaeditor/issues)
+**Pre-1.0 development:** this checkout includes features that are not yet published to npm. See [production readiness](PRODUCTION-READINESS.md) for verified checks and remaining release work. The repository owner handles publishing.
 
-LikhaEditor is a completely free, open-source, self-hosted, framework-agnostic rich text editor built for developers who demand flexibility without vendor lock-in. Run it anywhere: static HTML, Laravel, Livewire, React, Next.js, and more. The name "Likha" comes from the Hindi word "लिखा", meaning "written".
+[Documentation](https://likhaeditor.netlify.app/) · [Playground](https://likhaeditor.netlify.app/playground) · [Release status](https://likhaeditor.netlify.app/status)
 
-[Documentation](https://likhaeditor.netlify.app/) | [Examples](https://likhaeditor.netlify.app/examples/) | [API Reference](https://likhaeditor.netlify.app/api/core) | [Changelog](https://likhaeditor.netlify.app/changelog) | [npm Package](https://www.npmjs.com/package/@likhaeditor/likhaeditor)
+## Build and self-host
 
-## Why LikhaEditor
+Use Node 22.12+ and pnpm 8.12.0:
 
-- Free forever under the MIT license
-- No mandatory cloud services or accounts
-- Runs in plain HTML without build tooling
-- Friendly with Laravel, Livewire, and other backends
-- Works with your preferred frontend framework
+```sh
+pnpm install --frozen-lockfile
+pnpm build
+pnpm pre-publish
+pnpm test:packages
+```
 
-## Quick Start
-
-### CDN (Plain HTML)
+Copy `packages/html/dist/likha-editor.umd.js` and `likha-editor.css` to your static assets:
 
 ```html
-<!DOCTYPE html>
-<html>
-<head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@likhaeditor/likhaeditor/dist/likha-editor.css">
-</head>
-<body>
-  <div id="editor"></div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/@likhaeditor/likhaeditor/dist/likha-editor.umd.js"></script>
-  <script>
-    const editor = LikhaEditor.createEditor({
-      element: document.getElementById("editor"),
-      content: "<p>Start writing...</p>"
-    });
-  </script>
-</body>
-</html>
-```
-
-### NPM Installation
-
-```bash
-npm install @likhaeditor/likhaeditor
-```
-
-```javascript
-import { createEditor } from '@likhaeditor/likhaeditor';
-import '@likhaeditor/likhaeditor/dist/likha-editor.css';
-
-const editor = createEditor({
-  element: document.getElementById('editor'),
-  content: '<p>Start writing...</p>'
-});
-```
-
-### Laravel
-
-```bash
-composer require nomadprogrammer/likha-laravel
-```
-
-```blade
-<x-likha-editor name="content" :value="old('content', $post->content)" />
-```
-
-## Core Principles
-
-- 100 percent open source (MIT)
-- Self-hosted only, zero SaaS dependencies
-- Framework-agnostic core architecture
-- Works in a plain HTML page
-- Plugin-based feature model
-- No gated or paywalled functionality
-- Developer-first ergonomics and documentation
-
-## What LikhaEditor Is (and Is Not)
-
-### LikhaEditor is
-
-- A modern rich text editor platform
-- Fully extensible through plugins
-- Suitable for admin panels, CMS, SaaS apps, and dashboards
-- Welcoming to Laravel and Livewire workflows
-- Safe for commercial projects
-
-### LikhaEditor is not
-
-- A hosted cloud service
-- A SaaS subscription offering
-- A CKEditor clone (all-original implementation)
-- Locked into any single framework
-
-## Comparison with Other Editors
-
-| Feature | LikhaEditor | TipTap | Quill | CKEditor | Slate |
-|---------|-------|--------|-------|----------|-------|
-| License | MIT (Free) | MIT (Free) | BSD | GPL/Commercial | MIT (Free) |
-| Self-Hosted | Yes | Yes | Yes | Yes | Yes |
-| Cloud Required | No | No | No | Optional | No |
-| Framework | Agnostic | React-focused | Agnostic | Agnostic | React-only |
-| Plain HTML | Yes | No | Yes | Yes | No |
-| Laravel Support | First-class | Manual | Manual | Manual | Manual |
-| Plugin System | Yes | Yes | Limited | Yes | Custom |
-| Commercial Use | Free | Free | Free | Paid/GPL | Free |
-| Track Changes | Planned | Premium | No | Premium | Custom |
-| Collaborative | Planned | Premium | No | Premium | Custom |
-
-## Feature Roadmap
-
-### Core editing
-
-- ✅ Paragraphs and headings
-- ✅ Bold, italic, underline, strikethrough
-- ✅ Links and lists (bullet, ordered)
-- ✅ Undo and redo with keyboard shortcuts
-- ✅ Text color and highlighting
-- ✅ Subscript and superscript
-
-### Advanced blocks
-
-- ✅ Tables with insert and basic editing
-- ✅ Images with upload, resize, and alignment controls
-- ✅ Code blocks with language selection
-- ✅ Blockquotes and horizontal rules
-- ⏳ Table cell merge and advanced editing (planned)
-- ⏳ Syntax highlighting for code blocks (planned)
-
-### Professional capabilities (self-hosted)
-
-- Track changes and review workflows
-- Commenting and annotations
-- Version history and diffing
-- Markdown import and export
-- HTML to JSON and JSON to HTML transforms
-
-### Integrations
-
-- Plain HTML without build tools
-- Laravel Blade components
-- Livewire bindings
-- React and Next.js adapters
-- Vue adapter (planned)
-
-### Content management
-
-- Copy and paste from Word and Google Docs with formatting preservation
-- Drag and drop image uploads with preview
-- Inline image editing (crop, rotate, filters)
-- File attachments and media library
-- Embeds (YouTube, Twitter, CodePen, etc.)
-- Custom content blocks
-
-### Productivity features
-
-- Slash commands for quick block insertion
-- Autocomplete and mentions (@user, #tag)
-- Emoji picker with search
-- Character and word count
-- Read-only and focus modes
-- Auto-save with configurable intervals
-- Find and replace within content
-
-### Internationalization and accessibility
-
-- Multi-language UI support (i18n)
-- Right-to-left (RTL) text support
-- ARIA labels and keyboard navigation
-- Screen reader compatibility
-- High contrast and dark mode themes
-
-### Export and import
-
-- Export to PDF with custom styling
-- Print-friendly formatting
-- Import from Markdown, HTML, plain text
-- Export to Markdown, JSON, HTML
-- Content sanitization and XSS protection
-
-### Developer experience
-
-- TypeScript definitions included
-- Comprehensive API documentation
-- Testing utilities and helpers
-- Extensive code examples
-- Migration guides from other editors
-- Custom schema definitions
-- Event hooks and middleware
-
-### Advanced capabilities
-
-- Optional collaborative editing module powered by self-hosted WebSocket servers
-- Real-time presence indicators
-- Visual theme marketplace backed by community-created plugins
-- Accessibility audit tooling to ensure WCAG compliance out of the box
-- AI-powered writing assistance (bring your own API)
-- Grammar and spell checking (pluggable backends)
-- Content templates and snippets library
-
-## Works Everywhere
-
-### Plain HTML (no build tools)
-
-```html
+<link rel="stylesheet" href="/assets/likha-editor.css">
 <div id="editor"></div>
-
-<script type="module">
-	import { Editor } from "https://cdn.jsdelivr.net/npm/likha/dist/likha.js";
-
-	const editor = new Editor({
-		element: document.getElementById("editor"),
-		content: "<p>Hello from LikhaEditor</p>"
-	});
-
-	console.log(editor.getHTML());
+<script src="/assets/likha-editor.umd.js"></script>
+<script>
+  const instance = LikhaEditor.createEditor({
+    element: '#editor',
+    content: '<p>Start writing...</p>',
+    onChange: html => console.log(html)
+  });
+  // Call instance.destroy() when unmounting.
 </script>
 ```
 
-### Laravel Blade
+For a published version, the equivalent npm entry point is:
 
-```blade
-<x-likha-editor name="content" :value="$post->content" />
+```js
+import { createEditor } from '@likhaeditor/likhaeditor';
+import '@likhaeditor/likhaeditor/dist/likha-editor.css';
 ```
 
-### Livewire
+Pin the exact released version in production, including CDN URLs. New local features are unavailable from public CDN/npm until a release is published.
 
-```blade
-<x-likha-editor wire:model.defer="content" />
+## Implemented in this checkout
+
+- Paragraphs, headings, lists, blockquotes, code blocks, links, images, and horizontal rules.
+- Inline formatting, text color/highlight, alignment, undo/redo, source editing, and read-only mode.
+- Table insertion, row/column operations, headers, cell merge/split, and keyboard navigation.
+- Literal find/replace, validated document JSON, and CommonMark import/export for supported nodes.
+- Autosave callback with coalescing, flush, and cancellation.
+- Application-owned image upload callback, paste/drop hooks, and client MIME/size limits.
+- Optional range comments with resolve/reopen/delete and explicit version snapshots with persistence adapters.
+- Standalone browser bundle, TypeScript declarations, configurable toolbar, and plugin APIs.
+
+Comments are separate metadata; snapshots currently contain only the document. Deleted comment ranges become orphaned. Markdown cannot preserve every HTML feature. Upload security, content validation, authentication, and storage belong to the host application.
+
+Tracked changes, real-time collaboration, media crop/resize UI, syntax highlighting, dedicated framework adapters, and formal accessibility certification remain future work. This is not a claim of complete parity with established commercial editors. See [the broader wishlist](ROADMAP.md).
+
+## Packages
+
+| Directory | Package | Purpose |
+| --- | --- | --- |
+| packages/core | @likhaeditor/core | Editor engine and schema |
+| packages/ui | @likhaeditor/ui | Toolbar and menus |
+| packages/plugins | @likhaeditor/plugins | Official plugins |
+| packages/html | @likhaeditor/likhaeditor | Vanilla adapter and standalone bundle |
+
+React can mount the vanilla adapter in an effect and destroy it on cleanup. Blade can use the standalone build and a form field. Dedicated React, Laravel, Livewire, and Filament packages are not shipped.
+
+## Verification and website
+
+```sh
+pnpm pre-publish
+pnpm exec playwright install chromium firefox webkit
+pnpm test:browser
+pnpm docs:build
+pnpm test:site
+pnpm audit
 ```
 
-### React or Next.js
+The website builds the workspace editor into its interactive playground, so an npm release is not needed to preview or deploy repository changes. Netlify runs the package build before the documentation build. Run `pnpm docs:preview` for a local preview.
 
-```tsx
-<LikhaEditor value={value} onChange={setValue} />
-```
+## Contributing and license
 
-## Plugin-Based Architecture
+See [CONTRIBUTING.md](CONTRIBUTING.md). Report reproducible bugs in [GitHub issues](https://github.com/ProgrammerNomad/likhaeditor/issues).
 
-Everything in LikhaEditor is delivered as a plugin, so you only ship what you enable.
-
-```ts
-editor.use(TablePlugin);
-editor.use(ImagePlugin);
-editor.use(TrackChangesPlugin);
-```
-
-- No plugin, no bundle size increase
-- Fully tree-shakable builds
-- First-class support for community plugins
-
-## Architecture Overview
-
-### NPM Packages
-
-All packages are published under the `@likhaeditor` scope on npm:
-
-| Package | Version | Description |
-|---------|---------|-------------|
-| [@likhaeditor/core](https://www.npmjs.com/package/@likhaeditor/core) | ![npm](https://img.shields.io/npm/v/@likhaeditor/core) | Framework-agnostic editor engine |
-| [@likhaeditor/ui](https://www.npmjs.com/package/@likhaeditor/ui) | ![npm](https://img.shields.io/npm/v/@likhaeditor/ui) | Toolbar and UI components |
-| [@likhaeditor/plugins](https://www.npmjs.com/package/@likhaeditor/plugins) | ![npm](https://img.shields.io/npm/v/@likhaeditor/plugins) | Official plugin collection |
-| [@likhaeditor/likhaeditor](https://www.npmjs.com/package/@likhaeditor/likhaeditor) | ![npm](https://img.shields.io/npm/v/@likhaeditor/likhaeditor) | Vanilla JS wrapper (recommended) |
-
-**Coming soon:** `@likhaeditor/likhaeditor-react`, `@likhaeditor/likhaeditor-laravel`, `@likhaeditor/likhaeditor-livewire`
-
-### Project Structure
-
-```
-likha/
-├─ packages/
-│  ├─ core        # Editor engine (framework agnostic)
-│  ├─ ui          # Toolbar, menus, themes
-│  ├─ plugins     # Official plugins
-│  ├─ html        # Plain HTML adapter
-│  ├─ react       # React adapter
-│  ├─ laravel     # Laravel package
-│  └─ livewire    # Livewire integration
-├─ examples/
-│  ├─ html
-│  ├─ laravel
-│  └─ nextjs
-└─ docs/
-```
-
-## Tech Stack
-
-- TypeScript throughout the monorepo
-- ProseMirror (MIT) for the editing substrate
-- ES modules and modern build tooling (pnpm workspace)
-- Zero framework dependency inside the core package
-
-## License
-
-LikhaEditor is distributed under the MIT License.
-
-- Free for personal and commercial use
-- Redistribution allowed with the MIT copyright and license notice
-- No hidden clauses or feature gating
-
-## Contributing
-
-Contributions are welcome and encouraged. You can help by:
-
-- Implementing new plugins
-- Improving documentation and examples
-- Fixing bugs or regressions
-- Reviewing architecture decisions
-- Writing starter templates for new frameworks
-
-Please review CONTRIBUTING.md before submitting a pull request.
-
-## Roadmap to Version 1.0
-
-- ✅ Ship the core editor engine
-- ✅ Release a starter plugin bundle (20 plugins)
-- ✅ Publish the plain HTML adapter
-- ✅ Launch official documentation site (likhaeditor.netlify.app)
-- 🚧 Deliver the React adapter (in progress)
-- ⏳ Deliver the Laravel Blade component (planned)
-- ⏳ Finalize Livewire integration package (planned)
-- ⏳ Bootstrap community plugin gallery (planned)
-
-## Vision
-
-LikhaEditor aims to become the default open-source editor for developers seeking freedom, control, and simplicity without licenses, clouds, or lock-in. The goal is a modular platform that grows with your product and embraces the ecosystems you already trust.
-
-## Frequently Asked Questions
-
-### Is LikhaEditor really free?
-
-Yes, completely free. MIT licensed with no hidden costs, premium tiers, or feature gating. Commercial use is allowed; retain the MIT copyright and license notice when redistributing.
-
-### Does LikhaEditor require a backend server?
-
-No mandatory backend. LikhaEditor runs entirely in the browser. You only need a server if you want features like image uploads, which you control and implement yourself.
-
-### Can I use LikhaEditor offline?
-
-Yes, LikhaEditor works completely offline once loaded. No internet connection required for editing.
-
-### How does Likha compare to TipTap?
-
-Both are excellent. LikhaEditor focuses on framework-agnostic design with first-class Laravel/Livewire support and works in plain HTML without build tools. TipTap is React/Vue focused and requires a build step.
-
-### Will there be a paid version?
-
-No. LikhaEditor will remain 100 percent free and open source forever. No premium plans, no enterprise editions, no feature paywalls.
-
-### How is collaborative editing implemented?
-
-Collaborative editing is planned as an optional self-hosted module using operational transformation or CRDT algorithms. You host your own WebSocket server - no third-party services required.
-
-### Can I migrate from CKEditor or TinyMCE?
-
-Yes, migration guides and content conversion tools are planned to help you switch from other editors while preserving your existing content.
-
-### What is the browser support?
-
-LikhaEditor targets modern evergreen browsers (Chrome, Firefox, Safari, Edge). IE11 is not supported.
-
-### How can I get help?
-
-Check the [documentation](https://likhaeditor.netlify.app/), browse [examples](https://likhaeditor.netlify.app/examples/), open an [issue](https://github.com/ProgrammerNomad/likhaeditor/issues), or join our community discussions.
-
-## Community and Support
-
-- [GitHub Discussions](https://github.com/ProgrammerNomad/likhaeditor/discussions) - Ask questions and share ideas
-- [Issue Tracker](https://github.com/ProgrammerNomad/likhaeditor/issues) - Report bugs and request features
-
-## Support the Project
-
-LikhaEditor is and always will be free. You can support its development by:
-
-- Star the repository on [GitHub](https://github.com/ProgrammerNomad/likhaeditor)
-- Share LikhaEditor with your network and colleagues
-- Report bugs with detailed reproduction steps
-- Suggest features and integrations
-- Contribute code, documentation, or plugins
-- Write blog posts or tutorials about Likha
-- Sponsor development (GitHub Sponsors coming soon)
-- Help answer questions in Discussions
-
-## Acknowledgments
-
-LikhaEditor is built on the shoulders of giants:
-
-- [ProseMirror](https://prosemirror.net/) - The powerful editing framework
-- All our [contributors](https://github.com/ProgrammerNomad/likhaeditor/graphs/contributors)
-- The open-source community
-
-## Author
-
-**Shiv Singh**
-- GitHub: [@ProgrammerNomad](https://github.com/ProgrammerNomad)
-- Email: shiv@srapsware.com
-
----
-
-**Built with ❤️ by [ProgrammerNomad](https://github.com/ProgrammerNomad)**
+MIT licensed, free for personal and commercial use. Retain the copyright and license notice when redistributing. Built by [Shiv Singh](https://github.com/ProgrammerNomad) and contributors, using [ProseMirror](https://prosemirror.net/).

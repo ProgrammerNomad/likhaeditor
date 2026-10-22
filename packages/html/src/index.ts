@@ -1,4 +1,11 @@
-import { Editor } from '@likhaeditor/core';
+import { Editor, isSafeURL, FONT_FAMILIES } from '@likhaeditor/core';
+import { openInputDialog } from './dialog';
+import { createReviewPanel } from './review-panel';
+import { createAutosave, type AutosaveOptions } from './autosave';
+import { createVersionHistory, localVersionStore, type VersionStore } from './version-history';
+export { localVersionStore } from './version-history';
+export type { VersionStore, DocumentVersion } from './version-history';
+export type { AutosaveOptions } from './autosave';
 import type { Plugin } from '@likhaeditor/core';
 import {
   PlaceholderPlugin,
@@ -20,7 +27,12 @@ import {
   StrikethroughPlugin,
   SubscriptPlugin,
   SuperscriptPlugin,
-  ClearFormattingPlugin
+  ClearFormattingPlugin,
+  FindReplacePlugin,
+  MarkdownPlugin,
+  ImageUploadPlugin, type ImageUploadOptions,
+  CommentsPlugin, type CommentsOptions, type EditorComment,
+  TrackChangesPlugin, type TrackChangesOptions, SyntaxHighlightPlugin, TypographyPlugin
 } from '@likhaeditor/plugins';
 import { Toolbar, Button, Dropdown, TableGrid, injectTheme } from '@likhaeditor/ui';
 
@@ -63,6 +75,13 @@ function injectEditorStyles() {
     }
     
     .ProseMirror p { margin: 0.5em 0; }
+    .ProseMirror .is-empty[data-placeholder]::before {
+      content: attr(data-placeholder);
+      color: #737373;
+      float: left;
+      height: 0;
+      pointer-events: none;
+    }
     .ProseMirror h1 { font-size: 2em; font-weight: bold; margin: 0.67em 0; }
     .ProseMirror h2 { font-size: 1.5em; font-weight: bold; margin: 0.75em 0; }
     .ProseMirror h3 { font-size: 1.17em; font-weight: bold; margin: 0.83em 0; }
@@ -103,7 +122,7 @@ function injectEditorStyles() {
     
     .ProseMirror hr { border: none; border-top: 2px solid #ddd; margin: 1.5em 0; }
     
-    .ProseMirror img { max-width: 100%; height: auto; }
+    .ProseMirror img { max-width: 100%; }
     
     /* Text formatting */
     .ProseMirror strong { font-weight: bold; }
@@ -165,6 +184,12 @@ export interface LikhaEditorOptions {
   onChange?: (content: string) => void;
   /** Allow user editing (default: true). Programmatic updates remain available. */
   editable?: boolean;
+  /** Optional persistence owned by the host application; no hosted service required. */
+  autosave?: AutosaveOptions;
+  imageUpload?: ImageUploadOptions;
+  versions?: VersionStore;
+  comments?: CommentsOptions;
+  trackChanges?: TrackChangesOptions;
 }
 
 /**
@@ -178,6 +203,11 @@ export function createEditor(options: LikhaEditorOptions) {
 
   if (!element) {
     throw new Error('Editor element not found');
+  }
+  const toolbarHost = typeof options.toolbarContainer === 'string'
+    ? document.querySelector<HTMLElement>(options.toolbarContainer) : options.toolbarContainer;
+  if (options.toolbar !== false && options.toolbarContainer && !toolbarHost) {
+    throw new Error('Toolbar container not found');
   }
 
   // Inject theme and editor styles
@@ -205,10 +235,17 @@ export function createEditor(options: LikhaEditorOptions) {
     'strikethrough',
     'subscript',
     'superscript',
-    'clearFormatting'
+    'clearFormatting', 'findReplace', 'markdown', 'syntaxHighlight', 'typography'
   ];
 
   const plugins: Plugin[] = [];
+  if (enabledPlugins.includes('typography')) plugins.push(new TypographyPlugin());
+  if (enabledPlugins.includes('syntaxHighlight')) plugins.push(new SyntaxHighlightPlugin());
+  if (options.trackChanges) plugins.push(new TrackChangesPlugin(options.trackChanges));
+  if (options.comments) plugins.push(new CommentsPlugin(options.comments));
+  if (options.imageUpload) plugins.push(new ImageUploadPlugin(options.imageUpload));
+  if (enabledPlugins.includes('findReplace')) plugins.push(new FindReplacePlugin());
+  if (enabledPlugins.includes('markdown')) plugins.push(new MarkdownPlugin());
 
   if (enabledPlugins.includes('placeholder')) {
     plugins.push(new PlaceholderPlugin({ text: options.placeholder || 'Start writing...' }));
@@ -272,12 +309,16 @@ export function createEditor(options: LikhaEditorOptions) {
   }
 
   // Create editor
+  const autosave = options.autosave ? createAutosave(options.autosave) : undefined;
   const editor = new Editor({
     element,
     content: options.content,
     plugins,
     editable: options.editable,
-    onChange: options.onChange
+    onChange: html => {
+      autosave?.schedule(html);
+      options.onChange?.(html);
+    }
   });
 
   // Create toolbar if enabled
@@ -296,6 +337,9 @@ export function createEditor(options: LikhaEditorOptions) {
   }
 
   toolbar?.getElement().toggleAttribute('inert', options.editable === false);
+  const themeTargets = [element, toolbar?.getElement()].filter((target): target is HTMLElement => !!target);
+  const addedTheme = themeTargets.filter(target => options.darkTheme && !target.classList.contains('likha-dark'));
+  addedTheme.forEach(target => target.classList.add('likha-dark'));
 
   return {
     editor,
@@ -303,13 +347,26 @@ export function createEditor(options: LikhaEditorOptions) {
     getContent: () => editor.getHTML(),
     setContent: (html: string) => editor.setContent(html),
     getText: () => editor.getText(),
+    getJSON: () => editor.getJSON(),
+    setJSON: (content: unknown) => editor.setJSON(content),
+    importMarkdown: (text: string) => editor.executeCommand('importMarkdown', text),
+    exportMarkdown: () => editor.executeCommand('exportMarkdown') as string,
+    flushAutosave: () => autosave?.flush() ?? Promise.resolve(),
+    uploadImage: (file: File) => {
+      const plugin = editor.getPlugin('imageUpload') as ImageUploadPlugin | undefined;
+      if (!plugin) return Promise.reject(new Error('Configure imageUpload before uploading files'));
+      return plugin.uploadImage(editor, file);
+    },
+    versions: options.versions ? createVersionHistory(editor, options.versions) : undefined,
     setEditable: (editable: boolean) => {
       editor.setEditable(editable);
       toolbar?.getElement().toggleAttribute('inert', !editable);
     },
     destroy: () => {
+      autosave?.destroy();
       toolbar?.destroy();
       editor.destroy();
+      addedTheme.forEach(target => target.classList.remove('likha-dark'));
     }
   };
 }
@@ -422,13 +479,55 @@ function createDefaultToolbar(editor: Editor, container: HTMLElement, buttonConf
   });
   let closeColorPicker: (() => void) | undefined;
   toolbar.onDestroy(() => closeColorPicker?.());
+  let closeDialog: (() => void) | undefined;
+  toolbar.onDestroy(() => closeDialog?.());
+  const editURL = (image: boolean) => {
+    if (!editor.view.editable) return;
+    closeDialog?.();
+    const state = editor.view.state;
+    const bookmark = state.selection.getBookmark();
+    closeDialog = openInputDialog({
+      title: image ? 'Insert image' : 'Edit link',
+      fields: [
+        { name: 'url', label: image ? 'Image URL' : 'Link URL', required: true,
+          value: image ? '' : String(editor.executeCommand('getLinkHref') || '') },
+        ...(image ? [{ name: 'alt', label: 'Alternative text' }] : []),
+      ],
+      onSubmit: values => {
+        if (!isSafeURL(values.url, image)) return 'Enter a supported URL (https:// or a relative path).';
+        if (!editor.view.editable || !editor.view.state.doc.eq(state.doc)) return 'The document changed. Cancel and try again.';
+        editor.view.dispatch(editor.view.state.tr.setSelection(bookmark.resolve(editor.view.state.doc)));
+        const success = image ? editor.executeCommand('insertImage', values.url, values.alt) : editor.executeCommand('setLink', values.url);
+        if (!success) return 'Select the text to link before opening this dialog.';
+      },
+      onClose: () => { if (!editor.view.isDestroyed) editor.focus(); },
+    });
+  };
+  const requestLink = () => editURL(false);
+  editor.view.dom.addEventListener('likha:request-link', requestLink);
+  toolbar.onDestroy(() => editor.view.dom.removeEventListener('likha:request-link', requestLink));
 
   // Determine which buttons to show
   const showAll = !buttonConfig || buttonConfig === 'all';
   const enabledButtons = showAll ? [] : buttonConfig;
   
   const shouldShow = (button: string) => {
-    return showAll || enabledButtons.includes(button);
+    const dependencies: Record<string, string> = {
+      heading: 'heading', underline: 'underline', strikethrough: 'strikethrough',
+      subscript: 'subscript', superscript: 'superscript', clearFormatting: 'clearFormatting',
+      link: 'link', bulletList: 'bulletList', orderedList: 'orderedList', blockquote: 'blockquote',
+      alignLeft: 'text-alignment', alignCenter: 'text-alignment', alignRight: 'text-alignment',
+      image: 'image', table: 'table', horizontalRule: 'horizontalRule', codeBlock: 'code-block',
+      imageProperties: 'image',
+      textColor: 'text-color', highlight: 'highlight', htmlSourceView: 'html-source-view',
+      tableControls: 'table', find: 'findReplace', replace: 'findReplace',
+      comment: 'comments', comments: 'comments',
+      reviewChanges: 'trackChanges',
+      codeLanguage: 'code-block',
+      fontFamily: 'typography', fontSize: 'typography',
+      uploadImage: 'imageUpload',
+    };
+    return (showAll || enabledButtons.includes(button)) && (!dependencies[button] || !!editor.getPlugin(dependencies[button]));
   };
 
   // Icons (inline SVG strings)
@@ -564,12 +663,7 @@ function createDefaultToolbar(editor: Editor, container: HTMLElement, buttonConf
   const linkBtn = new Button({
     icon: icons.link,
     title: 'Insert Link (Ctrl+K)',
-    onClick: () => {
-      const url = prompt('Enter link URL:', 'https://');
-      if (url) {
-        editor.executeCommand('setLink', url);
-      }
-    }
+    onClick: () => editURL(false)
   });
 
   toolbar.addButton(linkBtn.getElement());
@@ -627,13 +721,34 @@ function createDefaultToolbar(editor: Editor, container: HTMLElement, buttonConf
   const imageBtn = new Button({
     icon: icons.image,
     title: 'Insert Image',
-    onClick: () => {
-      const url = prompt('Enter image URL:');
-      if (url) {
-        editor.executeCommand('insertImage', url);
-      }
-    }
+    onClick: () => editURL(true)
   });
+
+  const imageProperties = new Button({ label: 'Image properties', title: 'Edit image size and alternative text', onClick: () => {
+    const original = editor.view.state;
+    const bookmark = original.selection.getBookmark();
+    const image = original.doc.nodeAt(original.selection.from)?.type.name === 'image'
+      ? original.doc.nodeAt(original.selection.from) : original.selection.$from.nodeBefore;
+    if (image?.type.name !== 'image') {
+      closeDialog?.();
+      closeDialog = openInputDialog({ title: 'Select an image first', fields: [], onSubmit: () => {} });
+      return;
+    }
+    closeDialog?.();
+    closeDialog = openInputDialog({ title: 'Image properties', fields: [
+      { name: 'alt', label: 'Alternative text', value: image.attrs.alt || '' },
+      { name: 'width', label: 'Width in pixels (blank for automatic)', value: image.attrs.width ? String(image.attrs.width) : '' },
+      { name: 'height', label: 'Height in pixels (blank for automatic)', value: image.attrs.height ? String(image.attrs.height) : '' },
+    ], onSubmit: values => {
+      if (!original.doc.eq(editor.view.state.doc)) return 'The document changed. Cancel and select the image again.';
+      const dimensions = [values.width, values.height].map(value => value.trim() ? Number(value) : 0);
+      if (dimensions.some(value => !Number.isInteger(value) || value < 0 || value > 16384)) return 'Use whole pixel sizes from 1 to 16384, or leave the field blank.';
+      editor.view.dispatch(editor.view.state.tr.setSelection(bookmark.resolve(editor.view.state.doc)));
+      editor.executeCommand('setImageSize', dimensions[0], dimensions[1]);
+      editor.executeCommand('setImageAlt', values.alt);
+    }, onClose: () => { if (!editor.view.isDestroyed) editor.focus(); } });
+  } });
+  toolbar.addGroup([imageProperties.getElement()]);
 
   // Table button with grid selector dropdown
   const tableBtn = document.createElement('div');
@@ -651,6 +766,7 @@ function createDefaultToolbar(editor: Editor, container: HTMLElement, buttonConf
         tableGridContainer.style.display = 'none';
       } else {
         tableGridContainer.style.display = 'block';
+        tableGridContainer.querySelector<HTMLButtonElement>('button')?.focus();
       }
     }
   });
@@ -676,6 +792,13 @@ function createDefaultToolbar(editor: Editor, container: HTMLElement, buttonConf
   });
 
   tableGridContainer.appendChild(tableGridSelector.getElement());
+  tableGridContainer.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      tableGridContainer.style.display = 'none';
+      tableBtnInner.getElement().focus();
+    }
+  });
+  toolbar.onDestroy(() => tableGridSelector.destroy());
   tableBtn.appendChild(tableBtnInner.getElement());
   tableBtn.appendChild(tableGridContainer);
 
@@ -736,13 +859,125 @@ function createDefaultToolbar(editor: Editor, container: HTMLElement, buttonConf
     onClick: () => {
       editor.executeCommand('toggleSourceView');
     },
-    isActive: () => editor.executeCommand('isSourceViewActive') as boolean
+    isActive: () => !!editor.getPlugin('html-source-view') && editor.executeCommand('isSourceViewActive') === true
   });
 
   toolbar.addGroup([codeBtn.getElement(), colorBtn.getElement(), highlightBtn.getElement()]);
   toolbar.addSeparator();
   
   toolbar.addButton(sourceViewBtn.getElement());
+
+  const tableControls = new Dropdown({
+    placeholder: 'Table actions',
+    items: [
+      { value: 'addRowBefore', label: 'Insert row above' }, { value: 'addRowAfter', label: 'Insert row below' },
+      { value: 'addColumnBefore', label: 'Insert column left' }, { value: 'addColumnAfter', label: 'Insert column right' },
+      { value: 'deleteRow', label: 'Delete row' }, { value: 'deleteColumn', label: 'Delete column' },
+      { value: 'toggleHeaderRow', label: 'Toggle header row' }, { value: 'toggleHeaderColumn', label: 'Toggle header column' },
+      { value: 'mergeCells', label: 'Merge selected cells' }, { value: 'splitCell', label: 'Split cell' },
+      { value: 'deleteTable', label: 'Delete table' },
+    ],
+    onSelect: command => { editor.executeCommand(command); editor.focus(); },
+  });
+  const searchDialog = (replace: boolean) => {
+    closeDialog?.();
+    closeDialog = openInputDialog({
+      title: replace ? 'Replace all occurrences' : 'Find next occurrence',
+      fields: [{ name: 'query', label: 'Find text', required: true }, ...(replace ? [{ name: 'replacement', label: 'Replace with' }] : [])],
+      onSubmit: values => {
+        if (replace && !editor.view.editable) return 'The editor is read-only.';
+        const result = replace ? editor.executeCommand('replaceAll', values.query, values.replacement) : editor.executeCommand('findNext', values.query);
+        if (!result) return 'No matches found.';
+      },
+      onClose: () => { if (!editor.view.isDestroyed) editor.focus(); },
+    });
+  };
+  const findBtn = new Button({ label: 'Find', title: 'Find text', onClick: () => searchDialog(false) });
+  const replaceBtn = new Button({ label: 'Replace', title: 'Replace text', onClick: () => searchDialog(true) });
+  toolbar.addGroup([tableControls.getElement(), findBtn.getElement(), replaceBtn.getElement()]);
+
+  const commentBtn = new Button({ label: 'Comment', title: 'Add comment', onClick: () => {
+    closeDialog?.();
+    const original = editor.view.state;
+    const bookmark = original.selection.getBookmark();
+    closeDialog = openInputDialog({ title: 'Add comment', fields: [{ name: 'text', label: 'Comment text', required: true }],
+      onSubmit: values => {
+        if (!original.doc.eq(editor.view.state.doc)) return 'The document changed. Cancel and select the text again.';
+        editor.view.dispatch(editor.view.state.tr.setSelection(bookmark.resolve(editor.view.state.doc)));
+        if (!editor.executeCommand('addComment', values.text)) return 'Select text to attach this comment.';
+      },
+      onClose: () => { if (!editor.view.isDestroyed) editor.focus(); },
+    });
+  } });
+  let commentsPanel: HTMLElement | undefined;
+  const renderComments = () => {
+    if (!commentsPanel) return;
+    commentsPanel.replaceChildren();
+    const heading = document.createElement('h2'); heading.textContent = 'Comments'; commentsPanel.appendChild(heading);
+    const comments = editor.executeCommand('listComments') as EditorComment[];
+    if (!comments.length) { const empty = document.createElement('p'); empty.textContent = 'No comments yet.'; commentsPanel.appendChild(empty); }
+    comments.forEach(comment => {
+      const article = document.createElement('article');
+      const label = document.createElement('p'); label.textContent = `${comment.author || 'Anonymous'}${comment.resolved ? ' · Resolved' : ''}${comment.orphaned ? ' · Original text removed' : ''}`;
+      const text = document.createElement('p'); text.textContent = comment.text;
+      const resolve = document.createElement('button'); resolve.type = 'button'; resolve.textContent = comment.resolved ? 'Reopen' : 'Resolve';
+      resolve.addEventListener('click', () => editor.executeCommand('resolveComment', comment.id, !comment.resolved));
+      const remove = document.createElement('button'); remove.type = 'button'; remove.textContent = 'Delete comment';
+      remove.addEventListener('click', () => editor.executeCommand('removeComment', comment.id));
+      article.append(label, text, resolve, remove); commentsPanel?.appendChild(article);
+    });
+    const close = document.createElement('button'); close.type = 'button'; close.textContent = 'Close comments';
+    close.addEventListener('click', () => { commentsPanel?.remove(); commentsPanel = undefined; editor.focus(); });
+    commentsPanel.appendChild(close);
+  };
+  const commentsBtn = new Button({ label: 'Comments', title: 'Show comments', onClick: () => {
+    if (!commentsPanel) {
+      commentsPanel = document.createElement('section'); commentsPanel.className = 'likha-comments';
+      commentsPanel.setAttribute('aria-label', 'Comments'); editor.view.dom.parentElement?.appendChild(commentsPanel);
+    }
+    renderComments(); commentsPanel.querySelector('button')?.focus();
+  } });
+  editor.view.dom.addEventListener('likha:comments-change', renderComments);
+  toolbar.onDestroy(() => { editor.view.dom.removeEventListener('likha:comments-change', renderComments); commentsPanel?.remove(); });
+  toolbar.addGroup([commentBtn.getElement(), commentsBtn.getElement()]);
+  const uploadStatus = document.createElement('span');
+  uploadStatus.setAttribute('role', 'status');
+  const uploadInput = document.createElement('input');
+  uploadInput.type = 'file'; uploadInput.accept = 'image/png,image/jpeg,image/gif,image/webp,image/avif'; uploadInput.hidden = true;
+  uploadInput.addEventListener('change', () => {
+    const file = uploadInput.files?.[0];
+    if (!file) return;
+    const plugin = editor.getPlugin('imageUpload') as ImageUploadPlugin | undefined;
+    uploadStatus.textContent = 'Uploading image…';
+    void plugin?.uploadImage(editor, file).then(inserted => {
+      uploadStatus.textContent = inserted ? 'Image uploaded' : 'Upload cancelled';
+    }).catch(error => { uploadStatus.textContent = error instanceof Error ? error.message : 'Image upload failed'; });
+    uploadInput.value = '';
+  });
+  const uploadBtn = new Button({ label: 'Upload image', title: 'Upload image file', onClick: () => uploadInput.click() });
+  if (editor.getPlugin('imageUpload')) toolbar.addGroup([uploadBtn.getElement(), uploadInput, uploadStatus]);
+  toolbar.onDestroy(() => { uploadInput.remove(); uploadStatus.remove(); });
+
+  const reviewPlugin = editor.getPlugin('trackChanges') as TrackChangesPlugin | undefined;
+  const reviewPanel = reviewPlugin ? createReviewPanel(editor, reviewPlugin) : undefined;
+  const reviewBtn = new Button({ label: 'Review changes', title: 'Review tracked changes', onClick: () => reviewPanel?.open() });
+  if (reviewPanel) { toolbar.addGroup([reviewBtn.getElement()]); toolbar.onDestroy(reviewPanel.destroy); }
+
+  const codeLanguage = new Dropdown({ placeholder: 'Code language',
+    items: [{ value: '', label: 'Plain text' }, ...new SyntaxHighlightPlugin().languages().map(value => ({ value, label: value }))],
+    onSelect: language => { editor.executeCommand('setCodeBlock', language); editor.focus(); },
+  });
+  toolbar.addGroup([codeLanguage.getElement()]);
+
+  const fontFamilyDropdown = new Dropdown({ placeholder: 'Font family',
+    items: [{ value: '', label: 'Default font' }, ...FONT_FAMILIES.map(value => ({ value, label: value }))],
+    onSelect: value => { editor.executeCommand('setFontFamily', value || null); editor.focus(); },
+  });
+  const fontSizeDropdown = new Dropdown({ placeholder: 'Font size',
+    items: [{ value: '', label: 'Default size' }, ...[8, 10, 12, 14, 16, 18, 24, 36, 48, 72].map(value => ({ value: String(value), label: `${value} pt` }))],
+    onSelect: value => { editor.executeCommand('setFontSize', value ? Number(value) : null); editor.focus(); },
+  });
+  toolbar.addGroup([fontFamilyDropdown.getElement(), fontSizeDropdown.getElement()]);
 
   const controls: Array<[string, { getElement(): HTMLElement; destroy(): void }]> = [
     ['heading', headingDropdown], ['undo', undoBtn], ['redo', redoBtn],
@@ -753,8 +988,15 @@ function createDefaultToolbar(editor: Editor, container: HTMLElement, buttonConf
     ['blockquote', blockquoteBtn], ['alignLeft', alignLeftBtn],
     ['alignCenter', alignCenterBtn], ['alignRight', alignRightBtn],
     ['image', imageBtn], ['table', tableBtnInner], ['horizontalRule', hrBtn],
+    ['imageProperties', imageProperties],
     ['codeBlock', codeBtn], ['textColor', colorBtn], ['highlight', highlightBtn],
     ['htmlSourceView', sourceViewBtn],
+    ['tableControls', tableControls], ['find', findBtn], ['replace', replaceBtn],
+    ['comment', commentBtn], ['comments', commentsBtn],
+    ['uploadImage', uploadBtn],
+    ['reviewChanges', reviewBtn],
+    ['codeLanguage', codeLanguage],
+    ['fontFamily', fontFamilyDropdown], ['fontSize', fontSizeDropdown],
   ];
   controls.forEach(([name, control]) => {
     if (!shouldShow(name)) control.destroy();
@@ -792,16 +1034,18 @@ export {
   Button,
   Dropdown,
   injectTheme
+  , FindReplacePlugin, MarkdownPlugin
 };
 
 // Make available globally for CDN usage
 if (typeof window !== 'undefined') {
-  (window as any).LikhaEditor = {
+  (window as Window & { LikhaEditor?: unknown }).LikhaEditor = {
     createEditor,
     Editor,
     Toolbar,
     Button,
     Dropdown,
     injectTheme
+    , localVersionStore
   };
 }

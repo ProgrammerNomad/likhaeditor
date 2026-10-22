@@ -81,7 +81,7 @@ const instance = createEditor({
 });
 ```
 
-[View Live Demo](/examples/with-changes)
+[View Live Demo](/playground)
 
 ---
 
@@ -154,7 +154,7 @@ const editor2 = createEditor({
 });
 ```
 
-[View Live Demo](/examples/multiple)
+[View Live Demo](/playground)
 
 ---
 
@@ -186,7 +186,7 @@ createEditor({
 });
 ```
 
-[View Live Demo](/examples/minimal)
+[View Live Demo](/playground)
 
 ---
 
@@ -203,7 +203,7 @@ createEditor({
 });
 ```
 
-[View Live Demo](/examples/full)
+[View Live Demo](/playground)
 
 ---
 

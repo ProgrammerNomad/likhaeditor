@@ -1,3 +1,4 @@
+import type { Editor } from '@likhaeditor/core';
 import { Plugin } from '@likhaeditor/core';
 
 /**
@@ -9,7 +10,7 @@ export class HorizontalRulePlugin extends Plugin {
 
   commands() {
     return {
-      insertHorizontalRule: (editor: any) => {
+      insertHorizontalRule: (editor: Editor) => {
         const { state, dispatch } = editor.view;
         const hrType = state.schema.nodes.horizontal_rule;
         
@@ -34,7 +35,7 @@ export class HorizontalRulePlugin extends Plugin {
 
   keymap() {
     return {
-      'Mod-_': (editor: any) => this.commands().insertHorizontalRule(editor),
+      'Mod-_': (editor: Editor) => this.commands().insertHorizontalRule(editor),
     };
   }
 }

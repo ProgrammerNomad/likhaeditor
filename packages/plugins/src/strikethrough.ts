@@ -24,7 +24,7 @@ export class StrikethroughPlugin extends Plugin {
   keymap() {
     return {
       'Mod-Shift-s': (editor: Editor) => {
-        return editor.executeCommand('toggleStrikethrough');
+        return editor.executeCommand('toggleStrikethrough') === true;
       }
     };
   }

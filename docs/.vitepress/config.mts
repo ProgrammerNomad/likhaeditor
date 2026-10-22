@@ -5,7 +5,7 @@ export default defineConfig({
   title: 'Likha Editor',
   description: 'Modern, framework-agnostic rich text editor built on ProseMirror',
   
-  ignoreDeadLinks: true,
+  ignoreDeadLinks: false,
   
   themeConfig: {
     logo: { src: '/logo.svg', alt: 'Likha' },
@@ -18,7 +18,7 @@ export default defineConfig({
       {
         text: 'v0.0.2',
         items: [
-          { text: 'v0.0.2 (current)', link: '/' }
+          { text: 'Release status', link: '/status' }
         ]
       }
     ],
@@ -37,7 +37,9 @@ export default defineConfig({
         {
           text: 'Advanced',
           items: [
-            { text: 'Custom Plugins', link: '/guide/custom-plugins' }
+            { text: 'Custom Plugins', link: '/guide/custom-plugins' },
+            { text: 'Professional editing', link: '/guide/professional-editing' },
+            { text: 'Self-hosting and releases', link: '/guide/self-hosting' }
           ]
         },
         {

@@ -1,7 +1,7 @@
 # Creating Custom Plugins
 
 ::: warning Coming Soon
-Comprehensive plugin development guide is coming in **v0.2.0** (February 2025).
+Comprehensive plugin development guide is coming in a future release.
 :::
 
 ## Plugin Architecture

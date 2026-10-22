@@ -1,3 +1,4 @@
+import type { Editor } from '@likhaeditor/core';
 import { Plugin } from '@likhaeditor/core';
 import { wrapInList, liftListItem } from 'prosemirror-schema-list';
 
@@ -10,7 +11,7 @@ export class BulletListPlugin extends Plugin {
 
   commands() {
     return {
-      toggleBulletList: (editor: any) => {
+      toggleBulletList: (editor: Editor) => {
         const { state, dispatch } = editor.view;
         const listType = state.schema.nodes.bullet_list;
         const itemType = state.schema.nodes.list_item;
@@ -43,7 +44,7 @@ export class BulletListPlugin extends Plugin {
         }
       },
 
-      isBulletListActive: (editor: any): boolean => {
+      isBulletListActive: (editor: Editor): boolean => {
         const { state } = editor.view;
         const { $from } = state.selection;
         const listType = state.schema.nodes.bullet_list;
@@ -66,13 +67,13 @@ export class BulletListPlugin extends Plugin {
 
   keymap() {
     return {
-      'Mod-[': (editor: any) => {
+      'Mod-[': (editor: Editor) => {
         const { state, dispatch } = editor.view;
         const itemType = state.schema.nodes.list_item;
         if (!itemType) return false;
         return liftListItem(itemType)(state, dispatch);
       },
-      'Ctrl-Shift-8': (editor: any) => this.commands().toggleBulletList(editor),
+      'Ctrl-Shift-8': (editor: Editor) => this.commands().toggleBulletList(editor),
     };
   }
 }

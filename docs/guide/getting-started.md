@@ -9,7 +9,7 @@ LikhaEditor is a modern, framework-agnostic rich text editor built on top of Pro
 ## Key Features
 
 - **Framework Agnostic**: Works with vanilla HTML, React, Laravel, and Livewire
-- **Lightweight**: Only 75KB gzipped
+- **Standalone delivery**: One browser bundle plus CSS; no runtime dependency fetches
 - **Customizable Toolbar**: Choose which buttons to show
 - **Plugin System**: 19+ built-in plugins, easy to create custom ones
 - **Self-Hosted**: No cloud services, complete data privacy

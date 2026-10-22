@@ -1,7 +1,9 @@
 import { defineConfig } from 'vite';
+import { bundleNotices } from '../../scripts/bundle-notices';
 import path from 'path';
 
 export default defineConfig({
+  plugins: [bundleNotices()],
   resolve: {
     alias: {
       '@likhaeditor/core': path.resolve(__dirname, '../core/src/index.ts'),

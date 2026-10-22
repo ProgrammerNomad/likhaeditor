@@ -1,0 +1,36 @@
+import { afterEach, expect, it, vi } from 'vitest';
+import { Editor } from '@likhaeditor/core';
+import { TextSelection } from 'prosemirror-state';
+import { CommentsPlugin } from '../src/comments';
+let editor: Editor;
+afterEach(() => editor?.destroy());
+it('anchors comments through edits, resolves/reopens, and persists separate metadata', () => {
+  const onChange = vi.fn();
+  const plugin = new CommentsPlugin({ author: 'Reviewer', onChange });
+  editor = new Editor({ element: document.createElement('div'), content: '<p>Hello world</p>', plugins: [plugin] });
+  editor.view.dispatch(editor.view.state.tr.setSelection(TextSelection.create(editor.view.state.doc, 7, 12)));
+  const id = plugin.addComment(editor, '<script>Text only</script>') as string;
+  expect(plugin.listComments(editor)[0]).toMatchObject({ from: 7, to: 12, author: 'Reviewer', resolved: false });
+  expect(editor.view.dom.querySelector('.likha-comment-anchor')?.textContent).toBe('world');
+  editor.view.dispatch(editor.view.state.tr.insertText('X', 1));
+  expect(plugin.listComments(editor)[0]).toMatchObject({ from: 8, to: 13 });
+  expect(editor.getHTML()).not.toContain('comment');
+  expect(plugin.resolveComment(editor, id)).toBe(true);
+  expect(editor.view.dom.querySelector('.likha-comment-anchor')).toBeNull();
+  plugin.resolveComment(editor, id, false);
+  expect(editor.view.dom.querySelector('.likha-comment-anchor')).not.toBeNull();
+  editor.view.dispatch(editor.view.state.tr.delete(8, 13));
+  expect(plugin.listComments(editor)[0].orphaned).toBe(true);
+  expect(onChange).toHaveBeenCalled();
+  plugin.removeComment(editor, id);
+  expect(plugin.listComments(editor)).toEqual([]);
+});
+it('rejects empty selections and protects returned data from caller mutation', () => {
+  const plugin = new CommentsPlugin();
+  editor = new Editor({ element: document.createElement('div'), content: '<p>Text</p>', plugins: [plugin] });
+  expect(plugin.addComment(editor, 'Comment')).toBe(false);
+  editor.view.dispatch(editor.view.state.tr.setSelection(TextSelection.create(editor.view.state.doc, 1, 5)));
+  plugin.addComment(editor, 'Keep');
+  const comments = plugin.listComments(editor); comments[0].text = 'Mutated';
+  expect(plugin.listComments(editor)[0].text).toBe('Keep');
+});

@@ -24,7 +24,7 @@ export class UnderlinePlugin extends Plugin {
   keymap() {
     return {
       'Mod-u': (editor: Editor) => {
-        return editor.executeCommand('toggleUnderline');
+        return editor.executeCommand('toggleUnderline') === true;
       }
     };
   }

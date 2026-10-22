@@ -14,7 +14,7 @@
     "dev": "pnpm --filter \"./packages/**\" dev",
     "test": "node scripts/test.mjs run",
     "test:watch": "node scripts/test.mjs",
-    "lint": "eslint . --ext .ts,.tsx",
+    "lint": "eslint \"packages/**/*.ts\" \"*.ts\" --max-warnings=0",
     "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
     "typecheck": "pnpm --filter \"@likhaeditor/*\" typecheck",
     "clean": "pnpm --filter \"./packages/**\" clean && rm -rf node_modules",
@@ -22,9 +22,14 @@
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
     "pre-publish": "node scripts/pre-publish.mjs",
-    "publish:all": "pnpm pre-publish && pnpm --filter @likhaeditor/core publish --access public && pnpm --filter @likhaeditor/ui publish --access public && pnpm --filter @likhaeditor/plugins publish --access public && pnpm --filter @likhaeditor/likhaeditor publish --access public"
+    "publish:all": "pnpm pre-publish && pnpm --filter @likhaeditor/core publish --access public && pnpm --filter @likhaeditor/ui publish --access public && pnpm --filter @likhaeditor/plugins publish --access public && pnpm --filter @likhaeditor/likhaeditor publish --access public",
+    "test:browser": "playwright test",
+    "test:site": "playwright test --config playwright.site.config.ts",
+    "test:packages": "node scripts/test-packages.mjs"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.64.1",
     "@types/node": "^20.19.43",
     "@typescript-eslint/eslint-plugin": "^8.72.0",
     "@typescript-eslint/parser": "^8.72.0",
@@ -35,7 +40,8 @@
     "typescript": "^5.9.3",
     "vite": "^6.4.5",
     "vitepress": "^1.6.4",
-    "vitest": "^4.1.12"
+    "vitest": "^4.1.12",
+    "vue": "^3.5.44"
   },
   "packageManager": "pnpm@8.12.0",
   "engines": {

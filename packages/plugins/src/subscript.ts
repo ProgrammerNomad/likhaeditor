@@ -31,7 +31,7 @@ export class SubscriptPlugin extends Plugin {
   keymap() {
     return {
       'Mod-,': (editor: Editor) => {
-        return editor.executeCommand('toggleSubscript');
+        return editor.executeCommand('toggleSubscript') === true;
       }
     };
   }

@@ -1,3 +1,4 @@
+import type { Editor } from '@likhaeditor/core';
 import { Plugin, isSafeURL } from '@likhaeditor/core';
 import { Plugin as ProseMirrorPlugin } from 'prosemirror-state';
 import { keymap } from 'prosemirror-keymap';
@@ -11,7 +12,7 @@ export class LinkPlugin extends Plugin {
 
   commands() {
     return {
-      setLink: (editor: any, href: string): boolean => {
+      setLink: (editor: Editor, href: string): boolean => {
         if (!isSafeURL(href)) return false;
         const { state, dispatch } = editor.view;
         const linkMark = state.schema.marks.link;
@@ -38,7 +39,7 @@ export class LinkPlugin extends Plugin {
         return false;
       },
 
-      removeLink: (editor: any): boolean => {
+      removeLink: (editor: Editor): boolean => {
         const { state, dispatch } = editor.view;
         const linkMark = state.schema.marks.link;
         
@@ -57,7 +58,7 @@ export class LinkPlugin extends Plugin {
         return false;
       },
 
-      toggleLink: (editor: any, href?: string): boolean => {
+      toggleLink: (editor: Editor, href?: string): boolean => {
         const isActive = this.commands().isLinkActive(editor);
         
         if (isActive) {
@@ -72,7 +73,7 @@ export class LinkPlugin extends Plugin {
         return false;
       },
 
-      isLinkActive: (editor: any): boolean => {
+      isLinkActive: (editor: Editor): boolean => {
         const { state } = editor.view;
         const linkMark = state.schema.marks.link;
         
@@ -81,8 +82,8 @@ export class LinkPlugin extends Plugin {
         const { from, to } = state.selection;
         let active = false;
 
-        state.doc.nodesBetween(from, to, (node: any) => {
-          if (node.marks.some((m: any) => m.type === linkMark)) {
+        state.doc.nodesBetween(from, to, (node) => {
+          if (node.marks.some((m) => m.type === linkMark)) {
             active = true;
           }
         });
@@ -90,7 +91,7 @@ export class LinkPlugin extends Plugin {
         return active;
       },
 
-      getLinkHref: (editor: any): string | null => {
+      getLinkHref: (editor: Editor): string | null => {
         const { state } = editor.view;
         const linkMark = state.schema.marks.link;
         
@@ -99,8 +100,8 @@ export class LinkPlugin extends Plugin {
         const { from, to } = state.selection;
         let href: string | null = null;
 
-        state.doc.nodesBetween(from, to, (node: any) => {
-          const mark = node.marks.find((m: any) => m.type === linkMark);
+        state.doc.nodesBetween(from, to, (node) => {
+          const mark = node.marks.find((m) => m.type === linkMark);
           if (mark) {
             href = mark.attrs.href;
           }
@@ -124,26 +125,10 @@ export class LinkPlugin extends Plugin {
           // Need text selection to create link
           if (from === to) return false;
 
-          // Check for existing link
-          let existingHref = '';
-          state.doc.nodesBetween(from, to, (node: any) => {
-            const mark = node.marks.find((m: any) => m.type === linkMark);
-            if (mark && !existingHref) {
-              existingHref = mark.attrs.href;
-            }
-          });
+          if (!dispatch) return true;
+          this.editor?.view.dom.dispatchEvent(new CustomEvent('likha:request-link', { bubbles: true }));
+          return !!this.editor;
 
-          // Prompt for URL (will be enhanced with dialog later)
-          const url = prompt('Enter URL:', existingHref || 'https://');
-          
-          if (!isSafeURL(url)) return false;
-
-          if (dispatch) {
-            const tr = state.tr.addMark(from, to, linkMark.create({ href: url }));
-            dispatch(tr);
-          }
-          
-          return true;
         }
       })
     ];

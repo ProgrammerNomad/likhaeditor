@@ -1,3 +1,4 @@
+import { TextSelection } from 'prosemirror-state';
 import { describe, it, expect, beforeEach } from 'vitest';
 import { Editor } from '@likhaeditor/core';
 import { HighlightPlugin } from '../highlight';
@@ -20,11 +21,11 @@ describe('HighlightPlugin', () => {
       editor.setContent('<p>Hello world</p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             1,
             6
-          ) as any
+          )
         )
       );
       plugin.setHighlight(editor);
@@ -37,11 +38,11 @@ describe('HighlightPlugin', () => {
       editor.setContent('<p>Colorful text</p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             1,
             10
-          ) as any
+          )
         )
       );
       plugin.setHighlight(editor, 'lightgreen');
@@ -53,11 +54,11 @@ describe('HighlightPlugin', () => {
       editor.setContent('<p>Hex highlighted text</p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             1,
             4
-          ) as any
+          )
         )
       );
       plugin.setHighlight(editor, '#ffcc00');
@@ -69,11 +70,11 @@ describe('HighlightPlugin', () => {
       editor.setContent('<p>RGB highlighted text</p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             1,
             4
-          ) as any
+          )
         )
       );
       plugin.setHighlight(editor, 'rgb(255, 255, 0)');
@@ -91,11 +92,11 @@ describe('HighlightPlugin', () => {
       editor.setContent('<p>First word and second word</p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             1,
             11
-          ) as any
+          )
         )
       );
       plugin.setHighlight(editor, 'cyan');
@@ -110,11 +111,11 @@ describe('HighlightPlugin', () => {
       editor.setContent('<p><mark style="background-color: yellow">Highlighted text</mark></p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             1,
             17
-          ) as any
+          )
         )
       );
       plugin.removeHighlight(editor);
@@ -127,11 +128,11 @@ describe('HighlightPlugin', () => {
       editor.setContent('<p><mark style="background-color: lightblue">Highlighted text here</mark></p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             1,
             12
-          ) as any
+          )
         )
       );
       plugin.removeHighlight(editor);
@@ -143,11 +144,11 @@ describe('HighlightPlugin', () => {
       editor.setContent('<p>Plain text</p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             1,
             6
-          ) as any
+          )
         )
       );
       const result = plugin.removeHighlight(editor);
@@ -160,10 +161,10 @@ describe('HighlightPlugin', () => {
       editor.setContent('<p><mark style="background-color: pink">Pink</mark> text</p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             3
-          ) as any
+          )
         )
       );
       const color = plugin.getHighlight(editor);
@@ -174,10 +175,10 @@ describe('HighlightPlugin', () => {
       editor.setContent('<p>No highlight</p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             3
-          ) as any
+          )
         )
       );
       const color = plugin.getHighlight(editor);
@@ -188,10 +189,10 @@ describe('HighlightPlugin', () => {
       editor.setContent('<p><mark style="background-color: #abcdef">Hex</mark></p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             2
-          ) as any
+          )
         )
       );
       const color = plugin.getHighlight(editor);
@@ -204,10 +205,10 @@ describe('HighlightPlugin', () => {
       editor.setContent('<p><mark style="background-color: orange">Orange</mark></p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             3
-          ) as any
+          )
         )
       );
       const isActive = plugin.isHighlightActive(editor);
@@ -218,10 +219,10 @@ describe('HighlightPlugin', () => {
       editor.setContent('<p>Plain</p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             2
-          ) as any
+          )
         )
       );
       const isActive = plugin.isHighlightActive(editor);
@@ -232,10 +233,10 @@ describe('HighlightPlugin', () => {
       editor.setContent('<p><mark style="background-color: lime">Lime</mark></p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             2
-          ) as any
+          )
         )
       );
       expect(plugin.isHighlightActive(editor, 'lime')).toBe(true);
@@ -246,10 +247,10 @@ describe('HighlightPlugin', () => {
       editor.setContent('<p><mark style="background-color: aqua">Aqua</mark></p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             2
-          ) as any
+          )
         )
       );
       expect(plugin.isHighlightActive(editor)).toBe(true);
@@ -261,11 +262,11 @@ describe('HighlightPlugin', () => {
       editor.setContent('<p>Plain text</p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             1,
             6
-          ) as any
+          )
         )
       );
       plugin.toggleHighlight(editor);
@@ -277,11 +278,11 @@ describe('HighlightPlugin', () => {
       editor.setContent('<p><mark style="background-color: yellow">Highlighted</mark></p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             1,
             12
-          ) as any
+          )
         )
       );
       plugin.toggleHighlight(editor, 'yellow');
@@ -293,11 +294,11 @@ describe('HighlightPlugin', () => {
       editor.setContent('<p>Text</p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             1,
             5
-          ) as any
+          )
         )
       );
       plugin.toggleHighlight(editor, 'lightcoral');
@@ -313,11 +314,11 @@ describe('HighlightPlugin', () => {
         editor.setContent('<p>Text</p>');
         editor.view.dispatch(
           editor.view.state.tr.setSelection(
-            editor.view.state.selection.constructor.create(
+            TextSelection.create(
               editor.view.state.doc,
               1,
               5
-            ) as any
+            )
           )
         );
         plugin.setHighlight(editor, color);
@@ -330,11 +331,11 @@ describe('HighlightPlugin', () => {
       editor.setContent('<p>Transparent</p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             1,
             12
-          ) as any
+          )
         )
       );
       plugin.setHighlight(editor, 'rgba(255, 255, 0, 0.3)');
@@ -354,11 +355,11 @@ describe('HighlightPlugin', () => {
       editor.setContent('<p><strong><em>Bold italic</em></strong></p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             1,
             12
-          ) as any
+          )
         )
       );
       plugin.setHighlight(editor, 'yellow');
@@ -379,11 +380,11 @@ describe('HighlightPlugin', () => {
       editor.setContent('<p>Text</p>');
       editor.view.dispatch(
         editor.view.state.tr.setSelection(
-          editor.view.state.selection.constructor.create(
+          TextSelection.create(
             editor.view.state.doc,
             1,
             5
-          ) as any
+          )
         )
       );
       plugin.setHighlight(editor, 'yellow');

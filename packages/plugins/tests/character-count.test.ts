@@ -1,66 +1,16 @@
-import { describe, it, expect } from 'vitest';
+import { afterEach, expect, it, vi } from 'vitest';
+import { Editor } from '@likhaeditor/core';
 import { CharacterCountPlugin } from '../src/character-count';
-
-describe('CharacterCountPlugin', () => {
-  it('should have correct name', () => {
-    const plugin = new CharacterCountPlugin({ target: '#char-count' });
-    expect(plugin.name).toBe('characterCount');
-  });
-
-  it('should initialize without errors', () => {
-    const plugin = new CharacterCountPlugin({ target: '#char-count' });
-    const mockEditor = {
-      getHTML: () => '<p>Hello world</p>',
-      view: {
-        state: {
-          doc: {
-            textContent: 'Hello world',
-          },
-        },
-        dom: document.createElement('div'),
-      },
-    };
-
-    expect(() => plugin.init(mockEditor as any)).not.toThrow();
-  });
-
-  it('should provide getCharacterCount command', () => {
-    const plugin = new CharacterCountPlugin({ target: '#char-count' });
-    const commands = plugin.commands();
-    
-    expect(commands).toHaveProperty('getCharacterCount');
-    expect(typeof commands.getCharacterCount).toBe('function');
-  });
-
-  it('should provide getWordCount command', () => {
-    const plugin = new CharacterCountPlugin({ target: '#char-count' });
-    const commands = plugin.commands();
-    
-    expect(commands).toHaveProperty('getWordCount');
-    expect(typeof commands.getWordCount).toBe('function');
-  });
-
-  it('getCharacterCount should count characters correctly', () => {
-    const plugin = new CharacterCountPlugin({ target: '#char-count' });
-    const commands = plugin.commands();
-    
-    const mockEditor = {
-      getHTML: () => '<p>Hello world</p>',
-    };
-    
-    const count = commands.getCharacterCount(mockEditor);
-    expect(count).toBe(11);
-  });
-
-  it('getWordCount should count words correctly', () => {
-    const plugin = new CharacterCountPlugin({ target: '#char-count' });
-    const commands = plugin.commands();
-    
-    const mockEditor = {
-      getHTML: () => '<p>Hello world this is a test</p>',
-    };
-    
-    const count = commands.getWordCount(mockEditor);
-    expect(count).toBe(6);
-  });
+let editor: Editor;
+afterEach(() => { editor?.destroy(); document.body.replaceChildren(); vi.useRealTimers(); });
+it('counts decoded text and separates paragraphs without leaking timers', () => {
+  vi.useFakeTimers();
+  const counter = document.createElement('div'); counter.id = 'count'; document.body.appendChild(counter);
+  editor = new Editor({ element: document.createElement('div'), content: '<p>A &amp; B</p><p>😊</p>', plugins: [new CharacterCountPlugin({ target: '#count' })] });
+  expect(editor.executeCommand('getCharacterCount')).toBe(7);
+  expect(editor.executeCommand('getWordCount')).toBe(4);
+  expect(counter.textContent).toBe('7 characters, 4 words');
+  editor.setContent('<p>Updated</p>');
+  expect(counter.textContent).toBe('7 characters, 1 words');
+  editor.destroy(); expect(vi.getTimerCount()).toBe(0);
 });
